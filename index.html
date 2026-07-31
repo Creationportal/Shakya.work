@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shakya — AI products that enterprises actually adopt</title>
+  <meta name="description" content="Pranamyya Shakya — Product & AI Transformation Leader. Voice agents, AI calling, enterprise search and workflow automation built to be adopted, not admired." />
+  <meta name="author" content="Pranamyya Shakya" />
+  <meta property="og:title" content="shakya — AI products that enterprises actually adopt" />
+  <meta property="og:description" content="Voice, search and agent systems — built to be adopted, not admired." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <a href="index.html" class="nav__brand">shakya</a>
+    <nav class="nav__links">
+      <a href="projects.html" data-i18n="nav.projects">Projects</a>
+      <a href="ai-lab.html" data-i18n="nav.ailab">AI Lab</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="changelog.html" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="nav__right">
+      <div class="nav__status"><span class="dot"></span><span data-i18n="nav.status">OPEN TO WORK</span></div>
+      <button class="toggle" data-theme-toggle aria-label="Toggle theme"><span class="t-icon">◐</span><span class="t-label">Dark</span></button>
+      <button class="toggle" data-lang-toggle aria-label="Toggle language"><span class="en on">EN</span><span class="zh off">中文</span></button>
+      <button class="nav__burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orbs" aria-hidden="true">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+    </div>
+    <div class="container">
+      <div class="hero__grid">
+        <div>
+          <p class="kicker" data-i18n="home.kicker">PRANAMYYA SHAKYA · AI TRANSFORMATION LEADER</p>
+          <h1 class="hero__h1" data-i18n="home.h1">AI that enterprises actually adopt.</h1>
+          <p class="hero__lede" data-i18n="home.lede">Voice, search and agent systems — built to be adopted, not admired.</p>
+          <div class="hero__links">
+            <a href="projects.html" class="link" data-i18n="home.link.projects">View projects ↓</a>
+            <a href="contact.html" class="link link--dim" data-i18n="home.link.contact">Let's talk →</a>
+          </div>
+          <p class="hero__meta">GLOBAL · REMOTE-FIRST · EN / 中文</p>
+        </div>
+        <div class="orbit">
+          <canvas data-orbit width="460" height="460" aria-label="Interactive particle orbit"></canvas>
+          <p class="orbit__note" data-i18n="home.orbit.note">POINTER-REACTIVE · DRAG TO ORBIT · 24S LOOP</p>
+        </div>
+      </div>
+      <p class="hero__meta" style="text-align:center; margin-top:80px;" data-i18n="home.scroll">SCROLL TO EXPLORE ↓</p>
+    </div>
+  </section>
+
+  <!-- SHOWCASE TILES -->
+  <section class="showcase section">
+    <div class="container">
+      <div class="showcase__head" data-reveal>
+        <div>
+          <p class="kicker" data-i18n="show.kicker">WHAT I BUILD</p>
+          <h2 class="showcase__title" data-i18n="show.title">Four disciplines, one outcome.</h2>
+        </div>
+      </div>
+      <div class="tiles">
+        <!-- Voice -->
+        <article class="tile tile--1" data-reveal>
+          <div class="tile__visual">
+            <div class="ring ring--1"></div>
+            <div class="ring ring--2"></div>
+            <div class="ring ring--3"></div>
+            <div class="ring__core"></div>
+          </div>
+          <div>
+            <span class="tile__num">01</span>
+            <div class="tile__word" data-i18n="tile1.word">Voice</div>
+            <div class="tile__tag" data-i18n="tile1.tag">VOICE AGENTS · ASR/LLM/TTS</div>
+            <div class="tile__cta" data-i18n="tile1.cta">Try it →</div>
+          </div>
+        </article>
+        <!-- Search -->
+        <article class="tile tile--2" data-reveal>
+          <div class="tile__visual">
+            <div class="searchbar">
+              <span>🔍</span>
+              <input type="text" data-i18n-ph="tile2.ph" placeholder="Ask across contracts, SOPs, tickets…" />
+            </div>
+            <div class="result-row"><span class="result-row__n">1</span><span class="result-row__l"></span></div>
+            <div class="result-row"><span class="result-row__n">2</span><span class="result-row__l"></span></div>
+            <div class="result-row"><span class="result-row__n">3</span><span class="result-row__l"></span></div>
+          </div>
+          <div>
+            <span class="tile__num">02</span>
+            <div class="tile__word" data-i18n="tile2.word">Search</div>
+            <div class="tile__tag" data-i18n="tile2.tag">ENTERPRISE SEARCH · RAG</div>
+            <div class="tile__cta" data-i18n="tile2.cta">Try it →</div>
+          </div>
+        </article>
+        <!-- Agents -->
+        <article class="tile tile--3" data-reveal>
+          <div class="tile__visual">
+            <div class="nodes">
+              <svg viewBox="0 0 240 140">
+                <line x1="120" y1="70" x2="60" y2="20" stroke="currentColor" stroke-opacity="0.35"/>
+                <line x1="120" y1="70" x2="190" y2="25" stroke="currentColor" stroke-opacity="0.35"/>
+                <line x1="120" y1="70" x2="40" y2="110" stroke="currentColor" stroke-opacity="0.35"/>
+                <line x1="120" y1="70" x2="200" y2="115" stroke="currentColor" stroke-opacity="0.35"/>
+                <circle cx="120" cy="70" r="14" fill="currentColor"/>
+                <circle cx="60" cy="20" r="6" fill="currentColor" opacity="0.7"/>
+                <circle cx="190" cy="25" r="6" fill="currentColor" opacity="0.7"/>
+                <circle cx="40" cy="110" r="6" fill="currentColor" opacity="0.7"/>
+                <circle cx="200" cy="115" r="6" fill="currentColor" opacity="0.7"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <span class="tile__num">03</span>
+            <div class="tile__word" data-i18n="tile3.word">Agents</div>
+            <div class="tile__tag" data-i18n="tile3.tag">AI AGENTS · CALLING · COLLECTIONS</div>
+            <div class="tile__cta" data-i18n="tile3.cta">Try it →</div>
+          </div>
+        </article>
+        <!-- Workflow -->
+        <article class="tile tile--4" data-reveal>
+          <div class="tile__visual">
+            <div class="pipeline">
+              <div class="pipe-box"><div class="pipe-box__s" data-i18n="step.label">Step 1</div><div class="pipe-box__l" data-i18n="pipe.in">Input</div></div>
+              <span class="pipe-arrow">→</span>
+              <div class="pipe-box"><div class="pipe-box__s" data-i18n="step.label">Step 2</div><div class="pipe-box__l" data-i18n="pipe.agent">Agent</div></div>
+              <span class="pipe-arrow">→</span>
+              <div class="pipe-box"><div class="pipe-box__s" data-i18n="step.label">Step 3</div><div class="pipe-box__l" data-i18n="pipe.out">Output</div></div>
+            </div>
+          </div>
+          <div>
+            <span class="tile__num">04</span>
+            <div class="tile__word" data-i18n="tile4.word">Workflow</div>
+            <div class="tile__tag" data-i18n="tile4.tag">WORKFLOW AUTOMATION · AGENT CHAINS</div>
+            <div class="tile__cta" data-i18n="tile4.cta">Try it →</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORER -->
+  <section class="explorer section band">
+    <div class="container" data-tabs data-reveal>
+      <p class="kicker" data-i18n="exp.kicker">INTERACTIVE — TRY IT</p>
+      <h2 class="showcase__title" style="margin:10px 0 28px;" data-i18n="exp.title">Pick a discipline.</h2>
+      <div class="tabs">
+        <button class="tab active" data-title="Voice agent — live" data-trans="“您好，请问有什么可以帮您？” → intent detected · routing to billing…">Voice</button>
+        <button class="tab" data-title="Enterprise search — live" data-trans="Query: “renewal terms?” → 3 cited results from contracts.">Search</button>
+        <button class="tab" data-title="Agent network — live" data-trans="5 agents connected · 1 active · routing to collections.">Agents</button>
+        <button class="tab" data-title="Workflow — live" data-trans="“Refund over $500” → 3-step pipeline running.">Workflow</button>
+      </div>
+      <div class="panel">
+        <div class="panel__visual">
+          <div class="ring ring--1"></div>
+          <div class="ring ring--2"></div>
+          <div class="ring ring--3"></div>
+          <div class="ring__core"></div>
+        </div>
+        <div>
+          <span class="panel__live"><span class="dot"></span><span data-i18n="exp.live">LIVE · SYNTHETIC DATA</span></span>
+          <h3 class="panel__title" data-panel-title data-i18n="exp.title.p">Voice agent — live</h3>
+          <p class="panel__trans" data-panel-trans data-i18n="exp.trans">"您好，请问有什么可以帮您？" → intent detected · routing to billing…</p>
+          <div class="panel__metrics">
+            <span data-i18n="exp.m1">380MS LATENCY</span>
+            <span data-i18n="exp.m2">40+ DEPLOYMENTS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container" data-reveal>
+      <p class="kicker" style="color:rgba(255,255,255,0.7);" data-i18n="cta.kicker">COLLABORATE</p>
+      <h2 class="cta__title" data-i18n="cta.title">Let's build what enterprises actually use.</h2>
+      <div class="cta__links">
+        <a href="contact.html" data-i18n="cta.contact">Go to Contact →</a>
+        <a href="mailto:hi@shakya.ai" class="dim" data-i18n="cta.email">hi@shakya.ai ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <a href="index.html" class="footer__brand">shakya</a>
+        <div class="footer__links">
+          <a href="projects.html" data-i18n="footer.projects">PROJECTS</a>
+          <a href="ai-lab.html" data-i18n="footer.ailab">AI LAB</a>
+          <a href="about.html" data-i18n="footer.about">ABOUT</a>
+          <a href="contact.html" data-i18n="footer.contact">CONTACT</a>
+          <a href="changelog.html" data-i18n="footer.changelog">CHANGELOG</a>
+        </div>
+      </div>
+      <div class="footer__meta">
+        <span data-i18n="footer.meta.l">© 2026 PRANAMYYA SHAKYA · 本站支持中英双语</span>
+        <span data-i18n="footer.meta.r">BUILT WITH GIT · SEO-READY · V0.1.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

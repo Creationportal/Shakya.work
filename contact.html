@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — shakya</title>
+  <meta name="description" content="Get in touch — email, LinkedIn, WeChat, or send a note. Let's build what enterprises actually use." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <a href="index.html" class="nav__brand">shakya</a>
+    <nav class="nav__links">
+      <a href="projects.html" data-i18n="nav.projects">Projects</a>
+      <a href="ai-lab.html" data-i18n="nav.ailab">AI Lab</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" class="active" data-i18n="nav.contact">Contact</a>
+      <a href="changelog.html" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="nav__right">
+      <div class="nav__status"><span class="dot"></span><span data-i18n="nav.status">OPEN TO WORK</span></div>
+      <button class="toggle" data-theme-toggle aria-label="Toggle theme"><span class="t-icon">◐</span><span class="t-label">Dark</span></button>
+      <button class="toggle" data-lang-toggle aria-label="Toggle language"><span class="en on">EN</span><span class="zh off">中文</span></button>
+      <button class="nav__burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="pagehero">
+    <div class="container">
+      <p class="kicker" data-i18n="contact.kicker">CONTACT — LET'S TALK</p>
+      <h1 class="pagehero__h1" data-i18n="contact.h1">Let's build what enterprises actually use.</h1>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="channels" data-reveal>
+        <div class="channel"><div class="channel__l">EMAIL</div><a href="mailto:hi@shakya.ai" class="channel__v">hi@shakya.ai ↗</a></div>
+        <div class="channel"><div class="channel__l">LINKEDIN</div><a href="#" class="channel__v">in/shakya ↗</a></div>
+        <div class="channel"><div class="channel__l">WECHAT</div><span class="channel__v">shakya_ai ↗</span></div>
+      </div>
+
+      <div style="margin-top:48px;" data-reveal>
+        <p class="kicker" style="margin-bottom:16px;" data-i18n="contact.form.h">Or send a note</p>
+        <form class="form" data-form>
+          <div class="form__row">
+            <input type="text" class="field" name="name" placeholder="Your name" data-i18n-ph="contact.ph.name" required />
+            <input type="email" class="field" name="email" placeholder="Your email" data-i18n-ph="contact.ph.email" required />
+          </div>
+          <textarea class="field field--area" name="message" placeholder="Tell me about the problem you're solving" data-i18n-ph="contact.ph.msg" required></textarea>
+          <button type="submit" class="btn btn--primary" data-i18n="contact.send">SEND MESSAGE</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <a href="index.html" class="footer__brand">shakya</a>
+        <div class="footer__links">
+          <a href="projects.html" data-i18n="footer.projects">PROJECTS</a>
+          <a href="ai-lab.html" data-i18n="footer.ailab">AI LAB</a>
+          <a href="about.html" data-i18n="footer.about">ABOUT</a>
+          <a href="contact.html" data-i18n="footer.contact">CONTACT</a>
+          <a href="changelog.html" data-i18n="footer.changelog">CHANGELOG</a>
+        </div>
+      </div>
+      <div class="footer__meta">
+        <span data-i18n="footer.meta.l">© 2026 PRANAMYYA SHAKYA · 本站支持中英双语</span>
+        <span data-i18n="footer.meta.r">BUILT WITH GIT · SEO-READY · V0.1.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

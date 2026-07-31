@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — shakya</title>
+  <meta name="description" content="Pranamyya Shakya — a product and project leader who has taken AI from pitch deck to production. Shipped beats impressive." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <a href="index.html" class="nav__brand">shakya</a>
+    <nav class="nav__links">
+      <a href="projects.html" data-i18n="nav.projects">Projects</a>
+      <a href="ai-lab.html" data-i18n="nav.ailab">AI Lab</a>
+      <a href="about.html" class="active" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="changelog.html" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="nav__right">
+      <div class="nav__status"><span class="dot"></span><span data-i18n="nav.status">OPEN TO WORK</span></div>
+      <button class="toggle" data-theme-toggle aria-label="Toggle theme"><span class="t-icon">◐</span><span class="t-label">Dark</span></button>
+      <button class="toggle" data-lang-toggle aria-label="Toggle language"><span class="en on">EN</span><span class="zh off">中文</span></button>
+      <button class="nav__burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="pagehero">
+    <div class="container">
+      <p class="kicker" data-i18n="about.kicker">ABOUT — PRANAMYYA SHAKYA</p>
+      <h1 class="pagehero__h1" style="font-size:clamp(32px,4.5vw,44px);" data-i18n="about.h1">I build enterprise AI that survives contact with reality.</h1>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <p class="dim" style="font-size:16px; line-height:1.7; max-width:820px;" data-i18n="about.lede">I'm a product and project leader who has taken AI from pitch deck to production — across voice, search and agent systems. One principle drives the work: the demo is easy, the deployment is the product.</p>
+
+      <div class="cards card--2col" style="margin-top:48px;">
+        <div class="card" data-reveal>
+          <span class="card__kicker">VOICE · AGENTS</span>
+          <h3 class="card__title">Enterprise Voice & Agents</h3>
+          <p class="card__desc">Designing and shipping voice agents and conversational systems for service, sales and collections — from pilot to production.</p>
+        </div>
+        <div class="card" data-reveal>
+          <span class="card__kicker">PLATFORM · RAG</span>
+          <h3 class="card__title">AI Platform & Search</h3>
+          <p class="card__desc">Building enterprise search and workflow automation on RAG and agent chains, with the observability to scale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy">
+    <div class="container" data-reveal>
+      <p class="kicker" data-i18n="about.phil.k">PRINCIPLE</p>
+      <h2 class="philosophy__title" data-i18n="about.phil.t">Shipped beats impressive.</h2>
+      <p class="philosophy__body">Every engagement starts from the outcome a business can measure — cost per call, recovery rate, hours saved — not the model that powers it. I'd rather ship a narrow agent that 40 teams rely on than a broad one nobody trusts.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" data-reveal>
+      <p class="kicker" data-i18n="about.cap.k">CAPABILITIES</p>
+      <h2 class="showcase__title" style="font-size:30px; margin:10px 0 28px;" data-i18n="about.cap.t">What I bring to the table</h2>
+      <div class="capgrid">
+        <div class="cap"><span class="cap__n">01</span><div class="cap__t">Product & PM</div><p class="cap__d">0→1 product strategy, roadmap, PMP-certified delivery, stakeholder alignment across ops and eng.</p></div>
+        <div class="cap"><span class="cap__n">02</span><div class="cap__t">AI Engineering</div><p class="cap__d">Voice (ASR/LLM/TTS), RAG, agent chains, workflow automation — hands-on with production LLM systems.</p></div>
+        <div class="cap"><span class="cap__n">03</span><div class="cap__t">Enterprise GTM</div><p class="cap__d">Selling and deploying into banks, logistics and finance — bilingual, compliance-aware, CRM-native.</p></div>
+        <div class="cap"><span class="cap__n">04</span><div class="cap__t">Delivery & Scale</div><p class="cap__d">Pilots that turn into rollouts, observability, playbooks — so the next vertical onboards in days.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container" data-reveal>
+      <p class="kicker" style="color:rgba(255,255,255,0.7);" data-i18n="about.cta.k">GET IN TOUCH</p>
+      <h2 class="cta__title" style="font-size:clamp(28px,4vw,36px);" data-i18n="about.cta.t">If you're shipping enterprise AI, let's talk.</h2>
+      <div class="cta__links"><a href="contact.html" data-i18n="cta.contact">Go to Contact →</a></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <a href="index.html" class="footer__brand">shakya</a>
+        <div class="footer__links">
+          <a href="projects.html" data-i18n="footer.projects">PROJECTS</a>
+          <a href="ai-lab.html" data-i18n="footer.ailab">AI LAB</a>
+          <a href="about.html" data-i18n="footer.about">ABOUT</a>
+          <a href="contact.html" data-i18n="footer.contact">CONTACT</a>
+          <a href="changelog.html" data-i18n="footer.changelog">CHANGELOG</a>
+        </div>
+      </div>
+      <div class="footer__meta">
+        <span data-i18n="footer.meta.l">© 2026 PRANAMYYA SHAKYA · 本站支持中英双语</span>
+        <span data-i18n="footer.meta.r">BUILT WITH GIT · SEO-READY · V0.1.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

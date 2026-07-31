@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Lab — shakya</title>
+  <meta name="description" content="Three working demos taken from production systems — voice, workflow and search. Try the systems, not just the story." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <a href="index.html" class="nav__brand">shakya</a>
+    <nav class="nav__links">
+      <a href="projects.html" data-i18n="nav.projects">Projects</a>
+      <a href="ai-lab.html" class="active" data-i18n="nav.ailab">AI Lab</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="changelog.html" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="nav__right">
+      <div class="nav__status"><span class="dot"></span><span data-i18n="nav.status">OPEN TO WORK</span></div>
+      <button class="toggle" data-theme-toggle aria-label="Toggle theme"><span class="t-icon">◐</span><span class="t-label">Dark</span></button>
+      <button class="toggle" data-lang-toggle aria-label="Toggle language"><span class="en on">EN</span><span class="zh off">中文</span></button>
+      <button class="nav__burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="pagehero">
+    <div class="container">
+      <p class="kicker" data-i18n="lab.kicker">AI LAB — INTERACTIVE DEMOS</p>
+      <h1 class="pagehero__h1" data-i18n="lab.h1">Try the systems, not just the story.</h1>
+      <p class="pagehero__lede" data-i18n="lab.lede">Three working demos taken from production systems — voice, workflow and search. Everything here runs on synthetic enterprise data; the behavior is real.</p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <!-- Console -->
+      <div class="console" data-reveal>
+        <div class="console__head">
+          <span class="console__label" data-i18n="lab.demo.label">DEMO 01 — VOICE AGENT PLAYGROUND</span>
+          <span class="console__live"><span class="dot"></span><span data-i18n="exp.live">LIVE · SYNTHETIC DATA</span></span>
+        </div>
+        <div class="console__body">
+          <div>
+            <div class="bubble bubble--agent" data-i18n="lab.a1">Hello, this is the smart customer service at Shunfeng Logistics. How can I help you?</div>
+            <div class="bubble bubble--user" data-i18n="lab.u1">Can you check my invoice from March?</div>
+            <div class="bubble bubble--agent" data-i18n="lab.a2">Found it: March invoice #2043 was settled on March 14; a copy has been sent to your email.</div>
+          </div>
+          <div class="console__controls">
+            <div class="mic"><div class="mic__core"></div></div>
+            <span class="mono" style="font-size:9px; letter-spacing:0.1em; color:#EBEFF3;" data-i18n="lab.mic">TAP TO SPEAK</span>
+            <div class="console__wave"><span style="height:14px"></span><span style="height:30px"></span><span style="height:46px"></span><span style="height:22px"></span><span style="height:34px"></span></div>
+            <span class="mono" style="font-size:9px; letter-spacing:0.1em; color:#737373;" data-i18n="lab.latency">LATENCY 380MS · ASR → LLM → TTS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo cards -->
+      <div class="cards card--2col" style="margin-top:32px;">
+        <article class="card" data-reveal>
+          <span class="card__kicker" data-i18n="lab.d2.k">DEMO 02</span>
+          <h3 class="card__title" data-i18n="lab.d2.t">Prompt → Workflow</h3>
+          <div style="height:120px; background:var(--bg-elev); border-radius:var(--radius); margin:12px 0; display:flex; align-items:center; justify-content:center;" class="mono dim" style="font-size:10px;">WORKFLOW CANVAS</div>
+          <p class="card__desc" data-i18n="lab.d2.d">A natural-language request compiled into an executable agent chain — watch each step run in order.</p>
+        </article>
+        <article class="card" data-reveal>
+          <span class="card__kicker" data-i18n="lab.d3.k">DEMO 03</span>
+          <h3 class="card__title" data-i18n="lab.d3.t">Enterprise Search</h3>
+          <div style="height:120px; background:var(--bg-elev); border-radius:var(--radius); margin:12px 0; display:flex; align-items:center; justify-content:center;" class="mono dim" style="font-size:10px;">SEARCH UI</div>
+          <p class="card__desc" data-i18n="lab.d3.d">Ask a question across contracts, SOPs and tickets — answers arrive with citations you can audit.</p>
+        </article>
+      </div>
+
+      <!-- Deployments -->
+      <div style="margin-top:64px;" data-reveal>
+        <div class="eyebrow">
+          <div>
+            <p class="kicker" data-i18n="lab.dep.k">02 — IN PRODUCTION</p>
+            <h2 class="showcase__title" style="font-size:32px;" data-i18n="lab.dep.t">Running in production</h2>
+          </div>
+        </div>
+        <div class="table">
+          <div class="table__row table__row--head"><span>YEAR</span><span>DEPLOYMENT</span><span style="text-align:right;">OUTCOME</span></div>
+          <div class="table__row"><span class="year">2026</span><span class="title">Voice GPT — tier-1 bank service lines</span><span class="domain">62% COST ↓</span></div>
+          <div class="table__row"><span class="year">2025</span><span class="title">AI Calling — logistics renewals program</span><span class="domain">1M+ CALLS / YR</span></div>
+          <div class="table__row"><span class="year">2025</span><span class="title">Debt Collection AI — consumer finance</span><span class="domain">3.2× RECOVERY</span></div>
+          <div class="table__row"><span class="year">2024</span><span class="title">Enterprise Search — manufacturing group</span><span class="domain">12 TEAMS ONBOARDED</span></div>
+        </div>
+        <p class="mono dim" style="font-size:10px; margin-top:24px;" data-i18n="lab.note">ALL DEMOS RUN ON SYNTHETIC ENTERPRISE DATA — NO CLIENT INFORMATION</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <a href="index.html" class="footer__brand">shakya</a>
+        <div class="footer__links">
+          <a href="projects.html" data-i18n="footer.projects">PROJECTS</a>
+          <a href="ai-lab.html" data-i18n="footer.ailab">AI LAB</a>
+          <a href="about.html" data-i18n="footer.about">ABOUT</a>
+          <a href="contact.html" data-i18n="footer.contact">CONTACT</a>
+          <a href="changelog.html" data-i18n="footer.changelog">CHANGELOG</a>
+        </div>
+      </div>
+      <div class="footer__meta">
+        <span data-i18n="footer.meta.l">© 2026 PRANAMYYA SHAKYA · 本站支持中英双语</span>
+        <span data-i18n="footer.meta.r">BUILT WITH GIT · SEO-READY · V0.1.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
