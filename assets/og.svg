@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#6C5CE7" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#6C5CE7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0A0A0A"/>
+
+  <!-- orbital glow -->
+  <circle cx="880" cy="315" r="340" fill="url(#glow)"/>
+
+  <!-- concentric rings -->
+  <g stroke="#6C5CE7" fill="none" stroke-width="1.5">
+    <circle cx="880" cy="315" r="250" opacity="0.25"/>
+    <circle cx="880" cy="315" r="175" opacity="0.45"/>
+    <circle cx="880" cy="315" r="100" opacity="0.7"/>
+  </g>
+
+  <!-- orbiting particles -->
+  <g fill="#FFFFFF">
+    <circle cx="1130" cy="315" r="7" opacity="0.9"/>
+    <circle cx="737" cy="198" r="5" opacity="0.7"/>
+    <circle cx="1031" cy="435" r="6" opacity="0.8"/>
+    <circle cx="726" cy="438" r="4" opacity="0.6"/>
+    <circle cx="978" cy="179" r="4" opacity="0.6"/>
+    <circle cx="882" cy="584" r="5" opacity="0.7"/>
+    <circle cx="697" cy="315" r="5" opacity="0.65"/>
+    <circle cx="961" cy="311" r="3" opacity="0.5"/>
+    <circle cx="794" cy="211" r="3" opacity="0.5"/>
+  </g>
+
+  <!-- core node -->
+  <circle cx="880" cy="315" r="16" fill="#6C5CE7"/>
+  <circle cx="880" cy="315" r="16" fill="none" stroke="#6C5CE7" opacity="0.5">
+    <animate attributeName="r" values="16;30" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- wordmark -->
+  <text x="96" y="316" font-family="Helvetica, Arial, sans-serif" font-size="84" font-weight="700" letter-spacing="-2" fill="#FAFAFA">shakya</text>
+
+  <!-- accent rule -->
+  <rect x="98" y="348" width="64" height="4" fill="#6C5CE7"/>
+
+  <!-- mono caption -->
+  <text x="98" y="392" font-family="Menlo, Monaco, monospace" font-size="18" letter-spacing="3" fill="#A1A1AA">AI PRODUCTS THAT ENTERPRISES</text>
+  <text x="98" y="422" font-family="Menlo, Monaco, monospace" font-size="18" letter-spacing="3" fill="#A1A1AA">ACTUALLY ADOPT</text>
+
+  <!-- footer meta -->
+  <text x="98" y="560" font-family="Menlo, Monaco, monospace" font-size="14" letter-spacing="2" fill="#525252">PRANAMYYA SHAKYA · PRODUCT &amp; AI TRANSFORMATION LEADER</text>
+</svg>

@@ -4,7 +4,7 @@ A bilingual (EN / 中文), light/dark, static portfolio for a Product & AI Trans
 No build step — plain HTML, CSS, and vanilla JS. Drop the folder on any static host.
 
 ## Pages
-- `index.html` — Home (dark, vibrant, interactive orbit + discipline tiles + explorer)
+- `index.html` — Home (interactive drag orbit, count-up metrics, searchable tiles, explorer tabs)
 - `projects.html` — Project catalogue
 - `ai-lab.html` — Interactive demos (voice console, workflow, search)
 - `case-voice-gpt.html` — Voice GPT case study
@@ -16,10 +16,14 @@ No build step — plain HTML, CSS, and vanilla JS. Drop the folder on any static
 ## Features
 - **Bilingual toggle** — every string keyed via `data-i18n`; swaps EN ⇄ 中文 site-wide. Preference persists in `localStorage`.
 - **Light/dark theme** — `data-theme` on `<html>`, CSS variables, persists in `localStorage`. Default: dark.
-- **Interactive orbit** — pointer-reactive canvas particle field on the homepage.
+- **Interactive orbit** — pointer-reactive, draggable canvas particle field on the homepage.
+- **Count-up metrics** — animated stats band that triggers on scroll into view.
+- **Interactive search tile** — type to reveal real search results with skeleton loading animation.
+- **Explorer tabs** — four discipline tabs with per-tab visuals, i18n-aware, keyboard navigation.
 - **Scroll reveal** — IntersectionObserver fade-up on `[data-reveal]`.
-- **Responsive** — mobile nav, fluid grids, `prefers-reduced-motion` respected.
-- **SEO** — semantic HTML, per-page `<title>`/`<meta description>`, Open Graph tags on home.
+- **Responsive** — mobile nav with animated burger menu, fluid grids, `prefers-reduced-motion` respected.
+- **SEO + social** — per-page `<title>`/`<meta description>`, Open Graph, Twitter Cards, canonical URLs, inline SVG favicon, OG image.
+- **Accessibility** — skip-to-content, focus-visible rings, ARIA roles and states, semantic landmarks.
 
 ## Structure
 ```
@@ -29,10 +33,12 @@ website/
 ├── .nojekyll          (lets GitHub Pages serve /assets)
 └── assets/
     ├── css/styles.css
+    ├── og.png          (Open Graph image)
+    ├── og.svg          (source: OG image)
     └── js/
         ├── theme.js   (light/dark)
         ├── i18n.js    (EN/中文 dictionary + toggle)
-        └── main.js    (orbit, tabs, reveal, form, mobile nav)
+        └── main.js    (orbit, tabs, reveal, count-up, tile search, form, nav, scroll-top)
 ```
 
 ## Run locally
@@ -53,4 +59,4 @@ python3 -m http.server 8080
 - **Content:** edit the HTML files directly (nav + footer are inline per page for SEO).
 
 ---
-
+© 2026 Pranamyya Shakya. BUILT WITH GIT · SEO-READY · V0.2.0

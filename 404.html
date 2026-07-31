@@ -1,22 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — shakya</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <meta name="description" content="Page not found — shakya portfolio">
+  <meta name="author" content="Pranamyya Shakya">
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="canonical" href="https://shakya.ai/404.html" />
+  <meta property="og:title" content="404 — shakya">
+  <meta property="og:description" content="This page shipped, but not here.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shakya.ai/404.html" />
+  <meta property="og:site_name" content="shakya" />
+  <meta property="og:image" content="assets/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="404 — shakya" />
+  <meta name="twitter:description" content="This page shipped, but not here." />
+  <meta name="twitter:image" content="assets/og.png" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%236C5CE7' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%236C5CE7'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Sans+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    .err { position: relative; min-height: 70vh; display: flex; align-items: center; overflow: hidden; }
+    .err__code { font-family: var(--font-display); font-size: clamp(100px, 18vw, 200px); font-weight: 600; line-height: 1; letter-spacing: -0.06em; color: var(--text); opacity: 0.04; position: absolute; top: 50%; right: 5%; transform: translateY(-50%); pointer-events: none; user-select: none; }
+    .err__glitch { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .err__glitch span { position: absolute; display: block; width: 100%; height: 2px; background: var(--accent); opacity: 0.06; }
+    .err__glitch span:nth-child(1) { top: 18%; animation: drift 4s linear infinite; }
+    .err__glitch span:nth-child(2) { top: 52%; animation: drift 6s linear infinite 1s; }
+    .err__glitch span:nth-child(3) { top: 76%; animation: drift 5s linear infinite 0.5s; }
+    .err__glitch span:nth-child(4) { width: 60%; top: 34%; animation: drift 7s linear infinite 2s; }
+    .err__glitch span:nth-child(5) { width: 50%; top: 64%; animation: drift 8s linear infinite 0.3s; }
+    @keyframes drift { 0% { transform: translateX(-100%); } 100% { transform: translateX(100vw); } }
+    .err__content { position: relative; z-index: 1; }
+    .err__sub { font-size: clamp(18px, 2.5vw, 24px); color: var(--text-dim); margin-top: 12px; max-width: 560px; line-height: 1.5; }
+    .err__links { display: flex; gap: 32px; margin-top: 36px; flex-wrap: wrap; }
+    .err__links .link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+    .err__links .link { text-underline-offset: 4px; }
+    .err__links .link:hover { text-decoration: underline; }
+    .err__tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 48px; max-width: 560px; }
+    .err__tile { font-family: var(--font-display); font-size: 13px; font-weight: 500; letter-spacing: 0.01em; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-dim); transition: border-color 0.2s, color 0.2s, background 0.2s; text-align: center; }
+    .err__tile:hover { border-color: var(--accent-line); color: var(--accent); background: var(--accent-soft); }
+    .err__tile:active { transform: scale(0.97); }
+    .err__tile:focus-visible { outline: none; border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent); }
+    @media (max-width: 640px) {
+      .err__tiles { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .err__glitch { display: none; }
+    }
+  </style>
 </head>
 <body>
+  <a href="#content" class="skip-link" data-i18n="a11y.skip">Skip to content</a>
   <header class="nav">
     <a href="index.html" class="nav__brand">shakya</a>
+    <nav class="nav__links">
+      <a href="projects.html" data-i18n="nav.projects">Projects</a>
+      <a href="ai-lab.html" data-i18n="nav.ailab">AI Lab</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="changelog.html" data-i18n="nav.changelog">Changelog</a>
+    </nav>
+    <div class="nav__right">
+      <div class="nav__status"><span class="dot"></span><span data-i18n="nav.status">OPEN TO COLLABORATION</span></div>
+      <button class="toggle" data-theme-toggle="" aria-label="Toggle theme"><span class="t-icon" aria-hidden="true">◐</span><span class="t-label">Dark</span></button>
+      <button class="toggle" data-lang-toggle="" aria-label="Toggle language"><span class="en on">EN</span><span class="zh off">中文</span></button>
+      <button class="nav__burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </header>
-  <section class="hero" style="min-height:60vh; display:flex; align-items:center;">
-    <div class="container">
+
+  <main id="content">
+  <section class="err" data-od-id="error-section">
+    <div class="orbs" aria-hidden="true">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+    </div>
+    <div class="err__glitch" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="err__code" aria-hidden="true">404</div>
+    <div class="container err__content">
       <p class="kicker">ERROR 404</p>
-      <h1 class="hero__h1">This page shipped, but not here.</h1>
-      <p class="hero__lede">The link may be broken or the page moved. Head back to the homepage.</p>
-      <div class="hero__links"><a href="index.html" class="link">Back home ↓</a></div>
+      <h1 class="hero__h1" data-i18n="e404.h1">This page shipped, but not here.</h1>
+      <p class="err__sub" data-i18n="e404.sub">The link may be broken or the page moved. Try one of these instead:</p>
+      <div class="err__links">
+        <a href="index.html" class="link">Back home ↓</a>
+        <a href="projects.html" class="link link--dim" data-i18n="e404.projects">View projects →</a>
+      </div>
+      <div class="err__tiles">
+        <a href="index.html" class="err__tile">Home</a>
+        <a href="projects.html" class="err__tile">Projects</a>
+        <a href="ai-lab.html" class="err__tile">AI Lab</a>
+        <a href="contact.html" class="err__tile">Contact</a>
+      </div>
     </div>
   </section>
-</body>
-</html>
+</main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <a href="index.html" class="footer__brand">shakya</a>
+        <div class="footer__links">
+          <a href="projects.html" data-i18n="footer.projects">PROJECTS</a>
+          <a href="ai-lab.html" data-i18n="footer.ailab">AI LAB</a>
+          <a href="about.html" data-i18n="footer.about">ABOUT</a>
+          <a href="contact.html" data-i18n="footer.contact">CONTACT</a>
+          <a href="changelog.html" data-i18n="footer.changelog">CHANGELOG</a>
+        </div>
+      </div>
+      <div class="footer__meta">
+        <span data-i18n="footer.meta.l">© 2026 PRANAMYYA SHAKYA · 本站支持中英双语</span>
+        <span data-i18n="footer.meta.r">BUILT WITH GIT · SEO-READY · V0.2.0</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <button class="top" data-top aria-label="Back to top"><span aria-hidden="true">↑</span></button>
+</body></html>

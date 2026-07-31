@@ -25,7 +25,15 @@
     "footer.contact":   { en: "CONTACT",    zh: "联系" },
     "footer.changelog": { en: "CHANGELOG",  zh: "更新日志" },
     "footer.meta.l":    { en: "© 2026 PRANAMYYA SHAKYA · 本站支持中英双语", zh: "© 2026 PRANAMYYA SHAKYA · 本站支持中英双语" },
-    "footer.meta.r":    { en: "BUILT WITH GIT · SEO-READY · V0.1.0",       zh: "BUILT WITH GIT · SEO-READY · V0.1.0" },
+    "footer.meta.r":    { en: "BUILT WITH GIT · SEO-READY · V0.2.0",       zh: "BUILT WITH GIT · SEO-READY · V0.2.0" },
+
+    /* A11y */
+    "a11y.skip":        { en: "Skip to content", zh: "跳到正文" },
+
+    /* 404 */
+    "e404.h1":          { en: "This page shipped, but not here.",   zh: "这个页面已发货，但不在这里。" },
+    "e404.sub":         { en: "The link may be broken or the page moved. Try one of these instead:", zh: "链接可能已损坏或页面已移动。试试下面这些：" },
+    "e404.projects":    { en: "View projects →", zh: "查看项目 →" },
 
     /* Home hero */
     "home.kicker":  { en: "PRANAMYYA SHAKYA · AI TRANSFORMATION LEADER", zh: "PRANAMYYA SHAKYA · AI 转型负责人" },
@@ -62,6 +70,27 @@
     "pipe.in":     { en: "Input",    zh: "输入" },
     "pipe.agent":  { en: "Agent",    zh: "智能体" },
     "pipe.out":    { en: "Output",   zh: "输出" },
+
+    /* Home metrics band */
+    "metrics.l1":  { en: "DEPLOYMENTS",       zh: "部署量" },
+    "metrics.l2":  { en: "COST PER CALL ↓",   zh: "单次通话成本 ↓" },
+    "metrics.l3":  { en: "MEDIAN LATENCY",    zh: "中位延迟" },
+    "metrics.l4":  { en: "COVERAGE",          zh: "全天候覆盖" },
+
+    /* Home principles */
+    "prin.kicker": { en: "PRINCIPLES",        zh: "原则" },
+    "prin.title":  { en: "Three rules I build by.", zh: "我遵循的三条准则。" },
+    "prin.p1.t":   { en: "Shipped beats impressive.",  zh: "落地，胜过好看。" },
+    "prin.p1.d":   { en: "A narrow agent forty teams rely on beats a broad one nobody trusts.", zh: "一个让 40 个团队依赖的窄智能体，胜过无人信任的宽智能体。" },
+    "prin.p2.t":   { en: "Outcomes, not models.",      zh: "讲成果，不讲模型。" },
+    "prin.p2.d":   { en: "Cost per call, recovery rate, hours saved — not the LLM that powers it.", zh: "关注单次通话成本、回款率、节省的工时 —— 而不是背后的模型。" },
+    "prin.p3.t":   { en: "Deployment is the product.", zh: "落地才是产品。" },
+    "prin.p3.d":   { en: "The demo is easy; production, observability and scale are the real build.", zh: "演示容易；生产环境、可观测性与规模化才是真正的工程。" },
+
+    /* Tile 2 interactive search */
+    "tile2.r1":    { en: "Q2 renewal terms — Contract #1183", zh: "Q2 续约条款 — 合同 #1183" },
+    "tile2.r2":    { en: "Onboarding SOP, latest revision",  zh: "入职 SOP，最新修订版" },
+    "tile2.r3":    { en: "Ticket #4421 — invoice dispute",   zh: "工单 #4421 — 发票争议" },
 
     /* Explorer */
     "exp.kicker":  { en: "INTERACTIVE — TRY IT",        zh: "互动体验" },
@@ -143,6 +172,7 @@
     "contact.h1":     { en: "Let's build what enterprises actually use.", zh: "一起打造企业真正用起来的产品。" },
     "contact.form.h": { en: "Or send a note",       zh: "或留言给我" },
     "contact.send":   { en: "SEND MESSAGE",         zh: "发送留言" },
+    "contact.thanks": { en: "✓ MESSAGE SENT — I'LL GET BACK TO YOU", zh: "✓ 留言已发送 — 我会尽快回复" },
     "contact.ph.name":  { en: "Your name",   zh: "你的姓名" },
     "contact.ph.email": { en: "Your email",  zh: "你的邮箱" },
     "contact.ph.msg":   { en: "Tell me about the problem you're solving", zh: "说说你想解决的问题" },
@@ -167,7 +197,6 @@
       if (t && t[lang]) el.setAttribute("placeholder", t[lang]);
     });
     // toggle visual state
-    document.querySelectorAll("[data-lang-toggle] .on, [data-lang-toggle] .off").forEach(() => {});
     document.querySelectorAll("[data-lang-toggle]").forEach((tg) => {
       const en = tg.querySelector(".en");
       const zh = tg.querySelector(".zh");

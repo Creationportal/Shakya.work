@@ -9,16 +9,17 @@
   function apply(theme) {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem(STORAGE, theme);
+    const dark = theme === "dark";
     document.querySelectorAll("[data-theme-toggle]").forEach((tg) => {
       const label = tg.querySelector(".t-label");
       const icon = tg.querySelector(".t-icon");
-      if (label) label.textContent = theme === "dark" ? "Dark" : "Light";
-      if (icon) icon.textContent = theme === "dark" ? "◐" : "◑";
+      if (label) label.textContent = dark ? "Dark" : "Light";
+      if (icon) icon.textContent = dark ? "◐" : "◑";
       // localized label via i18n if present
-      if (window.i18n) {
-        const t = window.i18n.T["nav.theme"];
-        if (t) label.textContent = theme === "dark" ? (t.en) : (window.i18n.current() === "zh" ? "浅色" : "Light");
+      if (window.i18n && window.i18n.current() === "zh") {
+        if (label) label.textContent = dark ? "深色" : "浅色";
       }
+      tg.setAttribute("aria-pressed", String(dark));
     });
   }
 
