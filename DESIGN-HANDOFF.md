@@ -11,10 +11,10 @@ This archive is the source of truth for turning the design into production code.
 
 ## Source map
 - Primary entry: `index.html`
-- HTML screens detected: 8
+- HTML screens detected: 9
 - Stylesheets detected: 1
 - Script/component files detected: 3
-- Supporting assets detected: 3
+- Supporting assets detected: 4
 
 ## Responsive contract
 Validate the implementation across this 2025–2026 viewport matrix:
@@ -69,6 +69,7 @@ For responsive web exports, treat these as a modern breakpoint system for one ad
 - `case-voice-gpt.html`
 - `changelog.html`
 - `contact.html`
+- `cv.html`
 - `index.html`
 - `projects.html`
 
@@ -81,6 +82,7 @@ For responsive web exports, treat these as a modern breakpoint system for one ad
 - `assets/js/theme.js`
 
 ## Assets and supporting files
+- `assets/beatles.jpg`
 - `assets/og.png`
 - `assets/og.svg`
 - `README.md`

@@ -7,6 +7,7 @@
       "404.html",
       "about.html",
       "ai-lab.html",
+      "assets/beatles.jpg",
       "assets/css/styles.css",
       "assets/js/i18n.js",
       "assets/js/main.js",
@@ -16,6 +17,7 @@
       "case-voice-gpt.html",
       "changelog.html",
       "contact.html",
+      "cv.html",
       "index.html",
       "projects.html",
       "README.md"
@@ -27,6 +29,7 @@
       "case-voice-gpt.html",
       "changelog.html",
       "contact.html",
+      "cv.html",
       "index.html",
       "projects.html"
     ],
@@ -39,6 +42,7 @@
       "assets/js/theme.js"
     ],
     "assets": [
+      "assets/beatles.jpg",
       "assets/og.png",
       "assets/og.svg",
       "README.md"
@@ -72,6 +76,11 @@
     },
     {
       "file": "contact.html",
+      "role": "screen",
+      "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
+    },
+    {
+      "file": "cv.html",
       "role": "screen",
       "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
     },

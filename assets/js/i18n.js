@@ -12,7 +12,6 @@
     "nav.ailab":      { en: "AI Lab",       zh: "AI 实验室" },
     "nav.about":      { en: "About",        zh: "关于" },
     "nav.contact":    { en: "Contact",      zh: "联系" },
-    "nav.changelog":  { en: "Changelog",    zh: "更新日志" },
     "nav.status":     { en: "OPEN TO WORK", zh: "开放合作中" },
     "nav.lang.en":    { en: "EN",           zh: "EN" },
     "nav.lang.zh":    { en: "中文",         zh: "中文" },
@@ -23,9 +22,6 @@
     "footer.ailab":     { en: "AI LAB",     zh: "AI 实验室" },
     "footer.about":     { en: "ABOUT",      zh: "关于" },
     "footer.contact":   { en: "CONTACT",    zh: "联系" },
-    "footer.changelog": { en: "CHANGELOG",  zh: "更新日志" },
-    "footer.meta.l":    { en: "© 2026 PRANAMYYA SHAKYA · 本站支持中英双语", zh: "© 2026 PRANAMYYA SHAKYA · 本站支持中英双语" },
-    "footer.meta.r":    { en: "BUILT WITH GIT · SEO-READY · V0.2.0",       zh: "BUILT WITH GIT · SEO-READY · V0.2.0" },
 
     /* A11y */
     "a11y.skip":        { en: "Skip to content", zh: "跳到正文" },
@@ -36,8 +32,8 @@
     "e404.projects":    { en: "View projects →", zh: "查看项目 →" },
 
     /* Home hero */
-    "home.kicker":  { en: "PRANAMYYA SHAKYA · AI TRANSFORMATION LEADER", zh: "PRANAMYYA SHAKYA · AI 转型负责人" },
-    "home.h1":      { en: "AI that enterprises actually adopt.",         zh: "让企业真正用起来的 AI。" },
+    "home.kicker":  { en: "VOICE · SEARCH · AGENTS",                zh: "语音 · 搜索 · 智能体" },
+    "home.h1":      { en: "AI that people actually adopt.",         zh: "让人真正用起来的 AI。" },
     "home.lede":    { en: "Voice, search and agent systems — built to be adopted, not admired.", zh: "语音、搜索与智能体系统 —— 为落地而生，不为炫技。" },
     "home.link.projects": { en: "View projects ↓", zh: "查看项目 ↓" },
     "home.link.contact":  { en: "Let's talk →",    zh: "聊聊 →" },
@@ -45,7 +41,7 @@
     "home.scroll":  { en: "SCROLL TO EXPLORE ↓", zh: "向下滚动探索 ↓" },
 
     /* Showcase */
-    "show.kicker": { en: "WHAT I BUILD", zh: "我所构建的" },
+    "show.kicker": { en: "WHAT WE BUILD", zh: "我们所构建的" },
     "show.title":  { en: "Four disciplines, one outcome.", zh: "四大能力，一个结果。" },
     "tile1.word":  { en: "Voice",    zh: "语音" },
     "tile1.tag":   { en: "VOICE AGENTS · ASR/LLM/TTS",          zh: "语音坐席 · ASR/LLM/TTS" },
@@ -71,22 +67,6 @@
     "pipe.agent":  { en: "Agent",    zh: "智能体" },
     "pipe.out":    { en: "Output",   zh: "输出" },
 
-    /* Home metrics band */
-    "metrics.l1":  { en: "DEPLOYMENTS",       zh: "部署量" },
-    "metrics.l2":  { en: "COST PER CALL ↓",   zh: "单次通话成本 ↓" },
-    "metrics.l3":  { en: "MEDIAN LATENCY",    zh: "中位延迟" },
-    "metrics.l4":  { en: "COVERAGE",          zh: "全天候覆盖" },
-
-    /* Home principles */
-    "prin.kicker": { en: "PRINCIPLES",        zh: "原则" },
-    "prin.title":  { en: "Three rules I build by.", zh: "我遵循的三条准则。" },
-    "prin.p1.t":   { en: "Shipped beats impressive.",  zh: "落地，胜过好看。" },
-    "prin.p1.d":   { en: "A narrow agent forty teams rely on beats a broad one nobody trusts.", zh: "一个让 40 个团队依赖的窄智能体，胜过无人信任的宽智能体。" },
-    "prin.p2.t":   { en: "Outcomes, not models.",      zh: "讲成果，不讲模型。" },
-    "prin.p2.d":   { en: "Cost per call, recovery rate, hours saved — not the LLM that powers it.", zh: "关注单次通话成本、回款率、节省的工时 —— 而不是背后的模型。" },
-    "prin.p3.t":   { en: "Deployment is the product.", zh: "落地才是产品。" },
-    "prin.p3.d":   { en: "The demo is easy; production, observability and scale are the real build.", zh: "演示容易；生产环境、可观测性与规模化才是真正的工程。" },
-
     /* Tile 2 interactive search */
     "tile2.r1":    { en: "Q2 renewal terms — Contract #1183", zh: "Q2 续约条款 — 合同 #1183" },
     "tile2.r2":    { en: "Onboarding SOP, latest revision",  zh: "入职 SOP，最新修订版" },
@@ -104,9 +84,9 @@
 
     /* CTA */
     "cta.kicker":  { en: "COLLABORATE",        zh: "合作" },
-    "cta.title":   { en: "Let's build what enterprises actually use.", zh: "一起打造企业真正用起来的产品。" },
+    "cta.title":   { en: "Let's build what people actually use.", zh: "一起打造大家真正用起来的产品。" },
     "cta.contact": { en: "Go to Contact →",   zh: "前往联系 →" },
-    "cta.email":   { en: "hi@shakya.ai ↗",     zh: "hi@shakya.ai ↗" },
+    "cta.email":   { en: "tang.shakya@163.com", zh: "tang.shakya@163.com" },
 
     /* Projects page */
     "proj.kicker": { en: "PROJECTS — CATALOGUE", zh: "项目 — 目录" },
@@ -157,19 +137,22 @@
     "case.next.t": { en: "AI Calling",        zh: "AI 外呼" },
 
     /* About */
-    "about.kicker": { en: "ABOUT — PRANAMYYA SHAKYA", zh: "关于 — PRANAMYYA SHAKYA" },
-    "about.h1":     { en: "I build enterprise AI that survives contact with reality.", zh: "我打造的是能落地、经得起实战检验的企业级 AI。" },
-    "about.lede":   { en: "I'm a product and project leader who has taken AI from pitch deck to production — across voice, search and agent systems. One principle drives the work: the demo is easy, the deployment is the product.", zh: "我是一名产品与项目管理者，把 AI 从演示做到生产 —— 覆盖语音、搜索与智能体系统。一条原则贯穿始终：演示容易，落地才是产品。" },
+    "about.kicker": { en: "ABOUT — THE BEATLES", zh: "关于 — 披头士" },
+    "about.h1":     { en: "The band that changed music forever.", zh: "永远改变音乐的乐队。" },
+    "about.lede":   { en: "Formed in Liverpool in 1960, The Beatles — John Lennon, Paul McCartney, George Harrison and Ringo Starr — became the most influential band in history. Their sound evolved from raw rock 'n' roll to psychedelic experimentation, leaving behind a catalog that still defines popular music.", zh: "披头士乐队于 1960 年在利物浦成立，由约翰·列侬、保罗·麦卡特尼、乔治·哈里森和林戈·斯塔尔组成，成为历史上最具影响力的乐队。他们的音乐从原始摇滚演变为迷幻实验，留下的作品至今定义着流行音乐。" },
     "about.phil.k": { en: "PRINCIPLE",        zh: "原则" },
     "about.phil.t": { en: "Shipped beats impressive.", zh: "落地，胜过好看。" },
-    "about.cap.k":  { en: "CAPABILITIES",     zh: "能力" },
-    "about.cap.t":  { en: "What I bring to the table", zh: "我能带来什么" },
-    "about.cta.k":  { en: "GET IN TOUCH",     zh: "联系我" },
-    "about.cta.t":  { en: "If you're shipping enterprise AI, let's talk.", zh: "如果你在做企业级 AI，我们聊聊。" },
+
+    /* CV access */
+    "cv.label":     { en: "CV ACCESS",        zh: "简历访问" },
+    "cv.hint":      { en: "Enter the access code to view a private document.", zh: "输入访问码查看私人文档。" },
+    "cv.placeholder": { en: "Enter code…",    zh: "输入访问码……" },
+    "cv.submit":    { en: "ACCESS",           zh: "访问" },
+    "cv.wrong":     { en: "Incorrect code. Try again.", zh: "代码错误，请重试。" },
 
     /* Contact */
     "contact.kicker": { en: "CONTACT — LET'S TALK", zh: "联系 — 聊聊" },
-    "contact.h1":     { en: "Let's build what enterprises actually use.", zh: "一起打造企业真正用起来的产品。" },
+    "contact.h1":     { en: "Let's build what people actually use.", zh: "一起打造大家真正用起来的产品。" },
     "contact.form.h": { en: "Or send a note",       zh: "或留言给我" },
     "contact.send":   { en: "SEND MESSAGE",         zh: "发送留言" },
     "contact.thanks": { en: "✓ MESSAGE SENT — I'LL GET BACK TO YOU", zh: "✓ 留言已发送 — 我会尽快回复" },
@@ -196,7 +179,6 @@
       const t = T[key];
       if (t && t[lang]) el.setAttribute("placeholder", t[lang]);
     });
-    // toggle visual state
     document.querySelectorAll("[data-lang-toggle]").forEach((tg) => {
       const en = tg.querySelector(".en");
       const zh = tg.querySelector(".zh");
@@ -219,7 +201,6 @@
     apply(current() === "en" ? "zh" : "en");
   }
 
-  // init
   document.addEventListener("DOMContentLoaded", () => {
     apply(current());
     document.querySelectorAll("[data-lang-toggle]").forEach((tg) => {
