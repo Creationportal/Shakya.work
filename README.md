@@ -53,4 +53,4 @@ python3 -m http.server 8080
 - **Content:** edit the HTML files directly (nav + footer are inline per page for SEO).
 
 ---
-© 2026 Pranamyya Shakya. BUILT WITH GIT · SEO-READY · V0.1.0
+
