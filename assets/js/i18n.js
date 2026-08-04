@@ -12,7 +12,7 @@
     "nav.ailab":      { en: "AI Lab",       zh: "AI 实验室" },
     "nav.about":      { en: "About",        zh: "关于" },
     "nav.contact":    { en: "Contact",      zh: "联系" },
-    "nav.status":     { en: "OPEN TO WORK", zh: "开放合作中" },
+    "nav.status":     { en: "OPEN TO COLLABORATION", zh: "开放合作中" },
     "nav.lang.en":    { en: "EN",           zh: "EN" },
     "nav.lang.zh":    { en: "中文",         zh: "中文" },
     "nav.theme":      { en: "Dark",         zh: "深色" },
@@ -86,7 +86,7 @@
     "cta.kicker":  { en: "COLLABORATE",        zh: "合作" },
     "cta.title":   { en: "Let's build what people actually use.", zh: "一起打造大家真正用起来的产品。" },
     "cta.contact": { en: "Go to Contact →",   zh: "前往联系 →" },
-    "cta.email":   { en: "tang.shakya@163.com", zh: "tang.shakya@163.com" },
+    "cta.email":   { en: "creationpanel@gmail.com", zh: "creationpanel@gmail.com" },
 
     /* Projects page */
     "proj.kicker": { en: "PROJECTS — CATALOGUE", zh: "项目 — 目录" },
@@ -135,13 +135,6 @@
     "case.app.t":  { en: "How we shipped it", zh: "我们如何交付" },
     "case.next.k": { en: "NEXT CASE",         zh: "下一案例" },
     "case.next.t": { en: "AI Calling",        zh: "AI 外呼" },
-
-    /* About */
-    "about.kicker": { en: "ABOUT — THE BEATLES", zh: "关于 — 披头士" },
-    "about.h1":     { en: "The band that changed music forever.", zh: "永远改变音乐的乐队。" },
-    "about.lede":   { en: "Formed in Liverpool in 1960, The Beatles — John Lennon, Paul McCartney, George Harrison and Ringo Starr — became the most influential band in history. Their sound evolved from raw rock 'n' roll to psychedelic experimentation, leaving behind a catalog that still defines popular music.", zh: "披头士乐队于 1960 年在利物浦成立，由约翰·列侬、保罗·麦卡特尼、乔治·哈里森和林戈·斯塔尔组成，成为历史上最具影响力的乐队。他们的音乐从原始摇滚演变为迷幻实验，留下的作品至今定义着流行音乐。" },
-    "about.phil.k": { en: "PRINCIPLE",        zh: "原则" },
-    "about.phil.t": { en: "Shipped beats impressive.", zh: "落地，胜过好看。" },
 
     /* CV access */
     "cv.label":     { en: "CV ACCESS",        zh: "简历访问" },
@@ -194,7 +187,9 @@
   }
 
   function current() {
-    return localStorage.getItem(STORAGE) || "en";
+    const stored = localStorage.getItem(STORAGE);
+    if (stored) return stored;
+    return location.pathname.startsWith("/zh/") ? "zh" : "en";
   }
 
   function toggle() {

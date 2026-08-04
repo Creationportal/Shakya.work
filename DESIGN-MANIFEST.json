@@ -7,7 +7,6 @@
       "404.html",
       "about.html",
       "ai-lab.html",
-      "assets/beatles.jpg",
       "assets/css/styles.css",
       "assets/js/i18n.js",
       "assets/js/main.js",
@@ -42,7 +41,6 @@
       "assets/js/theme.js"
     ],
     "assets": [
-      "assets/beatles.jpg",
       "assets/og.png",
       "assets/og.svg",
       "README.md"

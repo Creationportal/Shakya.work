@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- EN core -->
+  <url><loc>https://shakya.work/</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://shakya.work/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://shakya.work/"/></url>
+  <url><loc>https://shakya.work/about</loc><lastmod>2026-08-03</lastmod><changefreq>yearly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://shakya.work/zh/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://shakya.work/about"/></url>
+  <url><loc>https://shakya.work/contact</loc><lastmod>2026-08-03</lastmod><changefreq>yearly</changefreq><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://shakya.work/zh/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://shakya.work/contact"/></url>
+  <url><loc>https://shakya.work/projects</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://shakya.work/ai-lab</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://shakya.work/case-voice-gpt</loc><lastmod>2026-08-03</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://shakya.work/changelog</loc><lastmod>2026-08-03</lastmod><changefreq>weekly</changefreq><priority>0.3</priority></url>
+
+  <!-- EN discipline pillars (F3) -->
+  <url><loc>https://shakya.work/voice</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://shakya.work/zh/voice"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://shakya.work/voice"/></url>
+  <url><loc>https://shakya.work/search</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://shakya.work/zh/search"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://shakya.work/search"/></url>
+  <url><loc>https://shakya.work/agents</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://shakya.work/zh/agents"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://shakya.work/agents"/></url>
+  <url><loc>https://shakya.work/workflow</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://shakya.work/zh/workflow"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://shakya.work/workflow"/></url>
+
+  <!-- Blog (F5) -->
+  <url><loc>https://shakya.work/blog</loc><lastmod>2026-08-03</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://shakya.work/blog/enterprise-voice-agents</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://shakya.work/blog/enterprise-search-rag</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://shakya.work/blog/ai-agents-vs-workflow-automation</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- ZH core + disciplines (F4) -->
+  <url><loc>https://shakya.work/zh/</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://shakya.work/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://shakya.work/"/></url>
+  <url><loc>https://shakya.work/zh/about</loc><lastmod>2026-08-03</lastmod><changefreq>yearly</changefreq><priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://shakya.work/about"/></url>
+  <url><loc>https://shakya.work/zh/contact</loc><lastmod>2026-08-03</lastmod><changefreq>yearly</changefreq><priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://shakya.work/contact"/></url>
+  <url><loc>https://shakya.work/zh/voice</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://shakya.work/voice"/></url>
+  <url><loc>https://shakya.work/zh/search</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://shakya.work/search"/></url>
+  <url><loc>https://shakya.work/zh/agents</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://shakya.work/agents"/></url>
+  <url><loc>https://shakya.work/zh/workflow</loc><lastmod>2026-08-03</lastmod><changefreq>monthly</changefreq><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://shakya.work/workflow"/></url>
+</urlset>

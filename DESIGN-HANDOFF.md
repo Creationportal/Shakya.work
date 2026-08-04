@@ -82,7 +82,6 @@ For responsive web exports, treat these as a modern breakpoint system for one ad
 - `assets/js/theme.js`
 
 ## Assets and supporting files
-- `assets/beatles.jpg`
 - `assets/og.png`
 - `assets/og.svg`
 - `README.md`

@@ -120,6 +120,8 @@ h1, h2, h3, .display { font-family: var(--font-display); font-weight: 500; lette
 .nav__right { display: flex; align-items: center; gap: 14px; }
 .nav__status { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--text-dim); }
 .nav__status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.nav__status { cursor: pointer; text-decoration: none; transition: color .2s ease; }
+a.nav__status:hover { color: var(--accent); }
 
 /* Toggles (theme + language) */
 .toggle {

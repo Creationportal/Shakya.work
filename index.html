@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>shakya — AI that people actually adopt</title>
-  <meta name="description" content="Voice, search and agent systems — built to be adopted, not admired." />
+  <title>shakya — Enterprise AI: Voice Agents, Search & Automation</title>
+  <meta name="description" content="Enterprise AI systems — voice agents, enterprise search (RAG), AI agents and workflow automation. Built to be adopted, not admired." />
   <meta name="theme-color" content="#0A0A0A" />
-  <link rel="canonical" href="https://shakya.ai/" />
-  <meta property="og:title" content="shakya — AI that people actually adopt" />
-  <meta property="og:description" content="Voice, search and agent systems — built to be adopted, not admired." />
+  <link rel="canonical" href="https://shakya.work/" />
+  <meta property="og:title" content="shakya — Enterprise AI: Voice Agents, Search & Automation" />
+  <meta property="og:description" content="Enterprise AI systems — voice agents, enterprise search (RAG), AI agents and workflow automation. Built to be adopted, not admired." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://shakya.ai/" />
+  <meta property="og:url" content="https://shakya.work/" />
   <meta property="og:site_name" content="shakya" />
-  <meta property="og:image" content="assets/og.png" />
+  <meta property="og:image" content="https://shakya.work/assets/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="shakya — AI that people actually adopt" />
-  <meta name="twitter:description" content="Voice, search and agent systems — built to be adopted, not admired." />
-  <meta name="twitter:image" content="assets/og.png" />
+  <meta name="twitter:title" content="shakya — Enterprise AI: Voice Agents, Search & Automation" />
+  <meta name="twitter:description" content="Enterprise AI systems — voice agents, enterprise search (RAG), AI agents and workflow automation. Built to be adopted, not admired." />
+  <meta name="twitter:image" content="https://shakya.work/assets/og.png" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%236C5CE7' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%236C5CE7'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,15 +30,16 @@
 
   <!-- NAV -->
   <header class="nav">
-    <a href="index.html" class="nav__brand">shakya</a>
+    <a href="/" class="nav__brand">shakya</a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="projects.html" data-i18n="nav.projects">Projects</a>
-      <a href="ai-lab.html" data-i18n="nav.ailab">AI Lab</a>
-      <a href="about.html" data-i18n="nav.about">About</a>
-      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="/projects" data-i18n="nav.projects">Projects</a>
+      <a href="/ai-lab" data-i18n="nav.ailab">AI Lab</a>
+      <a href="/blog">Blog</a>
+      <a href="/about" data-i18n="nav.about">About</a>
+      <a href="/contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="nav__right">
-      <div class="nav__status"><span class="dot"></span><span data-i18n="nav.status">OPEN TO WORK</span></div>
+      <a class="nav__status" href="/contact"><span class="dot"></span><span data-i18n="nav.status">OPEN TO COLLABORATION</span></a>
       <button class="toggle" data-theme-toggle aria-label="Toggle theme" aria-pressed="true"><span class="t-icon">◐</span><span class="t-label">Dark</span></button>
       <button class="toggle" data-lang-toggle aria-label="Toggle language"><span class="en on">EN</span><span class="zh off">中文</span></button>
       <button class="nav__burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -58,10 +59,10 @@
           <div>
             <p class="kicker" data-i18n="home.kicker">VOICE · SEARCH · AGENTS</p>
             <h1 class="hero__h1" data-i18n="home.h1">AI that people actually adopt.</h1>
-            <p class="hero__lede" data-i18n="home.lede">Voice, search and agent systems — built to be adopted, not admired.</p>
+            <p class="hero__lede" data-i18n="home.lede">Enterprise AI systems — voice agents, enterprise search (RAG), AI agents and workflow automation. Built to be adopted, not admired.</p>
             <div class="hero__links">
-              <a href="projects.html" class="link" data-i18n="home.link.projects">View projects ↓</a>
-              <a href="contact.html" class="link link--dim" data-i18n="home.link.contact">Let's talk →</a>
+              <a href="/projects" class="link" data-i18n="home.link.projects">View projects ↓</a>
+              <a href="/contact" class="link link--dim" data-i18n="home.link.contact">Let's talk →</a>
             </div>
             <p class="hero__meta">GLOBAL · REMOTE-FIRST · EN / 中文</p>
           </div>
@@ -95,7 +96,7 @@
               <span class="tile__num">01</span>
               <div class="tile__word" data-i18n="tile1.word">Voice</div>
               <div class="tile__tag" data-i18n="tile1.tag">VOICE AGENTS · ASR/LLM/TTS</div>
-              <a href="ai-lab.html" class="tile__cta" data-i18n="tile1.cta">Try it →</a>
+              <a href="/voice" class="tile__cta" data-i18n="tile1.cta">Try it →</a>
             </div>
           </article>
           <article class="tile tile--2" data-reveal>
@@ -118,7 +119,7 @@
               <span class="tile__num">02</span>
               <div class="tile__word" data-i18n="tile2.word">Search</div>
               <div class="tile__tag" data-i18n="tile2.tag">ENTERPRISE SEARCH · RAG</div>
-              <a href="ai-lab.html" class="tile__cta" data-i18n="tile2.cta">Try it →</a>
+              <a href="/search" class="tile__cta" data-i18n="tile2.cta">Try it →</a>
             </div>
           </article>
           <article class="tile tile--3" data-reveal>
@@ -141,7 +142,7 @@
               <span class="tile__num">03</span>
               <div class="tile__word" data-i18n="tile3.word">Agents</div>
               <div class="tile__tag" data-i18n="tile3.tag">AI AGENTS · CALLING · COLLECTIONS</div>
-              <a href="ai-lab.html" class="tile__cta" data-i18n="tile3.cta">Try it →</a>
+              <a href="/agents" class="tile__cta" data-i18n="tile3.cta">Try it →</a>
             </div>
           </article>
           <article class="tile tile--4" data-reveal>
@@ -158,7 +159,7 @@
               <span class="tile__num">04</span>
               <div class="tile__word" data-i18n="tile4.word">Workflow</div>
               <div class="tile__tag" data-i18n="tile4.tag">WORKFLOW AUTOMATION · AGENT CHAINS</div>
-              <a href="ai-lab.html" class="tile__cta" data-i18n="tile4.cta">Try it →</a>
+              <a href="/workflow" class="tile__cta" data-i18n="tile4.cta">Try it →</a>
             </div>
           </article>
         </div>
@@ -254,8 +255,8 @@
         <p class="kicker" style="color:rgba(255,255,255,0.7);" data-i18n="cta.kicker">COLLABORATE</p>
         <h2 class="cta__title" data-i18n="cta.title">Let's build what people actually use.</h2>
         <div class="cta__links">
-          <a href="contact.html" data-i18n="cta.contact">Go to Contact →</a>
-          <a href="mailto:tang.shakya@163.com" class="dim" data-i18n="cta.email">tang.shakya@163.com</a>
+          <a href="/contact" data-i18n="cta.contact">Go to Contact →</a>
+          <a href="mailto:creationpanel@gmail.com" class="dim" data-i18n="cta.email">creationpanel@gmail.com</a>
         </div>
       </div>
     </section>
@@ -265,12 +266,13 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__top">
-        <a href="index.html" class="footer__brand">shakya</a>
+        <a href="/" class="footer__brand">shakya</a>
         <div class="footer__links">
-          <a href="projects.html" data-i18n="footer.projects">PROJECTS</a>
-          <a href="ai-lab.html" data-i18n="footer.ailab">AI LAB</a>
-          <a href="about.html" data-i18n="footer.about">ABOUT</a>
-          <a href="contact.html" data-i18n="footer.contact">CONTACT</a>
+          <a href="/projects" data-i18n="footer.projects">PROJECTS</a>
+          <a href="/ai-lab" data-i18n="footer.ailab">AI LAB</a>
+          <a href="/blog">BLOG</a>
+          <a href="/about" data-i18n="footer.about">ABOUT</a>
+          <a href="/contact" data-i18n="footer.contact">CONTACT</a>
         </div>
       </div>
 

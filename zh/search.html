@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>企业搜索 — 基于合同、SOP 与工单的 RAG | shakya</title>
+  <meta name="description" content="企业搜索（RAG）从你的合同、SOP 与工单中给出带引用的答案。面向金融、法务与支持团队的语义检索与权限控制。" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <link rel="canonical" href="https://shakya.work/zh/search" />
+  <meta property="og:title" content="企业搜索 — 基于合同、SOP 与工单的 RAG | shakya" />
+  <meta property="og:description" content="企业搜索（RAG）从你的合同、SOP 与工单中给出带引用的答案。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shakya.work/zh/search" />
+  <meta property="og:site_name" content="shakya" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://shakya.work/assets/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="企业搜索 — 基于合同、SOP 与工单的 RAG | shakya" />
+  <meta name="twitter:description" content="企业搜索（RAG）从你的合同、SOP 与工单中给出带引用的答案。" />
+  <meta name="twitter:image" content="https://shakya.work/assets/og.png" />
+  <link rel="alternate" hreflang="en" href="https://shakya.work/search" />
+  <link rel="alternate" hreflang="x-default" href="https://shakya.work/search" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%236C5CE7' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%236C5CE7'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Sans+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"什么是基于 RAG 的企业搜索？","acceptedAnswer":{"@type":"Answer","text":"检索增强生成（RAG）企业搜索会在内部文档中检索相关片段，并基于这些来源生成答案，同时附上指向原始文件的引用。"}},
+      {"@type":"Question","name":"企业搜索与百度 / 谷歌有什么不同？","acceptedAnswer":{"@type":"Answer","text":"它只面向你的私有知识——合同、SOP、工单——遵循按文档的权限控制，并返回带引用的答案，而不是一堆链接。"}},
+      {"@type":"Question","name":"企业搜索会给出引用来源吗？","acceptedAnswer":{"@type":"Answer","text":"会。每个答案都会链接回它提取自的具体合同条款、SOP 版本或工单，方便用户先核实再行动。"}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a href="#content" class="skip-link">跳到正文</a>
+  <header class="nav">
+    <a href="/zh/" class="nav__brand">shakya</a>
+    <nav class="nav__links">
+      <a href="/zh/voice">语音</a>
+      <a href="/zh/search" class="active">搜索</a>
+      <a href="/zh/agents">智能体</a>
+      <a href="/zh/workflow">工作流</a>
+      <a href="/zh/about">关于</a>
+      <a href="/zh/contact">联系</a>
+    </nav>
+    <div class="nav__right">
+      <a class="nav__status" href="/zh/contact"><span class="dot"></span><span>开放合作中</span></a>
+      <button class="toggle" data-theme-toggle aria-label="切换主题"><span class="t-icon">◐</span><span class="t-label">深色</span></button>
+      <button class="toggle" data-lang-toggle aria-label="切换语言"><span class="en off">EN</span><span class="zh on">中文</span></button>
+      <button class="nav__burger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="content">
+  <section class="pagehero">
+    <div class="container">
+      <p class="kicker">方向 02 — 搜索</p>
+      <h1 class="pagehero__h1" style="font-size:clamp(30px,4.5vw,44px);">会给出引用的企业搜索。</h1>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <p class="dim" style="font-size:17px; line-height:1.9; max-width:760px;" data-reveal>
+        基于你的私有知识——合同、SOP、工单与知识库——的检索增强生成。用自然语言提问，即可得到带引用的答案，精确指向具体条款或版本。为无法承受幻觉的金融、法务与支持团队而构建。
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" data-reveal>
+      <p class="kicker">能力</p>
+      <h2 class="showcase__title" style="font-size:24px; margin:10px 0 18px;">企业搜索能带来什么</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;">
+        <div style="border:1px solid var(--border); border-radius:var(--radius); padding:18px;"><div class="tile__tag" style="margin-bottom:6px;">语义</div><p class="dim" style="font-size:14px; line-height:1.6;">基于语义的检索，而非关键词匹配——换种说法也能找到正确片段。</p></div>
+        <div style="border:1px solid var(--border); border-radius:var(--radius); padding:18px;"><div class="tile__tag" style="margin-bottom:6px;">引用</div><p class="dim" style="font-size:14px; line-height:1.6;">每个答案都链接到来源文档与片段，便于核实。</p></div>
+        <div style="border:1px solid var(--border); border-radius:var(--radius); padding:18px;"><div class="tile__tag" style="margin-bottom:6px;">安全</div><p class="dim" style="font-size:14px; line-height:1.6;">按文档权限控制，用户只能搜索被授权看到的内容。</p></div>
+        <div style="border:1px solid var(--border); border-radius:var(--radius); padding:18px;"><div class="tile__tag" style="margin-bottom:6px;">连接器</div><p class="dim" style="font-size:14px; line-height:1.6;">按计划从文档库、知识库与工单系统摄取数据。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" data-reveal>
+      <p class="kicker">常见问题</p>
+      <h2 class="showcase__title" style="font-size:24px; margin:10px 0 18px;">常见问题</h2>
+      <div style="max-width:760px;">
+        <p style="margin:14px 0 4px; font-weight:600;">什么是基于 RAG 的企业搜索？</p>
+        <p class="dim" style="font-size:15px; line-height:1.8;">检索增强生成（RAG）会在内部文档中检索相关片段，并基于这些来源生成答案，同时附上指向原始文件的引用。</p>
+        <p style="margin:14px 0 4px; font-weight:600;">企业搜索与百度 / 谷歌有什么不同？</p>
+        <p class="dim" style="font-size:15px; line-height:1.8;">它只面向你的私有知识，遵循按文档的权限控制，并返回带引用的答案，而不是一堆链接。</p>
+        <p style="margin:14px 0 4px; font-weight:600;">企业搜索会给出引用来源吗？</p>
+        <p class="dim" style="font-size:15px; line-height:1.8;">会。每个答案都会链接回它提取自的具体合同条款、SOP 版本或工单。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container" data-reveal>
+      <p class="kicker" style="color:rgba(255,255,255,0.7);">现场体验</p>
+      <h2 class="cta__title" style="font-size:clamp(28px,4vw,36px);">在 AI 实验室搜索真实合同。</h2>
+      <div class="cta__links">
+        <a href="/ai-lab">打开 AI 实验室 →</a>
+        <a href="/zh/contact" class="dim">联系我 →</a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <a href="/zh/" class="footer__brand">shakya</a>
+        <div class="footer__links">
+          <a href="/zh/voice">语音</a>
+          <a href="/zh/search">搜索</a>
+          <a href="/zh/agents">智能体</a>
+          <a href="/zh/workflow">工作流</a>
+          <a href="/zh/about">关于</a>
+          <a href="/zh/contact">联系</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="top" data-top aria-label="回到顶部">↑</button>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/i18n.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
