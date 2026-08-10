@@ -1,0 +1,191 @@
+{
+  "sections": {
+    "home": {
+      "label": {
+        "en": "Home",
+        "zh": "首页",
+        "yue": "首頁",
+        "es": "Inicio",
+        "ne": "गृहपृष्ठ"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/home.mp3",
+        "zh": "assets/audio/guide/zh/home.mp3",
+        "yue": "assets/audio/guide/yue/home.mp3",
+        "es": "assets/audio/guide/es/home.mp3",
+        "ne": "assets/audio/guide/ne/home.mp3"
+      },
+      "text": {
+        "en": "Welcome to Shakya dot work. I am your AI guide. Use me to explore this site in your own language.",
+        "zh": "欢迎来到 Shakya dot work。我是您的 AI 向导，请用您熟悉的语言自由探索本站。",
+        "yue": "歡迎來到 Shakya dot work。我係你嘅 AI 向導，用我嚟用你自己嘅語言探索呢個網站。",
+        "es": "Bienvenidos a Shakya punto work. Soy su guía de inteligencia artificial. Úseme para explorar este sitio en su propio idioma.",
+        "ne": "शाक्य डट वर्कमा स्वागत छ। म तपाईंको AI गाइड हुँ। यो साइट आफ्नै भाषामा अन्वेषण गर्न मलाई प्रयोग गर्नुहोस्।"
+      }
+    },
+    "projects": {
+      "label": {
+        "en": "Projects"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/projects.mp3"
+      },
+      "text": {
+        "en": "This is the Projects page. It showcases deployed AI systems across voice, search, and agents — each described with the problem it solved and the impact it delivered."
+      }
+    },
+    "agents": {
+      "label": {
+        "en": "Agents"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/agents.mp3"
+      },
+      "text": {
+        "en": "The Agents page is about autonomous AI agents and multi-agent networks. Explore how task-oriented agents are designed to operate reliably inside enterprise workflows."
+      }
+    },
+    "case-voice-gpt": {
+      "label": {
+        "en": "Voice GPT case study"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/case-voice-gpt.mp3"
+      },
+      "text": {
+        "en": "This is the Voice GPT case study, a deep dive into a production conversational voice agent. Voice GPT runs enterprise inbound service lines end to end, combining speech recognition, a language model and speech synthesis. In one deployment at a tier-one bank it cut service costs by 62 percent while keeping responses under 400 milliseconds. It is the reference example of voice AI shipping to production."
+      }
+    },
+    "ai-lab": {
+      "label": {
+        "en": "AI Lab"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/ai-lab.mp3"
+      },
+      "text": {
+        "en": "AI Lab is where you try the systems, not just read about them. It has three working demos pulled from production: a voice agent playground showing a customer-service exchange at 380 millisecond latency, a prompt to workflow compiler, and an enterprise search demo that answers across contracts, SOPs and tickets with citations. Below that, a deployment table shows real outcomes, like a 62 percent cost reduction and 3.2 times recovery rate."
+      }
+    },
+    "workflow": {
+      "label": {
+        "en": "Workflow"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/workflow.mp3"
+      },
+      "text": {
+        "en": "The Workflow page is about turning intent into automated pipelines. Using agent chains, a plain language request is compiled into an executable sequence of input, agent and output that runs policy as code. This is how repetitive business processes get rebuilt as reliable, observable AI workflows, the same engine behind the Workflow Automation product."
+      }
+    },
+    "about": {
+      "label": {
+        "en": "About"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/about.mp3"
+      },
+      "text": {
+        "en": "The About page introduces Pranamyya Shakya, a Product and AI Transformation Leader focused on voice, search and autonomous agents. The through line is simple: take AI from impressive demo to production systems that real teams use daily, across finance, logistics, healthcare and enterprise operations. The guiding principle here is shipped beats impressive, a finished deployed system always outlasts one endlessly polished in the lab."
+      }
+    },
+    "contact": {
+      "label": {
+        "en": "Contact"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/contact.mp3"
+      },
+      "text": {
+        "en": "The Contact page is where conversations start. You can reach out by email at creation panel at gmail dot com, connect on LinkedIn, or message on WeChat at shakyain. There is also a short form to describe the problem you are solving. This is the best place to talk about collaborations, engagements, or swapping notes on AI."
+      }
+    },
+    "voice": {
+      "label": {
+        "en": "Voice"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/voice.mp3"
+      },
+      "text": {
+        "en": "The Voice page focuses on voice agents and speech AI, the systems that actually talk to people. This includes Voice GPT for enterprise inbound service and AI Calling for outbound sales and renewals, all built on a speech recognition, language model and speech synthesis pipeline that responds in under 400 milliseconds. It is where conversational AI meets real phone lines."
+      }
+    },
+    "search": {
+      "label": {
+        "en": "Search"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/search.mp3"
+      },
+      "text": {
+        "en": "The Search page is about enterprise search powered by retrieval augmented generation. Instead of keyword matching, it answers questions across contracts, SOPs and support tickets, and shows its sources. One deployment onboarded twelve teams onto cited, auditable answers drawn from the company's own knowledge."
+      }
+    },
+    "cv": {
+      "label": {
+        "en": "CV"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/cv.mp3"
+      },
+      "text": {
+        "en": "The CV page is the formal resume. It belongs to Shakya Tang, a product and AI leader who takes systems from pitch deck to production across voice, search and agent automation. It lists experience building enterprise voice platforms, retrieval augmented search used by twelve teams, and workflow automation that lifted recovery rates three point two times. Credentials include PMP, with work spanning voice AI, search, agent automation and enterprise go to market."
+      }
+    },
+    "changelog": {
+      "label": {
+        "en": "Changelog"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/changelog.mp3"
+      },
+      "text": {
+        "en": "The Changelog page tracks what is new across the site and its projects, recent updates, launches and improvements. Check here to see how the portfolio and its AI systems have evolved over time."
+      }
+    },
+    "blog": {
+      "label": {
+        "en": "Blog"
+      },
+      "audio": {
+        "en": "assets/audio/guide/en/blog.mp3"
+      },
+      "text": {
+        "en": "The Blog holds longer form writing, opinions, tutorials and field notes from building AI systems. It is where deeper thinking about voice, search, agents and automation gets written down."
+      }
+    }
+  },
+  "news": {
+    "label": {
+      "en": "Latest AI news",
+      "zh": "最新 AI 资讯",
+      "yue": "最新 AI 消息",
+      "es": "Últimas noticias de IA",
+      "ne": "नवीनतम AI समाचार"
+    },
+    "audio": {
+      "en": "assets/audio/news/latest.en.mp3",
+      "zh": "assets/audio/news/latest.zh.mp3"
+    },
+    "text": {
+      "en": "Welcome to shakya AI Radio, your weekly digest for everything happening in the world of enterprise AI. I'm your host, and we have a heavy week to unpack.\n\nWe start with a serious warning about AI safety. Recent reports have highlighted how artificial intelligence can now be used to design entirely new viruses. It is a chilling development that underscores the urgent need for better guardrails as these models become more capable.\n\nSpeaking of guardrails, the legal landscape is shifting fast. A court in New Mexico has ordered Meta to pay five hundred and sixty-seven million dollars. The ruling comes after findings regarding the impact of their platforms on children's mental health, signaling a massive shift in how big tech might be held liable for algorithmic harms.\n\nIn the world of cybersecurity, Framework has disclosed a data breach. This was triggered by a Metabase zero-day vulnerability, serving as a blunt reminder that even the most specialized hardware ecosystems are not immune to software-level exploits.\n\nFor those of you following voice agents and real-time automation, New Orleans is making headlines. The city is testing Carbyne’s AI-powered software to triage emergency 911 calls. It is a fascinating, high-stakes look at how agentic workflows might soon handle critical human emergencies.\n\nAnd finally, a bit of a cultural debate. One writer has made waves by announcing they will no longer read any fiction authored by large language models. It’s a reminder that as our tech improves, the debate over human creativity and authenticity is only going to get louder.\n\nThat's your AI week on shakya AI Radio — see you next time.",
+      "zh": "欢迎收听 shakya AI Radio，为您带来企业级 AI 领域的每周动态。我是主持人，本周的消息非常丰富。\n\n首先是关于 AI 安全的严正警告。近期报告指出，人工智能已被用于设计全新的病毒。随着模型能力的提升，这一令人胆寒的发展凸显了建立完善防护机制的紧迫性。\n\n在法律方面，新墨西哥州法院裁定 Meta 需支付 5.67 亿美元，原因是其平台影响了儿童的心理健康。这标志着大科技公司在算法伤害责任认定方面正面临重大转变。\n\n网络安全领域，Framework 披露了一起由 Metabase 零日漏洞引发的数据泄露事件，提醒我们即使是专业的硬件生态也无法免疫软件攻击。\n\n此外，新奥尔良正在测试 Carbyne 的 AI 软件，用于 911 紧急电话分诊。这展示了智能体工作流在处理人类紧急情况方面的巨大潜力。\n\n最后，一位作家宣布不再阅读大模型创作的小说，引发热议。随着技术进步，关于人类创造力和真实性的争论只会愈演愈烈。\n\n以上就是 shakya AI Radio 的 AI 周报——我们下期再见。"
+    },
+    "updated": "2026-08-07",
+    "voiceAudio": {
+      "en": {
+        "default": "assets/audio/news/latest.en.mp3",
+        "anchor": "assets/audio/news/latest.en.mp3",
+        "casual": "assets/audio/news/latest.en.mp3",
+        "calm": "assets/audio/news/latest.en.mp3"
+      },
+      "zh": {
+        "default": "assets/audio/news/latest.zh.mp3",
+        "anchor": "assets/audio/news/latest.zh.mp3",
+        "casual": "assets/audio/news/latest.zh.mp3",
+        "calm": "assets/audio/news/latest.zh.mp3"
+      }
+    }
+  }
+}

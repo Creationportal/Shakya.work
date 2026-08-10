@@ -1,7 +1,7 @@
 Object.assign(window,{React,ReactDOM,PropTypes:void 0});
 const {createElement:h,useState,useEffect,useRef,useCallback,createContext,useContext} = React;
 
-const T = {
+const BASE_T = {
   nav:{projects:{en:"Projects",zh:"项目"},ailab:{en:"AI Lab",zh:"AI实验室"},agents:{en:"Agents",zh:"智能体"},about:{en:"About",zh:"关于"},contact:{en:"Contact",zh:"联系"}},
   status:{en:"OPEN TO COLLABORATION",zh:"开放合作中"},
   home:{kicker:{en:"VOICE \u00B7 SEARCH \u00B7 AGENTS",zh:"语音 \u00B7 搜索 \u00B7 智能体"},h1:{en:"AI portfolio \u2014 voice, agents, search & automation.",zh:"AI 作品集 \u2014 语音、智能体、搜索与自动化。"},lede:{en:"AI systems built for production \u2014 voice agents, enterprise search, agent networks and workflow automation.",zh:"为生产环境构建的 AI 系统 \u2014 语音坐席、企业搜索、智能体网络与工作流自动化。"},view:{en:"View projects \u2193",zh:"查看项目 \u2193"},talk:{en:"Let's talk \u2192",zh:"聊聊 \u2192"}},
@@ -30,8 +30,6 @@ const T = {
   contact_ph_name:{en:"Your name",zh:"你的姓名"},
   contact_ph_email:{en:"Your email",zh:"你的邮箱"},
   contact_ph_msg:{en:"Tell me about the problem you're solving",zh:"说说你想解决的问题"},
-  activity_log:{en:"RECENT ACTIVITY",zh:"最近动态"},
-  activity_clear:{en:"CLEAR",zh:"清除"},
   login_btn:{en:"LOGIN",zh:"登录"},
   orbit_note:{en:"POINTER-REACTIVE \u00B7 DRAG TO ORBIT",zh:"指针交互 \u00B7 拖拽旋转"},
   project_cards:[
@@ -91,6 +89,54 @@ const T = {
   ],
 };
 
+/* ============================================================
+   Backend control-panel override system
+   - shakya.siteConfig : deep-merged over BASE_T (site copy)
+   - shakya.settings   : { defaultTheme, defaultLang, aiGuideEnabled, newsEnabled }
+   - shakya.guideOverrides : { sections:{sec:{lang:text}}, news:{lang:text} }
+   Applied at boot; the /backend page writes these keys.
+   ============================================================ */
+function cloneObj(o){ return (typeof structuredClone==='function') ? structuredClone(o) : JSON.parse(JSON.stringify(o)); }
+function deepMerge(base, over){
+  const out = cloneObj(base);
+  for (const k in over){
+    const ov = over[k];
+    if (Array.isArray(ov)) out[k] = cloneObj(ov);
+    else if (ov && typeof ov==='object' && base[k] && typeof base[k]==='object' && !Array.isArray(base[k]))
+      out[k] = deepMerge(base[k], ov);
+    else out[k] = ov;
+  }
+  return out;
+}
+function loadOverrides(){ try{ return JSON.parse(localStorage.getItem('shakya.siteConfig')||'{}'); }catch(e){ return {}; } }
+function loadSettings(){ try{ return JSON.parse(localStorage.getItem('shakya.settings')||'null'); }catch(e){ return null; } }
+function getPath(obj, path){ return path.split('.').reduce((o,k)=> (o && o[k]!==undefined)? o[k] : undefined, obj); }
+function setPath(obj, path, val){
+  const parts = path.split('.'); let o = obj;
+  for (let i=0;i<parts.length-1;i++){ o[parts[i]] = o[parts[i]] || {}; o = o[parts[i]]; }
+  o[parts[parts.length-1]] = val;
+}
+function collectStringKeys(obj, prefix, acc){
+  acc = acc || [];
+  for (const k in obj){
+    const v = obj[k], path = (prefix?prefix+'.':'')+k;
+    if (v && typeof v==='object' && !Array.isArray(v)){
+      if (('en' in v) || ('zh' in v)) acc.push(path);
+      else collectStringKeys(v, path, acc);
+    }
+  }
+  return acc;
+}
+const ARRAY_KEYS = ['project_cards','lab_deployments','cv_experience','cv_certs','cv_domains','about_focus','sim_steps'];
+const SITE_OVERRIDES = loadOverrides();
+let T = deepMerge(cloneObj(BASE_T), SITE_OVERRIDES);
+
+/* ---- backend access token (client-side gate; see summary note) ---- */
+const BACKEND_TOKEN = btoa('shakya::backend::access');
+function grantBackendAccess(){ try{ sessionStorage.setItem('shakya.auth', BACKEND_TOKEN); }catch(e){} }
+function clearBackendAccess(){ try{ sessionStorage.removeItem('shakya.auth'); }catch(e){} }
+function hasBackendAccess(){ try{ return sessionStorage.getItem('shakya.auth') === BACKEND_TOKEN; }catch(e){ return false; } }
+
 function _t(key, lang) {
   const parts = key.split('.'); let obj = T;
   for (const p of parts) { if (!obj||!obj[p]) return key; obj = obj[p]; }
@@ -112,19 +158,16 @@ function App() {
   const [theme, setTheme] = useState('dark');
   const [lang, setLang] = useState('en');
   const [route, setRoute] = useState(window.location.pathname.replace(/\/+$/,'')||'/');
-  const [activities, setActivities] = useState([
-    {text:{en:"Site rebuilt \u2014 SPA with React",zh:"网站重构 \u2014 React SPA"},time:"2m ago"},
-    {text:{en:"Agent dashboard added",zh:"智能体面板已添加"},time:"5m ago"},
-    {text:{en:"Workspace features deployed",zh:"工作区功能已部署"},time:"10m ago"},
-  ]);
   const [loginOpen, setLoginOpen] = useState(false);
 
   useEffect(()=>{
-    const stored = localStorage.getItem('shakya-theme')||'dark';
+    const s = loadSettings();
+    const stored = (s && s.defaultTheme) ? s.defaultTheme : (localStorage.getItem('shakya-theme')||'dark');
     setTheme(stored); document.documentElement.setAttribute('data-theme',stored);
   },[]);
   useEffect(()=>{
-    const stored = localStorage.getItem('shakya-lang')||'en';
+    const s = loadSettings();
+    const stored = (s && s.defaultLang) ? s.defaultLang : (localStorage.getItem('shakya-lang')||'en');
     setLang(stored); document.documentElement.lang=stored==='zh'?'zh-CN':'en';
   },[]);
   useEffect(()=>{
@@ -142,39 +185,42 @@ function App() {
   const navigate = useCallback((path)=>{window.history.pushState({},'',path);setRoute(path);window.scrollTo({top:0,behavior:'auto'});},[]);
   const match = useCallback((path)=>route===path,[route]);
   const t = useCallback((key)=>_t(key,lang),[lang]);
+  const showLogin = route === '/about';                 // login button ONLY on About
 
-  const addActivity = useCallback((textEn,textZh)=>{
-    const now = new Date();
-    const timeStr = now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-    setActivities(prev=>[{text:{en:textEn,zh:textZh},time:timeStr},...prev].slice(0,10));
-  },[]);
+  // Access gate: /backend requires a valid session token. Resolve BEFORE render so the
+  // control panel is never painted to the DOM without authorization (no flash, no leak).
+  const locked = (route === '/backend' && !hasBackendAccess());
+  const effectiveRoute = locked ? '/about' : route;
+  const isBackend = effectiveRoute === '/backend';
 
-  const clearActivities = useCallback(()=>setActivities([]),[]);
+  useEffect(()=>{
+    // Direct hit on /backend without a token: bounce the URL bar to /about too.
+    if (route === '/backend' && !hasBackendAccess()) navigate('/about');
+  },[route,navigate]);
 
   const page = (()=>{
-    if (route==='/') return h(HomePage,{navigate,t,addActivity,lang,key:'home'});
-    if (route==='/ai-lab') return h(AiLabPage,{navigate,t,lang,key:'ailab'});
-    if (route==='/projects') return h(ProjectsPage,{navigate,t,lang,key:'projects'});
-    if (route==='/agents/simulation') return h(SimulationAgentPage,{navigate,t,lang,key:'sim'});
-    if (route==='/agents') return h(AgentsPage,{navigate,t,lang,key:'agents'});
-    if (route==='/about') return h(AboutPage,{navigate,t,lang,key:'about'});
-    if (route==='/contact') return h(ContactPage,{navigate,t,addActivity,lang,key:'contact'});
-    if (route==='/cv') return h(CvPage,{navigate,t,lang,key:'cv'});
+    if (effectiveRoute==='/') return h(HomePage,{navigate,t,lang,key:'home'});
+    if (effectiveRoute==='/ai-lab') return h(AiLabPage,{navigate,t,lang,key:'ailab'});
+    if (effectiveRoute==='/projects') return h(ProjectsPage,{navigate,t,lang,key:'projects'});
+    if (effectiveRoute==='/agents/simulation') return h(SimulationAgentPage,{navigate,t,lang,key:'sim'});
+    if (effectiveRoute==='/agents') return h(AgentsPage,{navigate,t,lang,key:'agents'});
+    if (effectiveRoute==='/about') return h(AboutPage,{navigate,t,lang,key:'about'});
+    if (effectiveRoute==='/contact') return h(ContactPage,{navigate,t,lang,key:'contact'});
+    if (effectiveRoute==='/cv') return h(CvPage,{navigate,t,lang,key:'cv'});
+    if (effectiveRoute==='/backend') return h(BackendPage,{navigate,t,lang});
     return h(NotFoundPage,{navigate,t,lang,key:'404'});
   })();
 
   return h('div',{style:{display:'flex',flexDirection:'column',minHeight:'100vh'}},
-    h(Nav,{navigate,match,lang,toggleLang,theme,toggleTheme,t,route}),
+    !isBackend && h(Nav,{navigate,match,lang,toggleLang,theme,toggleTheme,t,route,showLogin,setLoginOpen}),
     h('div',{style:{flex:1,display:'flex',flexDirection:'column'}}, page),
-    h(Footer,{navigate,t}),
-    h(ScrollTop),
-    h(ActivityLog,{activities,clearActivities,t,lang}),
-    h(LoginButton,{loginOpen,setLoginOpen,lang}),
+    !isBackend && h(Footer,{navigate,t}),
+    !isBackend && h(ScrollTop),
     loginOpen && h(LoginModal,{onClose:()=>setLoginOpen(false),lang})
   );
 }
 
-function Nav({navigate,match,lang,toggleLang,theme,toggleTheme,t,route}) {
+function Nav({navigate,match,lang,toggleLang,theme,toggleTheme,t,route,showLogin,setLoginOpen}) {
   const [open,setOpen] = useState(false);
   const navRef = useRef(null);
   useEffect(()=>{
@@ -197,6 +243,9 @@ function Nav({navigate,match,lang,toggleLang,theme,toggleTheme,t,route}) {
     h('div',{className:'nav__right'},
       h('a',{className:'nav__status',href:'/contact',onClick:(e)=>{e.preventDefault();navigate('/contact');}},
         h('span',{className:'dot'}),h('span',null,t('status'))
+      ),
+      showLogin && h('button',{className:'login-btn',onClick:()=>setLoginOpen(true),'aria-label':'Login to backend'},
+        t('login_btn')
       ),
       h('button',{className:'toggle',onClick:toggleTheme,'aria-label':'Toggle theme'},
         h('span',null,theme==='dark'?'\u25D0':'\u25D1'),
@@ -235,41 +284,28 @@ function ScrollTop() {
   return h('button',{className:`top--btn${show?' show':''}`,onClick:()=>window.scrollTo({top:0,behavior:'smooth'}),'aria-label':'Back to top'},'\u2191');
 }
 
-function ActivityLog({activities,clearActivities,t,lang}) {
-  return h('div',{className:'activity-log'},
-    h('div',{className:'activity-log__inner'},
-      h('div',{className:'activity-log__header'},
-        h('span',{className:'activity-log__label'},t('activity_log')),
-        h('span',{className:'activity-log__clear',onClick:clearActivities},t('activity_clear'))
-      ),
-      h('div',{className:'activity-log__list'},
-        activities.map((a,i)=>h('div',{key:i,className:'activity-log__item'},
-          h('span',{className:'activity-log__dot'}),
-          h('span',{style:{flex:1}},typeof a.text==='object'?(a.text[lang]||a.text.en):a.text),
-          h('span',{className:'activity-log__time'},a.time)
-        ))
-      )
-    )
-  );
-}
-
-function LoginButton({loginOpen,setLoginOpen,lang}) {
-  return h('button',{className:'login-btn',onClick:()=>setLoginOpen(true)},
-    lang==='zh'?'\u767B\u5F55':'LOGIN'
-  );
-}
-
 function LoginModal({onClose,lang}) {
   const [code,setCode]=useState('');
-  const [error,setError]=useState(false);
-  const handleSubmit=(e)=>{e.preventDefault();setError(true);setTimeout(()=>setError(false),2000);};
+  const [error,setError]=useState('');
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    if (code.trim()==='1234') {
+      grantBackendAccess();          // sets sessionStorage token
+      setError('');
+      onClose();
+      window.history.pushState({},'', '/backend');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    } else {
+      setError(lang==='zh'?'访问码错误，请重试。':'Incorrect code. Try again.');
+    }
+  };
   return h('div',{style:{position:'fixed',inset:0,zIndex:200,display:'flex',alignItems:'center',justifyContent:'center',background:'rgba(0,0,0,0.6)',backdropFilter:'blur(4px)'},onClick:onClose},
     h('div',{style:{background:'var(--bg-elev)',border:'1px solid var(--border)',borderRadius:'var(--radius)',padding:32,maxWidth:400,width:'90%'},onClick:e=>e.stopPropagation()},
-      h('h3',{style:{fontFamily:'var(--font-display)',fontSize:20,fontWeight:500,marginBottom:8}},lang==='zh'?'\u767B\u5F55':'Sign In'),
-      h('p',{style:{fontSize:13,color:'var(--text-dim)',marginBottom:20}},lang==='zh'?'占位认证 \u2014 无真实后端。':'Placeholder authentication \u2014 no real backend.'),
+      h('h3',{style:{fontFamily:'var(--font-display)',fontSize:20,fontWeight:500,marginBottom:8}},lang==='zh'?'\u540E\u53F0\u767B\u5F55':'Backend Sign In'),
+      h('p',{style:{fontSize:13,color:'var(--text-dim)',marginBottom:20}},lang==='zh'?'输入访问码以进入配置后台。':'Enter the access code to open the configuration panel.'),
       h('form',{onSubmit:handleSubmit},
         h('input',{type:'text',value:code,onChange:e=>setCode(e.target.value),placeholder:lang==='zh'?'输入访问码...':'Enter access code...',style:{width:'100%',padding:12,border:'1px solid var(--border)',borderRadius:2,background:'var(--bg)',color:'var(--text)',fontSize:14,outline:'none',marginBottom:12},className:'field'}),
-        error && h('p',{style:{fontSize:11,color:'#EF4444',marginBottom:8,fontFamily:'var(--font-mono)'}},lang==='zh'?'代码错误，请重试。':'Incorrect code. Try again.'),
+        error && h('p',{style:{fontSize:11,color:'#EF4444',marginBottom:8,fontFamily:'var(--font-mono)'}},error),
         h('div',{style:{display:'flex',gap:12,justifyContent:'flex-end'}},
           h('button',{type:'button',onClick:onClose,className:'btn btn--ghost',style:{padding:'10px 18px'}},lang==='zh'?'关闭':'CLOSE'),
           h('button',{type:'submit',className:'btn btn--primary',style:{padding:'10px 18px'}},lang==='zh'?'访问':'ACCESS')
@@ -541,9 +577,9 @@ function AboutPage({navigate,t,lang}) {
   );
 }
 
-function ContactPage({navigate,t,addActivity}) {
+function ContactPage({navigate,t}) {
   const [sent,setSent]=useState(false);
-  const handleSubmit=(e)=>{e.preventDefault();setSent(true);setTimeout(()=>setSent(false),1800);if(addActivity)addActivity('New contact form submission','新的联系表单提交');};
+  const handleSubmit=(e)=>{e.preventDefault();setSent(true);setTimeout(()=>setSent(false),1800);};
   return h('main',{id:'content'},
     h('section',{className:'pagehero'},
       h('div',{className:'container'},
@@ -646,27 +682,65 @@ function AgentsPage({navigate,t,lang}) {
 }
 
 function SimulationAgentPage({navigate,t,lang}) {
-  const steps = T.sim_steps;
-  const l = (o) => o[lang] || o.en;
+  const simRef = React.useRef(null);
+  const rafRef = React.useRef(null);
+  const simCanvasRef = React.useRef(null);
+  const chartCanvasRef = React.useRef(null);
+  const tipRef = React.useRef(null);
+  const displayRef = React.useRef(new Map());
+  const phaseRef = React.useRef(null);
+  const sampleRef = React.useRef(0);
+  const kpiRef = React.useRef(0);
   const [running,setRunning] = React.useState(false);
-  const [visible,setVisible] = React.useState(0);
-  const timerRef = React.useRef(null);
+  const [counts,setCounts] = React.useState({agents:0,humans:0,phase:'Day'});
+  const [log,setLog] = React.useState([]);
+
   React.useEffect(()=>{
-    if(!running){setVisible(0);return}
-    timerRef.current = setInterval(()=>{
-      setVisible(v=>{if(v>=steps.length){clearInterval(timerRef.current);setRunning(false);return v+1}return v+1})
-    },600);
-    return ()=>clearInterval(timerRef.current);
-  },[running,steps.length]);
-  const handleRun = ()=>{
-    if(running)return;
-    setVisible(0);
-    setRunning(true);
+    if (!window.Sim || !window.Renderer || !window.OfficeCharts) {
+      setLog(prev=>['Simulation engine failed to load.', ...prev].slice(0,10));
+      return;
+    }
+    const sim = new window.Sim();
+    const renderer = new window.Renderer(simCanvasRef.current);
+    const charts = new window.OfficeCharts({canvas: chartCanvasRef.current, tip: tipRef.current});
+    sim.paused = true; // wait for RUN SCENARIO
+    simRef.current = sim;
+    const display = displayRef.current;
+    const loop = ()=>{
+      sim.update();
+      const state = sim.getState();
+      for (const f of state.figures) {
+        const d = display.get(f.id) || {x:f.x, y:f.y};
+        display.set(f.id, d);
+        d.x += (f.x - d.x) * 0.25;
+        d.y += (f.y - d.y) * 0.25;
+      }
+      renderer.draw({world:state.world, zones:state.zones, props:state.props, walls:state.walls, figures:state.figures, display, selected:null, time:state.time});
+      let agents = 0, humans = 0;
+      for (const f of state.figures) {
+        if (f.type === 'robot') { if (f.state !== 'idle') agents++; }
+        else if (!f.gone) humans++;
+      }
+      const now = performance.now();
+      if (now - kpiRef.current > 300) { kpiRef.current = now; setCounts({agents, humans, phase: state.time.isNight ? 'Night' : 'Day'}); }
+      const ph = state.time.isNight ? 'Night' : 'Day';
+      if (phaseRef.current !== ph) { phaseRef.current = ph; setLog(prev=>[`${ph}: ${humans} humans present - ${agents} agents active`, ...prev].slice(0,10)); }
+      if (now - sampleRef.current > 400) { sampleRef.current = now; charts.push({t: state.time.clock, agents, humans}); }
+      charts.render();
+      rafRef.current = requestAnimationFrame(loop);
+    };
+    rafRef.current = requestAnimationFrame(loop);
+    return ()=>{ if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  },[]);
+
+  const toggle = ()=>{
+    const sim = simRef.current; if (!sim) return;
+    const paused = sim.togglePause();
+    setRunning(!paused);
+    setLog(prev=>[(paused ? 'Scenario paused.' : 'Scenario started - agents patrolling, humans at desks.') , ...prev].slice(0,10));
   };
-  const handleStop = ()=>{
-    clearInterval(timerRef.current);
-    setRunning(false);
-  };
+
+  const l = (o) => o[lang] || o.en;
   return h('main',{id:'content'},
     h('section',{className:'pagehero'},
       h('div',{className:'container'},
@@ -678,38 +752,53 @@ function SimulationAgentPage({navigate,t,lang}) {
     ),
     h('section',{className:'section--tight'},
       h('div',{className:'container'},
-        h('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,marginBottom:32}},
+        h('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20,marginBottom:20}},
           h('div',{className:'card',style:{padding:20}},
             h('div',{style:{fontFamily:'var(--font-mono)',fontSize:9,letterSpacing:'0.1em',color:'var(--text-dim)',textTransform:'uppercase',marginBottom:8}},t('sim_scenario')),
             h('div',{style:{fontFamily:'var(--font-display)',fontSize:18,fontWeight:500,marginBottom:4}},'Test Scenario #42'),
-            h('div',{style:{fontSize:13,color:'var(--text-dim)',lineHeight:1.5}},'Inbound call routing with ASR \u2192 LLM \u2192 TTS pipeline'),
+            h('div',{style:{fontSize:13,color:'var(--text-dim)',lineHeight:1.5}},'A hybrid office: 16 humans + 16 AI agents on one floor, running a 24/7 day/night loop.'),
             h('div',{style:{display:'flex',gap:8,marginTop:12}},
-              h('span',{style:{fontFamily:'var(--font-mono)',fontSize:10,letterSpacing:'0.08em',color:'var(--accent)',padding:'4px 10px',border:'1px solid var(--accent-line)',borderRadius:100,background:'var(--accent-soft)'}},'VOICE AGENT'),
-              h('span',{style:{fontFamily:'var(--font-mono)',fontSize:10,letterSpacing:'0.08em',color:'var(--text-dim)',padding:'4px 10px',border:'1px solid var(--border)',borderRadius:100}},'INBOUND')
+              h('span',{style:{fontFamily:'var(--font-mono)',fontSize:10,letterSpacing:'0.08em',color:'var(--accent)',padding:'4px 10px',border:'1px solid var(--accent-line)',borderRadius:100,background:'var(--accent-soft)'}},'AGENTS'),
+              h('span',{style:{fontFamily:'var(--font-mono)',fontSize:10,letterSpacing:'0.08em',color:'var(--text-dim)',padding:'4px 10px',border:'1px solid var(--border)',borderRadius:100}},'LIVE')
             )
           ),
           h('div',{className:'card',style:{padding:20,display:'flex',flexDirection:'column',justifyContent:'space-between'}},
             h('div',null,
               h('div',{style:{fontFamily:'var(--font-mono)',fontSize:9,letterSpacing:'0.1em',color:'var(--text-dim)',textTransform:'uppercase',marginBottom:8}},t('sim_controls')),
               h('div',{style:{display:'flex',gap:12,alignItems:'center'}},
-                h('button',{className:'btn btn--primary',onClick:handleRun,disabled:running,style:{opacity:running?0.5:1,fontSize:12,padding:'10px 18px'}},t('sim_run')),
-                h('button',{className:'btn btn--ghost',onClick:handleStop,disabled:!running,style:{opacity:!running?0.5:1,fontSize:12,padding:'10px 18px'}},t('sim_stop'))
+                h('button',{className:'btn btn--primary',onClick:toggle,disabled:running,style:{opacity:running?0.5:1,fontSize:12,padding:'10px 18px'}},t('sim_run')),
+                h('button',{className:'btn btn--ghost',onClick:toggle,disabled:!running,style:{opacity:!running?0.5:1,fontSize:12,padding:'10px 18px'}},t('sim_stop'))
               )
             ),
-            h('div',{style:{display:'flex',alignItems:'center',gap:8,marginTop:12}},
-              h('span',{style:{width:6,height:6,borderRadius:'50%',background:running?'#22C55E':'var(--text-dim)',display:'inline-block',transition:'background .3s'}}),
-              h('span',{style:{fontFamily:'var(--font-mono)',fontSize:10,color:'var(--text-dim)'}},running?t('sim_running'):t('sim_idle'))
+            h('div',{style:{display:'flex',gap:18,marginTop:14,fontFamily:'var(--font-mono)',fontSize:11,color:'var(--text-dim)'}},
+              h('span',null,`AI AGENTS: ${counts.agents}`),
+              h('span',null,`HUMANS: ${counts.humans}`),
+              h('span',null,`${counts.phase}`)
             )
           )
         ),
-        h('div',{style:{fontFamily:'var(--font-mono)',fontSize:9,letterSpacing:'0.1em',color:'var(--text-dim)',textTransform:'uppercase',marginBottom:12}},t('sim_console')),
-        h('div',{style:{background:'var(--bg-elev)',border:'1px solid var(--border)',borderRadius:'var(--radius)',padding:24,minHeight:240}},
-          h('div',{style:{display:'flex',flexDirection:'column',gap:4}},
-            steps.map((s,i)=>h('div',{key:i,style:{display:'flex',alignItems:'center',gap:12,padding:'8px 0',opacity:i<visible?1:i===visible?0.5:0.15,transition:'opacity .3s',fontSize:13,color:'var(--text)',lineHeight:1.4}},
-              h('span',{style:{width:20,height:20,borderRadius:'50%',background:i<visible?'var(--accent)':'var(--surface)',border:'1px solid var(--border)',display:'flex',alignItems:'center',justifyContent:'center',flex:'none',fontSize:9,fontWeight:500,color:i<visible?'#FAFAFA':'var(--text-dim)',transition:'all .3s'}},i<visible?'\u2713':String(i+1).padStart(2,'0')),
-              h('span',{style:{flex:1}},l(s)),
-              i<visible && h('span',{style:{fontFamily:'var(--font-mono)',fontSize:9,color:'var(--text-dim)',flex:'none'}},`${(300+Math.random()*200).toFixed(0)}ms`)
-            ))
+        h('div',{className:'olt-stage'},
+          h('canvas',{ref:simCanvasRef,className:'olt-canvas',width:1280,height:896})
+        ),
+        h('div',{className:'olt-charts'},
+          h('div',{style:{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}},
+            h('span',{style:{fontFamily:'var(--font-mono)',fontSize:9,letterSpacing:'0.1em',color:'var(--text-dim)',textTransform:'uppercase'}},'PRESENCE - AGENTS VS HUMANS'),
+            h('div',{style:{display:'flex',gap:16,fontSize:12,color:'var(--text-dim)'}},
+              h('span',{style:{display:'flex',alignItems:'center',gap:6}},h('span',{style:{width:10,height:10,borderRadius:3,background:'var(--accent)'}}),'AI agents'),
+              h('span',{style:{display:'flex',alignItems:'center',gap:6}},h('span',{style:{width:10,height:10,borderRadius:3,background:'#3b82c4'}}),'Humans')
+            )
+          ),
+          h('div',{className:'olt-chart-wrap'},
+            h('canvas',{ref:chartCanvasRef,className:'olt-chart-canvas'}),
+            h('div',{ref:tipRef,className:'olt-tip'})
+          )
+        ),
+        h('div',{style:{marginTop:20}},
+          h('div',{style:{fontFamily:'var(--font-mono)',fontSize:9,letterSpacing:'0.1em',color:'var(--text-dim)',textTransform:'uppercase',marginBottom:12}},t('sim_console')),
+          h('div',{className:'olt-console'},
+            log.length === 0
+              ? h('div',{style:{fontSize:13,color:'var(--text-dim)'}},'Idle - press RUN SCENARIO to start.')
+              : log.map((line,i)=>h('div',{key:i,style:{fontSize:13,color:i===0?'var(--text)':'var(--text-dim)',opacity:1-(i*0.06),padding:'4px 0',fontFamily:'var(--font-mono)'}},`> ${line}`))
           )
         )
       )
@@ -792,6 +881,182 @@ function NotFoundPage({navigate,t,lang}) {
       )
     )
   );
+}
+
+function BackendPage({navigate,t,lang}) {
+  const [tab,setTab] = useState('content');
+  const [strings,setStrings] = useState({});
+  const [arrays,setArrays] = useState({});
+  const [guide,setGuide] = useState({sections:{},news:{}});
+  const [settings,setSettings] = useState({aiGuideEnabled:true,defaultTheme:'dark',defaultLang:'en',newsEnabled:true});
+  const [saved,setSaved] = useState('');
+  const [manifestOk,setManifestOk] = useState(false);
+
+  // --- gate: no token -> bounce out ---
+  useEffect(()=>{
+    if (!hasBackendAccess()) { window.location.replace('/about'); }
+  },[]);
+
+  // --- init editable content from effective T ---
+  useEffect(()=>{
+    const s={}; const a={};
+    collectStringKeys(BASE_T).forEach(p=>{ const v=getPath(T,p)||{}; s[p]={en:v.en||'',zh:v.zh||''}; });
+    ARRAY_KEYS.forEach(k=>{ a[k]=JSON.stringify(getPath(T,k)||[],null,2); });
+    setStrings(s); setArrays(a);
+    const st = loadSettings();
+    if (st) setSettings(Object.assign({aiGuideEnabled:true,defaultTheme:'dark',defaultLang:'en',newsEnabled:true}, st));
+  },[]);
+
+  // --- init AI guide text from manifest.json ---
+  useEffect(()=>{
+    fetch('assets/audio/manifest.json').then(r=>r.ok?r.json():Promise.reject()).then(m=>{
+      const g={sections:{},news:{}};
+      Object.keys(m.sections||{}).forEach(sec=>{
+        const tx=(m.sections[sec].text)||{}; g.sections[sec]={en:tx.en||'',zh:tx.zh||''};
+      });
+      const ntx=(m.news&&m.news.text)||{}; g.news={en:ntx.en||'',zh:ntx.zh||''};
+      setGuide(g); setManifestOk(true);
+    }).catch(()=>{ setManifestOk(false); });
+  },[]);
+
+  if (!hasBackendAccess()) return null;
+
+  const PAGE_LABELS = {home:'Home',about:'About',projects:'Projects',agents:'Agents',contact:'Contact',cv:'CV',lab:'AI Lab',sim:'Simulation',nav:'Navigation',footer:'Footer',status:'Status',cta:'CTA',login_btn:'Global'};
+  function groupedStrings(){
+    const groups={};
+    collectStringKeys(BASE_T).forEach(p=>{ const g=p.split('.')[0]; (groups[g]=groups[g]||[]).push(p); });
+    return groups;
+  }
+
+  function download(name,text){ const b=new Blob([text],{type:'application/json'}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u; a.download=name; a.click(); URL.revokeObjectURL(u); }
+
+  function setStr(path,field,val){ setStrings(prev=>Object.assign({},prev,{[path]:Object.assign({},prev[path],{[field]:val})})); }
+  function setArr(key,val){ setArrays(prev=>Object.assign({},prev,{[key]:val})); }
+  function setGuideText(kind,key,field,val){ setGuide(prev=>{ const n=Object.assign({},prev); n[kind][key]=Object.assign({},n[kind][key],{[field]:val}); return n; }); }
+
+  function saveContent(){
+    const overrides={};
+    Object.keys(strings).forEach(p=>setPath(overrides,p,{en:strings[p].en,zh:strings[p].zh}));
+    Object.keys(arrays).forEach(k=>{ try{ const v=JSON.parse(arrays[k]); overrides[k]=v; }catch(e){ /* keep existing on invalid JSON */ } });
+    localStorage.setItem('shakya.siteConfig',JSON.stringify(overrides));
+    setSaved('Site content saved — reload the site to apply changes.');
+  }
+  function saveGuide(){
+    localStorage.setItem('shakya.guideOverrides',JSON.stringify(guide));
+    setSaved('AI guide text saved — reload the site to apply. Export manifest.json to deploy.');
+  }
+  function saveSettings(){
+    localStorage.setItem('shakya.settings',JSON.stringify(settings));
+    setSaved('Settings saved — applies on next load (theme/language default, widget on/off).');
+  }
+  function exportAll(){
+    const all={siteConfig:JSON.parse(localStorage.getItem('shakya.siteConfig')||'{}'),guideOverrides:guide,settings:settings};
+    download('shakya.config.json',JSON.stringify(all,null,2));
+  }
+  function resetAll(){
+    if(!window.confirm('Clear all overrides (content, guide text, settings)? Site reverts to defaults on reload.')) return;
+    localStorage.removeItem('shakya.siteConfig'); localStorage.removeItem('shakya.guideOverrides'); localStorage.removeItem('shakya.settings');
+    setSaved('All overrides cleared.');
+  }
+  function logout(){ clearBackendAccess(); navigate('/about'); }
+
+  const wrap=h('div',{className:'backend'},
+    h('header',{className:'backend__bar'},
+      h('div',null,
+        h('div',{className:'backend__title'},'Backend Configuration'),
+        h('div',{className:'backend__sub'},'shakya.work — centralized control panel')
+      ),
+      h('div',{className:'backend__bar-actions'},
+        h('button',{className:'btn btn--ghost',style:{fontSize:11,padding:'8px 14px'},onClick:()=>navigate('/')},'View site ↗'),
+        h('button',{className:'btn btn--primary',style:{fontSize:11,padding:'8px 14px'},onClick:logout},'Logout')
+      )
+    ),
+    h('div',{className:'backend__tabs'},
+      ['content','guide','settings'].map(tb=>h('button',{key:tb,className:'backend__tab'+(tab===tb?' active':''),onClick:()=>setTab(tb)},
+        tb==='content'?'Site Content':tb==='guide'?'AI Guide Text':'Site Settings'))
+    ),
+    h('div',{className:'backend__body'},
+      saved && h('div',{className:'backend__saved'},saved),
+
+      tab==='content' && h('div',null,
+        h('p',{className:'backend__note'},'Every editable site string is listed below, grouped by page. These are the actual configurable copy elements used across the site.'),
+        Object.keys(groupedStrings()).map(g=>h('section',{key:g,className:'backend__group'},
+          h('h3',{className:'backend__group-title'},PAGE_LABELS[g]||g),
+          groupedStrings()[g].map(p=>h('div',{key:p,className:'backend__field'},
+            h('label',{className:'backend__field-label'},p),
+            h('div',{className:'backend__langs'},
+              h('textarea',{className:'field field--area',value:strings[p]?strings[p].en:'',placeholder:'English',onChange:e=>setStr(p,'en',e.target.value)}),
+              h('textarea',{className:'field field--area',value:strings[p]?strings[p].zh:'',placeholder:'中文',onChange:e=>setStr(p,'zh',e.target.value)})
+            )
+          ))
+        )),
+        h('section',{className:'backend__group'},
+          h('h3',{className:'backend__group-title'},'Structured Content (JSON)'),
+          ARRAY_KEYS.map(k=>h('div',{key:k,className:'backend__field'},
+            h('label',{className:'backend__field-label'},k+' (JSON)'),
+            h('textarea',{className:'field field--area',style:{minHeight:120,fontFamily:'var(--font-mono)',fontSize:12},value:arrays[k]||'',onChange:e=>setArr(k,e.target.value)})
+          ))
+        ),
+        h('div',{className:'backend__actions'},
+          h('button',{className:'btn btn--primary',onClick:saveContent},'Save site content')
+        )
+      ),
+
+      tab==='guide' && h('div',null,
+        !manifestOk && h('p',{className:'backend__note'},'Could not load manifest.json (audio guide source). Guide text editing is unavailable until it is reachable.'),
+        manifestOk && h('p',{className:'backend__note'},'AI guide narration text per section and for the weekly news. Edits apply to the voice widget on reload.'),
+        manifestOk && Object.keys(guide.sections).map(sec=>h('section',{key:sec,className:'backend__group'},
+          h('h3',{className:'backend__group-title'},'Section: '+sec),
+          h('div',{className:'backend__langs'},
+            h('textarea',{className:'field field--area',value:guide.sections[sec].en,placeholder:'English',onChange:e=>setGuideText('sections',sec,'en',e.target.value)}),
+            h('textarea',{className:'field field--area',value:guide.sections[sec].zh,placeholder:'中文',onChange:e=>setGuideText('sections',sec,'zh',e.target.value)})
+          )
+        )),
+        manifestOk && h('section',{className:'backend__group'},
+          h('h3',{className:'backend__group-title'},'Section: news (weekly)'),
+          h('div',{className:'backend__langs'},
+            h('textarea',{className:'field field--area',value:guide.news.en,placeholder:'English',onChange:e=>setGuideText('news','en',e.target.value)}),
+            h('textarea',{className:'field field--area',value:guide.news.zh,placeholder:'中文',onChange:e=>setGuideText('news','zh',e.target.value)})
+          )
+        ),
+        manifestOk && h('div',{className:'backend__actions'},
+          h('button',{className:'btn btn--primary',onClick:saveGuide},'Save guide text'),
+          h('button',{className:'btn btn--ghost',onClick:()=>{ const m={sections:{},news:{text:guide.news}}; Object.keys(guide.sections).forEach(s=>m.sections[s]={text:guide.sections[s]}); download('manifest.guide.json',JSON.stringify(m,null,2)); }},'Export guide JSON')
+        )
+      ),
+
+      tab==='settings' && h('div',null,
+        h('p',{className:'backend__note'},'Site-wide toggles that map to real runtime behaviour.'),
+        h('section',{className:'backend__group'},
+          h('div',{className:'backend__toggle'},
+            h('div',null,h('div',{className:'backend__field-label'},'AI guide widget'),h('div',{className:'backend__toggle-sub'},'Show the bottom-left voice guide on the site')),
+            h('label',{className:'switch'},h('input',{type:'checkbox',checked:settings.aiGuideEnabled,onChange:e=>setSettings(s=>({...s,aiGuideEnabled:e.target.checked}))}),h('span',{className:'slider'}))
+          ),
+          h('div',{className:'backend__toggle'},
+            h('div',null,h('div',{className:'backend__field-label'},'Weekly AI news'),h('div',{className:'backend__toggle-sub'},'Enable the news tab in the voice guide')),
+            h('label',{className:'switch'},h('input',{type:'checkbox',checked:settings.newsEnabled,onChange:e=>setSettings(s=>({...s,newsEnabled:e.target.checked}))}),h('span',{className:'slider'}))
+          ),
+          h('div',{className:'backend__toggle'},
+            h('div',null,h('div',{className:'backend__field-label'},'Default theme')),
+            h('select',{className:'field',style:{maxWidth:200},value:settings.defaultTheme,onChange:e=>setSettings(s=>({...s,defaultTheme:e.target.value}))},h('option',{value:'dark'},'Dark'),h('option',{value:'light'},'Light'))
+          ),
+          h('div',{className:'backend__toggle'},
+            h('div',null,h('div',{className:'backend__field-label'},'Default language')),
+            h('select',{className:'field',style:{maxWidth:200},value:settings.defaultLang,onChange:e=>setSettings(s=>({...s,defaultLang:e.target.value}))},h('option',{value:'en'},'English'),h('option',{value:'zh'},'中文'))
+          )
+        ),
+        h('div',{className:'backend__actions'},
+          h('button',{className:'btn btn--primary',onClick:saveSettings},'Save settings')
+        )
+      ),
+
+      h('div',{className:'backend__footer-actions'},
+        h('button',{className:'btn btn--ghost',onClick:exportAll},'Export all config (JSON)'),
+        h('button',{className:'btn btn--ghost',onClick:resetAll},'Reset all overrides')
+      )
+    )
+  );
+  return wrap;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(h(App));
