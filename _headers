@@ -1,7 +1,10 @@
 # GitHub Pages custom headers (F6 — caching / Core Web Vitals)
-# Long-cache immutable static assets
+# NOTE: do NOT use `immutable` here. Once a browser caches an asset as immutable
+# it will never revalidate, so a redeploy becomes invisible (stale login / broken sim).
+# We use a short max-age + must-revalidate instead, and rely on versioned query
+# strings (?v=) in index.html to bust caches on each deploy.
 /assets/
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=3600, must-revalidate
 
 # HTML: revalidate quickly so content/SEO edits propagate fast
 /*.html
