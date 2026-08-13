@@ -1,6 +1,80 @@
 Object.assign(window,{React,ReactDOM,PropTypes:void 0});
 const {createElement:h,useState,useEffect,useRef,useCallback,createContext,useContext} = React;
 
+/* ---- Contact form submission endpoint ----
+   Set this to your Formspree/Cloudflare-Worker endpoint. Without it the form shows an error
+   state instead of a fake success. */
+const FORM_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID';
+
+/* ---- Per-route SEO metadata (set client-side, since this is a static SPA) ----
+   Titles are kept < 60 chars; descriptions 140-155 chars. */
+const SITE_ORIGIN = 'https://shakya.work';
+const SEO_DEFAULT = {
+  title: 'Page not found — shakya',
+  desc: 'This page shipped, but not here. Explore the shakya.work AI portfolio of voice, search and agent systems.'
+};
+const SEO = {
+  '/':                 { title: 'shakya — Voice Agents, Search & Automation',
+                        desc: 'Enterprise AI systems built for production: voice agents, enterprise search, agent networks and workflow automation adopted by real teams.' },
+  '/ai-lab':           { title: 'AI Lab — Interactive Demos | shakya',
+                        desc: 'Three working demos from production: a voice agent playground, a prompt-to-workflow compiler and enterprise search with cited answers.' },
+  '/projects':         { title: 'Projects — AI Shipped & Scaled | shakya',
+                        desc: 'A catalogue of production AI systems across voice, search and agent automation — from pilot to 40+ deployed installations.' },
+  '/agents':           { title: 'Agents — Network Dashboard | shakya',
+                        desc: 'Monitor, manage and deploy AI agents across calling, collections and operations from a single agent network dashboard.' },
+  '/agents/simulation':{ title: 'Simulation Agent — Test Dashboard | shakya',
+                        desc: 'Test scenario execution and monitoring for voice agent pipelines, with a live simulation of a hybrid office of agents and humans.' },
+  '/trading-simulator':{ title: 'Trading Simulator — Simulation Only | shakya',
+                        desc: 'A trading simulation sandbox for education: test strategies and market scenarios with no real money and no financial advice.' },
+  '/about':            { title: 'About — Pranamyya Shakya | shakya',
+                        desc: 'Product & AI Transformation Leader building voice, search and autonomous agents — taking AI from impressive demo to production.' },
+  '/contact':          { title: 'Contact — Let’s Talk | shakya',
+                        desc: 'Let’s build what people actually use. Email, LinkedIn or send a note — I’ll get back to you about your AI project.' },
+  '/cv':               { title: 'CV — Pranamyya Shakya | shakya',
+                        desc: 'Curriculum vitae of a product and AI leader shipping voice, search, RAG and workflow automation across finance, logistics and health.' },
+  '/backend':          { title: 'Backend — Configuration | shakya',
+                        desc: 'Centralized control panel for site content, AI guide text and runtime settings. Configuration is stored locally in your browser.' },
+};
+
+function _ensureMeta(name){
+  let m = document.querySelector('meta[name="'+name+'"]');
+  if (!m){ m = document.createElement('meta'); m.setAttribute('name', name); document.head.appendChild(m); }
+  return m;
+}
+function _ensureOG(prop){
+  let m = document.querySelector('meta[property="'+prop+'"]');
+  if (!m){ m = document.createElement('meta'); m.setAttribute('property', prop); document.head.appendChild(m); }
+  return m;
+}
+function _ensureLink(rel){
+  let l = document.querySelector('link[rel="'+rel+'"]');
+  if (!l){ l = document.createElement('link'); l.setAttribute('rel', rel); document.head.appendChild(l); }
+  return l;
+}
+function updateSEO(route, lang){
+  const entry = SEO[route] || SEO_DEFAULT;
+  document.title = entry.title;
+  _ensureMeta('description').setAttribute('content', entry.desc);
+  _ensureLink('canonical').setAttribute('href', SITE_ORIGIN + (route === '/' ? '/' : route));
+  _ensureOG('og:title').setAttribute('content', entry.title);
+  _ensureOG('og:description').setAttribute('content', entry.desc);
+  // JSON-LD Person schema — injected once into <head>.
+  if (!document.getElementById('jsonld-person')) {
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.id = 'jsonld-person';
+    s.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      'name': 'Pranamyya Shakya',
+      'jobTitle': 'Product & AI Transformation Leader',
+      'url': SITE_ORIGIN,
+      'sameAs': ['https://www.linkedin.com/in/shakya-pranamya/']
+    });
+    document.head.appendChild(s);
+  }
+}
+
 const BASE_T = {
   nav:{projects:{en:"Projects",zh:"项目"},ailab:{en:"AI Lab",zh:"AI实验室"},agents:{en:"Agents",zh:"智能体"},about:{en:"About",zh:"关于"},contact:{en:"Contact",zh:"联系"}},
   status:{en:"OPEN TO COLLABORATION",zh:"开放合作中"},
@@ -33,12 +107,12 @@ const BASE_T = {
   login_btn:{en:"LOGIN",zh:"登录"},
   orbit_note:{en:"POINTER-REACTIVE \u00B7 DRAG TO ORBIT",zh:"指针交互 \u00B7 拖拽旋转"},
   project_cards:[
-    {kicker:{en:"VOICE AI \u00B7 2026",zh:"语音 AI \u00B7 2026"},title:{en:"Voice GPT",zh:"Voice GPT"},desc:{en:"Enterprise voice agents that run inbound service lines end-to-end.",zh:"企业级语音坐席平台，端到端处理呼入服务。"}},
-    {kicker:{en:"CONVERSATIONAL AI \u00B7 2025",zh:"对话 AI \u00B7 2025"},title:{en:"AI Calling",zh:"AI 外呼"},desc:{en:"Outbound voice agents for sales qualification and renewals.",zh:"面向销售与续费的外呼语音智能体。"}},
-    {kicker:{en:"FINTECH \u00B7 AGENTS \u00B7 2025",zh:"金融科技 \u00B7 智能体 \u00B7 2025"},title:{en:"Debt Collection AI",zh:"催收 AI"},desc:{en:"Compliant recovery agents with auditable conversations at scale.",zh:"合规催收智能体，全程话术可审计。"}},
-    {kicker:{en:"KNOWLEDGE \u00B7 RAG \u00B7 2024",zh:"知识库 \u00B7 RAG \u00B7 2024"},title:{en:"Enterprise Search",zh:"企业搜索"},desc:{en:"RAG over corporate knowledge \u2014 answers with citations.",zh:"基于企业知识库的 RAG \u2014 答案带引用。"}},
-    {kicker:{en:"SALES AI \u00B7 2024",zh:"销售 AI \u00B7 2024"},title:{en:"Sales AI",zh:"销售 AI"},desc:{en:"Pipeline copilot for B2B teams \u2014 research, outreach and follow-up.",zh:"面向 B2B 团队的销售副驾。"}},
-    {kicker:{en:"WORKFLOW \u00B7 2024",zh:"工作流 \u00B7 2024"},title:{en:"Workflow Automation",zh:"工作流自动化"},desc:{en:"Natural-language requests compiled into executable agent chains.",zh:"自然语言请求编译为可执行的智能体链。"}},
+    {kicker:{en:"VOICE AI \u00B7 2026",zh:"语音 AI \u00B7 2026"},title:{en:"Voice GPT",zh:"Voice GPT"},desc:{en:"Enterprise voice agents that run inbound service lines end-to-end.",zh:"企业级语音坐席平台，端到端处理呼入服务。"}, path:'/contact'},
+    {kicker:{en:"CONVERSATIONAL AI \u00B7 2025",zh:"对话 AI \u00B7 2025"},title:{en:"AI Calling",zh:"AI 外呼"},desc:{en:"Outbound voice agents for sales qualification and renewals.",zh:"面向销售与续费的外呼语音智能体。"}, path:'/contact'},
+    {kicker:{en:"FINTECH \u00B7 SIMULATION \u00B7 2025",zh:"金融科技 \u00B7 模拟交易 \u00B7 2025"},title:{en:"Trader",zh:"交易模拟器"},desc:{en:"A trading simulation sandbox for education: test strategies and market scenarios with no real money.",zh:"交易模拟沙盒：测试策略和市场场景，无真实资金。"}, path:'/trading-simulator'},
+    {kicker:{en:"KNOWLEDGE \u00B7 RAG \u00B7 2024",zh:"知识库 \u00B7 RAG \u00B7 2024"},title:{en:"Enterprise Search",zh:"企业搜索"},desc:{en:"RAG over corporate knowledge \u2014 answers with citations.",zh:"基于企业知识库的 RAG \u2014 答案带引用。"}, path:'/contact'},
+    {kicker:{en:"WORKFLOW \u00B7 AUTOMATION \u00B7 2024",zh:"工作流 \u00B7 自动化 \u00B7 2024"},title:{en:"WT",zh:"工作流工具"},desc:{en:"Natural-language requests compiled into executable agent chains — workflow automation engine.",zh:"自然语言请求编译为可执行的智能体链 — 工作流自动化引擎。"}, path:'/wt'},
+    {kicker:{en:"WORKFLOW \u00B7 2024",zh:"工作流 \u00B7 2024"},title:{en:"Workflow Automation",zh:"工作流自动化"},desc:{en:"Natural-language requests compiled into executable agent chains.",zh:"自然语言请求编译为可执行的智能体链。"}, path:'/contact'},
   ],
   lab_deployments:[
     {year:"2026",title:{en:"Voice GPT \u2014 tier-1 bank service lines",zh:"Voice GPT \u2014 一级银行服务线"},outcome:{en:"62% COST \u2193",zh:"成本降低 62%"}},
@@ -131,12 +205,6 @@ const ARRAY_KEYS = ['project_cards','lab_deployments','cv_experience','cv_certs'
 const SITE_OVERRIDES = loadOverrides();
 let T = deepMerge(cloneObj(BASE_T), SITE_OVERRIDES);
 
-/* ---- backend access token (client-side gate; see summary note) ---- */
-const BACKEND_TOKEN = btoa('shakya::backend::access');
-function grantBackendAccess(){ try{ sessionStorage.setItem('shakya.auth', BACKEND_TOKEN); }catch(e){} }
-function clearBackendAccess(){ try{ sessionStorage.removeItem('shakya.auth'); }catch(e){} }
-function hasBackendAccess(){ try{ return sessionStorage.getItem('shakya.auth') === BACKEND_TOKEN; }catch(e){ return false; } }
-
 function _t(key, lang) {
   const parts = key.split('.'); let obj = T;
   for (const p of parts) { if (!obj||!obj[p]) return key; obj = obj[p]; }
@@ -158,7 +226,6 @@ function App() {
   const [theme, setTheme] = useState('dark');
   const [lang, setLang] = useState('en');
   const [route, setRoute] = useState(window.location.pathname.replace(/\/+$/,'')||'/');
-  const [loginOpen, setLoginOpen] = useState(false);
 
   useEffect(()=>{
     const s = loadSettings();
@@ -185,42 +252,34 @@ function App() {
   const navigate = useCallback((path)=>{window.history.pushState({},'',path);setRoute(path);window.scrollTo({top:0,behavior:'auto'});},[]);
   const match = useCallback((path)=>route===path,[route]);
   const t = useCallback((key)=>_t(key,lang),[lang]);
-  const showLogin = route === '/about';                 // login button ONLY on About
 
-  // Access gate: /backend requires a valid session token. Resolve BEFORE render so the
-  // control panel is never painted to the DOM without authorization (no flash, no leak).
-  const locked = (route === '/backend' && !hasBackendAccess());
-  const effectiveRoute = locked ? '/about' : route;
-  const isBackend = effectiveRoute === '/backend';
-
-  useEffect(()=>{
-    // Direct hit on /backend without a token: bounce the URL bar to /about too.
-    if (route === '/backend' && !hasBackendAccess()) navigate('/about');
-  },[route,navigate]);
+  // Per-route SEO: keep <title>, description, canonical and OG tags in sync with the route.
+  useEffect(()=>{ updateSEO(route, lang); }, [route, lang]);
 
   const page = (()=>{
-    if (effectiveRoute==='/') return h(HomePage,{navigate,t,lang,key:'home'});
-    if (effectiveRoute==='/ai-lab') return h(AiLabPage,{navigate,t,lang,key:'ailab'});
-    if (effectiveRoute==='/projects') return h(ProjectsPage,{navigate,t,lang,key:'projects'});
-    if (effectiveRoute==='/agents/simulation') return h(SimulationAgentPage,{navigate,t,lang,key:'sim'});
-    if (effectiveRoute==='/agents') return h(AgentsPage,{navigate,t,lang,key:'agents'});
-    if (effectiveRoute==='/about') return h(AboutPage,{navigate,t,lang,key:'about'});
-    if (effectiveRoute==='/contact') return h(ContactPage,{navigate,t,lang,key:'contact'});
-    if (effectiveRoute==='/cv') return h(CvPage,{navigate,t,lang,key:'cv'});
-    if (effectiveRoute==='/backend') return h(BackendPage,{navigate,t,lang});
+    if (route==='/') return h(HomePage,{navigate,t,lang,key:'home'});
+    if (route==='/ai-lab') return h(AiLabPage,{navigate,t,lang,key:'ailab'});
+    if (route==='/projects') return h(ProjectsPage,{navigate,t,lang,key:'projects'});
+    if (route==='/agents/simulation') return h(SimulationAgentPage,{navigate,t,lang,key:'sim'});
+    if (route==='/agents') return h(AgentsPage,{navigate,t,lang,key:'agents'});
+    if (route==='/trading-simulator') return h(TradingSimulatorPage,{lang,key:'trading'});
+    if (route==='/wt') return h(ComingSoonPage,{navigate,t,lang,key:'wt'});
+    if (route==='/about') return h(AboutPage,{navigate,t,lang,key:'about'});
+    if (route==='/contact') return h(ContactPage,{navigate,t,lang,key:'contact'});
+    if (route==='/cv') return h(CvPage,{navigate,t,lang,key:'cv'});
+    if (route==='/backend') return h(BackendPage,{navigate,t,lang});
     return h(NotFoundPage,{navigate,t,lang,key:'404'});
   })();
 
   return h('div',{style:{display:'flex',flexDirection:'column',minHeight:'100vh'}},
-    !isBackend && h(Nav,{navigate,match,lang,toggleLang,theme,toggleTheme,t,route,showLogin,setLoginOpen}),
+    h(Nav,{navigate,match,lang,toggleLang,theme,toggleTheme,t,route}),
     h('div',{style:{flex:1,display:'flex',flexDirection:'column'}}, page),
-    !isBackend && h(Footer,{navigate,t}),
-    !isBackend && h(ScrollTop),
-    loginOpen && h(LoginModal,{onClose:()=>setLoginOpen(false),lang})
+    h(Footer,{navigate,t}),
+    h(ScrollTop)
   );
 }
 
-function Nav({navigate,match,lang,toggleLang,theme,toggleTheme,t,route,showLogin,setLoginOpen}) {
+function Nav({navigate,match,lang,toggleLang,theme,toggleTheme,t,route}) {
   const [open,setOpen] = useState(false);
   const navRef = useRef(null);
   useEffect(()=>{
@@ -244,9 +303,6 @@ function Nav({navigate,match,lang,toggleLang,theme,toggleTheme,t,route,showLogin
       h('a',{className:'nav__status',href:'/contact',onClick:(e)=>{e.preventDefault();navigate('/contact');}},
         h('span',{className:'dot'}),h('span',null,t('status'))
       ),
-      showLogin && h('button',{className:'login-btn',onClick:()=>setLoginOpen(true),'aria-label':'Login to backend'},
-        t('login_btn')
-      ),
       h('button',{className:'toggle',onClick:toggleTheme,'aria-label':'Toggle theme'},
         h('span',null,theme==='dark'?'\u25D0':'\u25D1'),
         h('span',{style:{fontSize:'10px'}},theme==='dark'?'Dark':'Light')
@@ -269,10 +325,13 @@ function Footer({navigate,t}) {
       h('div',{className:'footer__top'},
         h('a',{href:'/',className:'footer__brand',onClick:(e)=>{e.preventDefault();navigate('/');}},'shakya'),
         h('div',{className:'footer__links'},
-          NAV_ITEMS.filter(i=>i.id!=='home').map(item=>
-            h('a',{key:item.id,href:item.path,onClick:(e)=>{e.preventDefault();navigate(item.path);}},t(item.label))
-          )
+          h('a',{href:'/privacy.html'},'Privacy'),
+          h('a',{href:'/terms.html'},'Terms'),
+          h('a',{href:'/accessibility.html'},'Accessibility')
         )
+      ),
+      h('div',{className:'footer__bottom'},
+        h('p',{style:{fontSize:12,color:'var(--text-dim)',marginTop:20,fontFamily:'var(--font-mono)',letterSpacing:'0.04em'}},'© '+new Date().getFullYear()+' shakya.work. All rights reserved.')
       )
     )
   );
@@ -282,37 +341,6 @@ function ScrollTop() {
   const [show,setShow]=useState(false);
   useEffect(()=>{const h=()=>setShow(window.scrollY>600);window.addEventListener('scroll',h,{passive:true});return ()=>window.removeEventListener('scroll',h);},[]);
   return h('button',{className:`top--btn${show?' show':''}`,onClick:()=>window.scrollTo({top:0,behavior:'smooth'}),'aria-label':'Back to top'},'\u2191');
-}
-
-function LoginModal({onClose,lang}) {
-  const [code,setCode]=useState('');
-  const [error,setError]=useState('');
-  const handleSubmit=(e)=>{
-    e.preventDefault();
-    if (code.trim()==='1234') {
-      grantBackendAccess();          // sets sessionStorage token
-      setError('');
-      onClose();
-      window.history.pushState({},'', '/backend');
-      window.dispatchEvent(new PopStateEvent('popstate'));
-    } else {
-      setError(lang==='zh'?'访问码错误，请重试。':'Incorrect code. Try again.');
-    }
-  };
-  return h('div',{style:{position:'fixed',inset:0,zIndex:200,display:'flex',alignItems:'center',justifyContent:'center',background:'rgba(0,0,0,0.6)',backdropFilter:'blur(4px)'},onClick:onClose},
-    h('div',{style:{background:'var(--bg-elev)',border:'1px solid var(--border)',borderRadius:'var(--radius)',padding:32,maxWidth:400,width:'90%'},onClick:e=>e.stopPropagation()},
-      h('h3',{style:{fontFamily:'var(--font-display)',fontSize:20,fontWeight:500,marginBottom:8}},lang==='zh'?'\u540E\u53F0\u767B\u5F55':'Backend Sign In'),
-      h('p',{style:{fontSize:13,color:'var(--text-dim)',marginBottom:20}},lang==='zh'?'输入访问码以进入配置后台。':'Enter the access code to open the configuration panel.'),
-      h('form',{onSubmit:handleSubmit},
-        h('input',{type:'text',value:code,onChange:e=>setCode(e.target.value),placeholder:lang==='zh'?'输入访问码...':'Enter access code...',style:{width:'100%',padding:12,border:'1px solid var(--border)',borderRadius:2,background:'var(--bg)',color:'var(--text)',fontSize:14,outline:'none',marginBottom:12},className:'field'}),
-        error && h('p',{style:{fontSize:11,color:'#EF4444',marginBottom:8,fontFamily:'var(--font-mono)'}},error),
-        h('div',{style:{display:'flex',gap:12,justifyContent:'flex-end'}},
-          h('button',{type:'button',onClick:onClose,className:'btn btn--ghost',style:{padding:'10px 18px'}},lang==='zh'?'关闭':'CLOSE'),
-          h('button',{type:'submit',className:'btn btn--primary',style:{padding:'10px 18px'}},lang==='zh'?'访问':'ACCESS')
-        )
-      )
-    )
-  );
 }
 
 function Orbit() {
@@ -460,11 +488,11 @@ function ProjectsPage({navigate,t,lang}) {
     h('section',{className:'section--tight'},
       h('div',{className:'container'},
         h('div',{className:'cards'},
-          cards.map((c,i)=>h('article',{key:i,className:'card'},
+          cards.map((c,i)=>h('article',{key:i,className:'card',onClick:()=>navigate(c.path||'/contact'),style:{cursor:'pointer'}},
             h('span',{className:'card__kicker'},l(c.kicker)),
             h('h3',{className:'card__title'},l(c.title)),
             h('p',{className:'card__desc'},l(c.desc)),
-            h('a',{href:'/contact',className:'card__link',onClick:(e)=>{e.preventDefault();navigate('/contact');}},'View case \u2192')
+            h('a',{href:c.path||'/contact',className:'card__link',onClick:(e)=>{e.preventDefault();navigate(c.path||'/contact');}},c.path && c.path!=='/contact' ? 'View project \u2192' : 'View case \u2192')
           ))
         )
       )
@@ -578,8 +606,35 @@ function AboutPage({navigate,t,lang}) {
 }
 
 function ContactPage({navigate,t}) {
-  const [sent,setSent]=useState(false);
-  const handleSubmit=(e)=>{e.preventDefault();setSent(true);setTimeout(()=>setSent(false),1800);};
+  // status: 'idle' | 'sending' | 'sent' | 'error'
+  const [status,setStatus]=useState('idle');
+  const [name,setName]=useState('');
+  const [email,setEmail]=useState('');
+  const [message,setMessage]=useState('');
+  const [botcheck,setBotcheck]=useState(false);
+  const [errorMsg,setErrorMsg]=useState('');
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    if (botcheck) return;                       // honeypot tripped — silently ignore bots
+    setStatus('sending'); setErrorMsg('');
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify({ name, email, message })
+      });
+      if (res.ok) {
+        setStatus('sent');
+      } else {
+        setStatus('error');
+        setErrorMsg("Sorry — that didn't go through. Please try again or email me directly at creationpanel@gmail.com.");
+      }
+    } catch (err) {
+      setStatus('error');
+      setErrorMsg("Network error — please check your connection and try again, or email me directly at creationpanel@gmail.com.");
+    }
+  };
   return h('main',{id:'content'},
     h('section',{className:'pagehero'},
       h('div',{className:'container'},
@@ -605,14 +660,16 @@ function ContactPage({navigate,t}) {
         ),
         h('div',{style:{marginTop:48}},
           h('p',{className:'kicker',style:{marginBottom:16}},t('contact_form')),
-          h('form',{className:'form',onSubmit:handleSubmit},
+          h('form',{className:'form',onSubmit:handleSubmit,noValidate:true},
+            h('input',{type:'checkbox',name:'botcheck',tabIndex:-1,autoComplete:'off',checked:botcheck,onChange:e=>setBotcheck(e.target.checked),style:{display:'none'}}),
             h('div',{className:'form__row'},
-              h('input',{type:'text',className:'field',name:'name',placeholder:t('contact_ph_name'),required:true}),
-              h('input',{type:'email',className:'field',name:'email',placeholder:t('contact_ph_email'),required:true})
+              h('input',{type:'text',className:'field',name:'name',placeholder:t('contact_ph_name'),value:name,onChange:e=>setName(e.target.value),required:true,disabled:status==='sending'}),
+              h('input',{type:'email',className:'field',name:'email',placeholder:t('contact_ph_email'),value:email,onChange:e=>setEmail(e.target.value),required:true,disabled:status==='sending'})
             ),
-            h('textarea',{className:'field field--area',name:'message',placeholder:t('contact_ph_msg'),required:true}),
-            h('button',{type:'submit',className:'btn btn--primary'},t('contact_send')),
-            h('p',{className:`form-state${sent?' show':''}`,'aria-live':'polite'},t('contact_thanks'))
+            h('textarea',{className:'field field--area',name:'message',placeholder:t('contact_ph_msg'),value:message,onChange:e=>setMessage(e.target.value),required:true,disabled:status==='sending'}),
+            h('button',{type:'submit',className:'btn btn--primary',disabled:status==='sending'},status==='sending'?'\u2026 SENDING' : t('contact_send')),
+            status==='sent' && h('p',{className:'form-state show',role:'status','aria-live':'polite'},t('contact_thanks')),
+            status==='error' && h('p',{className:'form-state form-state--error show',role:'alert','aria-live':'assertive'},errorMsg)
           )
         )
       )
@@ -742,6 +799,10 @@ function SimulationAgentPage({navigate,t,lang}) {
 
   const l = (o) => o[lang] || o.en;
   return h('main',{id:'content'},
+    h('div',{className:'sim-disclaimer',role:'note',style:{display:'flex',alignItems:'center',gap:10,justifyContent:'center',padding:'12px 20px',margin:'0 0 8px',border:'1px solid var(--accent-line)',borderRadius:'var(--radius)',background:'var(--accent-soft)',color:'var(--text)',fontSize:13,lineHeight:1.4,textAlign:'center'}},
+      h('span',{style:{fontSize:16,lineHeight:1}},'\u26A0'),
+      h('span',null,'Simulation only — for education, not financial advice.')
+    ),
     h('section',{className:'pagehero'},
       h('div',{className:'container'},
         h('a',{href:'/agents',className:'back-link',onClick:(e)=>{e.preventDefault();navigate('/agents');}},t('sim_back')),
@@ -865,6 +926,28 @@ function CvPage({navigate,t,lang}) {
   );
 }
 
+function ComingSoonPage({navigate,t,lang}) {
+  const routeName = 'WT';
+  return h('main',{id:'content'},
+    h('section',{className:'pagehero'},
+      h('div',{className:'container'},
+        h('p',{className:'kicker'},'COMING SOON'),
+        h('h1',{className:'pagehero__h1'},routeName),
+        h('p',{className:'pagehero__lede'},'This project is under development. Check back soon.')
+      )
+    ),
+    h('section',{className:'section--tight'},
+      h('div',{className:'container',style:{textAlign:'center'}},
+        h('div',{style:{fontSize:48,lineHeight:1,color:'var(--accent)',marginBottom:16}},'🚧'),
+        h('p',{style:{fontSize:18,color:'var(--text-dim)',maxWidth:480,margin:'0 auto',lineHeight:1.6}},'We\'re building something interesting here. This page will launch with full documentation, demos, and technical details.'),
+        h('div',{style:{marginTop:32}},
+          h('a',{href:'/projects',className:'btn btn--primary',onClick:(e)=>{e.preventDefault();navigate('/projects');}},'← Back to Projects')
+        )
+      )
+    )
+  );
+}
+
 function NotFoundPage({navigate,t,lang}) {
   return h('main',{id:'content'},
     h('section',{style:{position:'relative',minHeight:'70vh',display:'flex',alignItems:'center',overflow:'hidden'}},
@@ -892,11 +975,6 @@ function BackendPage({navigate,t,lang}) {
   const [saved,setSaved] = useState('');
   const [manifestOk,setManifestOk] = useState(false);
 
-  // --- gate: no token -> bounce out ---
-  useEffect(()=>{
-    if (!hasBackendAccess()) { window.location.replace('/about'); }
-  },[]);
-
   // --- init editable content from effective T ---
   useEffect(()=>{
     const s={}; const a={};
@@ -918,8 +996,6 @@ function BackendPage({navigate,t,lang}) {
       setGuide(g); setManifestOk(true);
     }).catch(()=>{ setManifestOk(false); });
   },[]);
-
-  if (!hasBackendAccess()) return null;
 
   const PAGE_LABELS = {home:'Home',about:'About',projects:'Projects',agents:'Agents',contact:'Contact',cv:'CV',lab:'AI Lab',sim:'Simulation',nav:'Navigation',footer:'Footer',status:'Status',cta:'CTA',login_btn:'Global'};
   function groupedStrings(){
@@ -958,7 +1034,7 @@ function BackendPage({navigate,t,lang}) {
     localStorage.removeItem('shakya.siteConfig'); localStorage.removeItem('shakya.guideOverrides'); localStorage.removeItem('shakya.settings');
     setSaved('All overrides cleared.');
   }
-  function logout(){ clearBackendAccess(); navigate('/about'); }
+  function logout(){ navigate('/about'); }
 
   const wrap=h('div',{className:'backend'},
     h('header',{className:'backend__bar'},
@@ -1059,4 +1135,22 @@ function BackendPage({navigate,t,lang}) {
   return wrap;
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+/* ---- Error boundary: show a branded fallback instead of a white screen ---- */
+class ErrorBoundary extends React.Component {
+  constructor(props){ super(props); this.state = { hasError:false }; }
+  static getDerivedStateFromError(){ return { hasError:true }; }
+  componentDidCatch(error, info){ if (typeof console!=='undefined') console.error('[shakya] render error:', error, info); }
+  render(){
+    if (this.state.hasError) {
+      return h('main',{style:{minHeight:'70vh',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',textAlign:'center',padding:'48px 24px',gap:16}},
+        h('p',{className:'kicker'},'SOMETHING WENT WRONG'),
+        h('h1',{className:'hero__h1',style:{fontSize:'clamp(32px,5vw,48px)'}},'This page hit a snag.'),
+        h('p',{style:{fontSize:18,color:'var(--text-dim)',maxWidth:520,lineHeight:1.5}},'An unexpected error occurred while rendering the site. Try reloading, or head back to the homepage.'),
+        h('a',{href:'/',className:'btn btn--primary',style:{marginTop:8,padding:'12px 22px'}},'Back to home \u2195')
+      );
+    }
+    return this.props.children;
+  }
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(h(ErrorBoundary,null,h(App)));

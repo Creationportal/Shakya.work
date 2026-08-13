@@ -9,3 +9,22 @@
 # HTML: revalidate quickly so content/SEO edits propagate fast
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
+
+# ---------------------------------------------------------------------------
+# B2 — Security headers (F6 hardening)
+# NOTE: GitHub Pages IGNORES this file (it is a Netlify/Cloudflare Pages
+# convention). These only take effect if the site is moved to a host that
+# reads `_headers` (e.g. Netlify or Cloudflare Pages).
+#
+# HSTS and X-Frame-Options can ONLY be delivered by the host's response
+# headers, never by a <meta> tag. To actually enforce them on this domain,
+# front the site with Cloudflare (or switch to a host that reads _headers).
+# A meta CSP fallback for XSS protection is added to index.html <head>.
+# ---------------------------------------------------------------------------
+/*
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.coingecko.com; frame-ancestors 'none'
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=(self)
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
