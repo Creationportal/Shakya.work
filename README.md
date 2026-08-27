@@ -1,54 +1,36 @@
-# shakya — AI portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Single-page React application — a portfolio for AI, voice, agents, and automation projects.  
-Bilingual (EN / 中文), dark/light theme. Deploy to any static host.
+## Getting Started
 
-## Pages
-| Route | Content |
-|---|---|
-| `/` | Home — hero orbit, showcase tiles, CTA |
-| `/projects` | Project catalogue (6 cards) |
-| `/ai-lab` | Interactive demos (voice console, workflow, search) |
-| `/agents` | Agent dashboard — 5 agents with status/activity/uptime |
-| `/agents/simulation` | Simulation agent — run scenarios with live step console |
-| `/about` | Bio, philosophy, focus areas |
-| `/contact` | Channels (EMAIL / LINKEDIN / WECHAT) + message form |
-| `/cv` | CV — hidden from nav, accessible by URL |
+First, run the development server:
 
-## Features
-- **SPA routing** via `history.pushState` + 404 fallback
-- **Bilingual toggle** — EN / 中文, persists in localStorage
-- **Dark/light theme** — persists in localStorage
-- **Interactive orbit** — pointer-reactive, draggable canvas particle field
-- **Agent dashboard** — status/activity/uptime cards, Simulation Agent subpage with pipeline console
-- **Workspace features** — activity log (bottom-left), login button (placeholder)
-- **Responsive** — breakpoints at 980px / 640px, burger nav on mobile
-- **SEO** — per-page meta, Open Graph, Twitter Cards, sitemap, robots.txt
-
-## Architecture
-```
-├── index.html               SPA entry (React 18 + Babel standalone)
-├── 404.html                 SPA path-preserving redirect
-├── assets/
-│   ├── css/styles.css       Design system (268 lines)
-│   ├── js/app.js            React SPA (797 lines, 9 components)
-│   ├── og.png               Open Graph image
-│   └── og.svg               OG source
-├── zh/                      Chinese-page redirect stubs → SPA
-├── blog/                    Blog redirect stubs → SPA
-├── sitemap.xml
-├── robots.txt
-├── _headers
-├── .nojekyll
-└── .gitignore
-```
-
-## Run locally
 ```bash
-python3 -m http.server 8080
-open http://localhost:8080
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Deploy
-Push to GitHub Pages, Cloudflare Pages, or any static host.  
-`404.html` handles SPA client-side routing on hosts without URL rewriting.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

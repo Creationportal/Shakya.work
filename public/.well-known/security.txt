@@ -1,0 +1,4 @@
+Contact: mailto:creationpanel@gmail.com
+Expires: 2027-09-26T00:00:00.000Z
+Preferred-Languages: en, zh
+Canonical: https://shakya.work/.well-known/security.txt

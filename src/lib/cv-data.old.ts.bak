@@ -1,0 +1,237 @@
+/**
+ * CV data — sourced from "SHAKYA CV 4.1.pdf" and cross-checked with Shakya
+ * (emails tangshakya@163.com + creationpanel@gmail.com; MSc presented as
+ * completed 2020–2024). A newer CV can replace this file's content anytime.
+ */
+
+export interface Localized {
+  en: string;
+  zh: string;
+}
+
+export type SectionKind = "university" | "course" | "certification";
+
+export interface CvEducation {
+  school: string;
+  place: string;
+  degree: Localized;
+  period: string;
+  detail: Localized;
+  kind: SectionKind;
+}
+
+export interface CvExperience {
+  role: Localized;
+  company: string;
+  place: string;
+  period: string;
+  detail: Localized;
+}
+
+export interface CvLanguage {
+  name: string;
+  level: Localized;
+}
+
+export interface CvReference {
+  name: string;
+  title: string;
+  note: string;
+}
+
+export interface CvData {
+  name: string;
+  headline: Localized;
+  location: string;
+  contacts: {
+    emailPrimary: string;
+    emailSecondary: string;
+    phone: string;
+    linkedin: string;
+    location: string;
+  };
+  summary: Localized;
+  experience: CvExperience[];
+  education: CvEducation[];
+  languages: CvLanguage[];
+  skills: string[];
+  distinctions: Localized[];
+  references: CvReference[];
+}
+
+export const CV_DATA: CvData = {
+  name: "Shakya Pranamya",
+  headline: {
+    en: "Fintech & AI product management · system analysis · China market",
+    zh: "金融科技与 AI 产品管理 · 系统分析 · 中国市场",
+  },
+  location: "Lalitpur, Nepal · Beijing · Shanghai",
+  contacts: {
+    emailPrimary: "creationpanel@gmail.com",
+    emailSecondary: "tangshakya@163.com",
+    phone: "+977 9840804857",
+    linkedin: "https://www.linkedin.com/in/shakya-pranamya",
+    location: "Lalitpur, Nepal",
+  },
+  summary: {
+    en: "Product-minded engineer with hands-on experience across fintech, China-market operations and user-facing product design. Helped launch a trading back-end platform at Treal Technologies, designed WeChat mini-app UI at a Shanghai startup, and coordinated user SOPs at an investment firm. MSc in Computer Science from Beihang University on a full Chinese Government Scholarship; IELTS 8.5, HSK 4.",
+    zh: "产品思维的技术实践者，具备金融科技、中国市场运营与用户端产品设计的实战经验。在马来西亚 Treal Technologies 参与交易后端平台上线，在上海初创公司设计微信小程序界面，并在投资管理公司协调用户 SOP。北京航空航天大学计算机科学硕士（中国政府全额奖学金），雅思 8.5，HSK 4 级。",
+  },
+  experience: [
+    {
+      role: {
+        en: "System Analyst",
+        zh: "系统分析师",
+      },
+      company: "Treal Technologies Pvt. Ltd.",
+      place: "Kuala Lumpur, Malaysia",
+      period: "Dec 2018 – Nov 2019",
+      detail: {
+        en: "Trading back-end project launch and testing for the fintech platform division.",
+        zh: "负责金融科技平台部门交易后端项目的上线与测试。",
+      },
+    },
+    {
+      role: {
+        en: "Assistant Process Manager",
+        zh: "流程管理助理",
+      },
+      company: "Ying Lv Hui Investment Management Co., Ltd.",
+      place: "Shanghai, China",
+      period: "Aug – Nov 2018",
+      detail: {
+        en: "User SOP and operations coordination.",
+        zh: "负责用户 SOP 与运营协调。",
+      },
+    },
+    {
+      role: {
+        en: "Product Designer (Intern)",
+        zh: "产品设计师（实习）",
+      },
+      company: "Langzou Technologies",
+      place: "Shanghai, China",
+      period: "Jul – Aug 2018",
+      detail: {
+        en: "Mobile application development (e-learning) and WeChat mini-app UI design.",
+        zh: "移动应用开发（在线教育）与微信小程序 UI 设计。",
+      },
+    },
+  ],
+  education: [
+    {
+      school: "Beihang University",
+      place: "Beijing, China",
+      degree: {
+        en: "MSc, Computer Science & Technology",
+        zh: "计算机科学与技术 硕士",
+      },
+      period: "2020 – 2024",
+      detail: {
+        en: "Full Chinese Government Scholarship (CSC Type A).",
+        zh: "中国政府全额奖学金（CSC A 类）。",
+      },
+      kind: "university",
+    },
+    {
+      school: "Bohai University",
+      place: "Liaoning, China",
+      degree: {
+        en: "BSc, Software Engineering",
+        zh: "软件工程 学士",
+      },
+      period: "2014 – 2018",
+      detail: {
+        en: "GPA 3.85.",
+        zh: "GPA 3.85。",
+      },
+      kind: "university",
+    },
+    {
+      school: "Fudan University — School of Management",
+      place: "Shanghai, China",
+      degree: {
+        en: "Innovative China & Digital Entrepreneurship (short course)",
+        zh: "创新中国与数字创业（短期课程）",
+      },
+      period: "Jul 2018",
+      detail: {
+        en: "Grade 86.",
+        zh: "成绩 86 分。",
+      },
+      kind: "course",
+    },
+    {
+      school: "G.E.D., State of California",
+      place: "United States",
+      degree: {
+        en: "High School Equivalency — Internet-based (IBT)",
+        zh: "高中同等学力 — 网考（IBT）",
+      },
+      period: "2014",
+      detail: {
+        en: "Grade A.",
+        zh: "成绩 A。",
+      },
+      kind: "certification",
+    },
+  ],
+  languages: [
+    {
+      name: "English",
+      level: { en: "IELTS Band 8.5", zh: "雅思 8.5 分" },
+    },
+    {
+      name: "Chinese (Mandarin)",
+      level: { en: "HSK Level 4 · higher-intermediate", zh: "HSK 4 级 · 中高级" },
+    },
+    {
+      name: "Nepali",
+      level: { en: "Native", zh: "母语" },
+    },
+    {
+      name: "Nepal Bhasa",
+      level: { en: "Native", zh: "母语" },
+    },
+    {
+      name: "Hindi",
+      level: { en: "Conversational", zh: "日常交流" },
+    },
+  ],
+  skills: [
+    "Python · Ruby",
+    "UI design & product logic",
+    "SOP & system optimization — logistics, finance, retail",
+    "SQL on Alibaba Cloud",
+    "Computer network management & deployment",
+    "Office suite — plotting, rollout, assessment, upgrade",
+    "Business marketing & resource prioritization",
+  ],
+  distinctions: [
+    {
+      en: "Participant — Global Entrepreneurship Week 2017, Shanghai",
+      zh: "参与者 — 2017 年上海全球创业周",
+    },
+    {
+      en: "3rd place — Mass Enterprise Youth Innovation & Entrepreneurship Competition, 2016",
+      zh: "三等奖 — 2016 年大众创业万众创新大赛",
+    },
+  ],
+  references: [
+    {
+      name: "Prof. Dr. Li Bo",
+      title: "Professor, College of Computer Science and Engineering, Beihang University",
+      note: "Academic reference",
+    },
+    {
+      name: "Prof. Dr. Zhao Xuhui",
+      title: "Director, College of Information Technology",
+      note: "Academic reference",
+    },
+    {
+      name: "Mrs. Pan Yi",
+      title: "Head of Customer Relations, Treal Technologies Ltd.",
+      note: "Professional reference",
+    },
+  ],
+};
