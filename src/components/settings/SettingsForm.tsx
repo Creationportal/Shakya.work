@@ -191,7 +191,7 @@ export default function SettingsForm() {
       (lang: "en" | "zh") =>
       (v: string) => {
         setDraft((d) => {
-          const target = d[section] as any;
+          const target = d[section] as unknown as Record<string, Record<string, string>>;
           return {
             ...d,
             [section]: { ...target, [field]: { ...target[field], [lang]: v } },

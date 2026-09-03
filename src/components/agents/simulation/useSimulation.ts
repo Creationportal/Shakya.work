@@ -12,6 +12,7 @@ export function useSimulation(
   const displayRef = useRef(new Map<string, { x: number; y: number }>());
   const rafRef = useRef<number>(0);
   const runningRef = useRef(false);
+  const reducedRef = useRef(false);
   const lastCountsRef = useRef({ agents: 0, humans: 0, phase: "Day" });
   const startLoopRef = useRef<() => void>(() => {});
 
@@ -50,19 +51,25 @@ export function useSimulation(
         setCounts(c);
       }
 
-      // Only keep the render loop alive while the simulation is running;
-      // otherwise the RAF chain ends here (saves CPU when paused).
-      rafRef.current = runningRef.current ? requestAnimationFrame(tick) : 0;
+      // Only keep the render loop alive while the simulation is running AND
+      // motion is allowed; otherwise the RAF chain ends here.
+      rafRef.current = runningRef.current && !reducedRef.current ? requestAnimationFrame(tick) : 0;
     };
 
     // Kick the loop off from start()/stop() transitions.
     startLoopRef.current = () => {
-      if (!rafRef.current && runningRef.current) {
+      if (!rafRef.current && runningRef.current && !reducedRef.current) {
         rafRef.current = requestAnimationFrame(tick);
       }
     };
 
-    // Draw the initial idle frame immediately.
+    // Respect reduced-motion: a single static frame, no animation loop.
+    reducedRef.current =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Draw the initial idle frame; tick() won't schedule further frames when
+    // reduced motion is requested.
     setCounts(engine.getCounts());
     tick();
 
@@ -74,7 +81,7 @@ export function useSimulation(
     if (!engine) return;
     engine.start();
     runningRef.current = true;
-    startLoopRef.current();
+    if (!reducedRef.current) startLoopRef.current();
     setRunning(true);
   }, []);
 

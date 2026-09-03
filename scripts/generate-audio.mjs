@@ -59,7 +59,7 @@ function outPathFor(url) {
   return path.join(ROOT, "public", url.replace(/^\/+/, ""));
 }
 
-async function synthFish(text, lang) {
+async function synthFish(text) {
   const key = process.env.FISH_API_KEY;
   if (!key) throw new Error("FISH_API_KEY is not set");
   const body = {
@@ -164,7 +164,7 @@ async function main() {
       ok++;
       continue;
     }
-    const buf = await synthFish(text, job.lang);
+    const buf = await synthFish(text);
     fs.mkdirSync(path.dirname(out), { recursive: true });
     fs.writeFileSync(out, buf);
     ok++;

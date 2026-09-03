@@ -1,12 +1,19 @@
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import { getLang, translate } from "@/lib/i18n/server";
+import { pageMeta } from "@/lib/seo";
 import { getSettings } from "@/lib/settings/store";
 import Icon from "@/components/Icon";
 
 export async function generateMetadata() {
   const lang = await getLang();
-  return { title: lang === "zh" ? "联系 — 贵宾通道" : "Contact — VIP desk" };
+  return pageMeta(lang, {
+    title: { en: "Contact", zh: "联系" },
+    description: {
+      en: "A direct contact channel for VIP clients and partners of Shakya — priority replies for collaboration and enterprise AI work.",
+      zh: "面向 Shakya 的 VIP 客户与合作伙伴的直接联系通道——合作与企业级 AI 需求优先回复。",
+    },
+  });
 }
 
 export default async function VipContactPage() {

@@ -1,9 +1,16 @@
 import PageIntro from "@/components/PageIntro";
 import { getLang, translate } from "@/lib/i18n/server";
+import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata() {
   const lang = await getLang();
-  return { title: lang === "zh" ? "聚合" : "Hub" };
+  return pageMeta(lang, {
+    title: { en: "Hub", zh: "聚合" },
+    description: {
+      en: "A centralized hub of Shakya.work — quick links to AI demos, projects, the agent simulator and contact.",
+      zh: "Shakya.work 的聚合入口——快速访问 AI 演示、项目、智能体模拟器与联系页面。",
+    },
+  });
 }
 
 export default async function HubPage() {

@@ -25,6 +25,7 @@ export default function CvDownloadButton({
   useEffect(() => {
     let cancelled = false;
     if (!pdfPath) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- set initial state after mount once settings are ready
       setExists(false);
       return;
     }

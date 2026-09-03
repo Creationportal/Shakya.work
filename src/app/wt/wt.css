@@ -1,0 +1,92 @@
+/* Self-contained dark theme for the Weight Tracker (/wt) page so it doesn't
+   clash with the light-by-default site design tokens. */
+
+.wt-app {
+  --color-bg: #0b0f1a;
+  --color-card: #151b29;
+  --color-card2: #1b2334;
+  --color-line: #242e42;
+  --color-fg: #f2f5fa;
+  --color-muted: #8b95a9;
+  --color-faint: #5a6579;
+  --color-blue: #3b82f6;
+  --color-purple: #a855f7;
+  --color-teal: #2dd4bf;
+  --color-green: #34d399;
+  --color-red: #f87171;
+  --color-amber: #fbbf24;
+
+  min-height: 100dvh;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tailwind v4 surface colors the components reference by class name */
+.wt-app .bg-bg { background-color: var(--color-bg); }
+.wt-app .bg-card { background-color: var(--color-card); }
+.wt-app .bg-card2 { background-color: var(--color-card2); }
+.wt-app .border-line { border-color: var(--color-line); }
+.wt-app .text-fg { color: var(--color-fg); }
+.wt-app .text-muted { color: var(--color-muted); }
+.wt-app .text-faint { color: var(--color-faint); }
+.wt-app .text-blue { color: var(--color-blue); }
+.wt-app .text-red { color: var(--color-red); }
+.wt-app .text-green { color: var(--color-green); }
+.wt-app .text-amber { color: var(--color-amber); }
+.wt-app .bg-blue { background-color: var(--color-blue); }
+.wt-app .border-blue\/50 { border-color: rgba(59, 130, 246, 0.5); }
+.wt-app .border-blue\/45 { border-color: rgba(59, 130, 246, 0.45); }
+.wt-app .border-blue\/35 { border-color: rgba(59, 130, 246, 0.35); }
+.wt-app .bg-blue\/15 { background-color: rgba(59, 130, 246, 0.15); }
+.wt-app .border-purple\/40 { border-color: rgba(168, 85, 247, 0.4); }
+.wt-app .bg-purple\/20 { background-color: rgba(168, 85, 247, 0.2); }
+.wt-app .border-purple\/35 { border-color: rgba(168, 85, 247, 0.35); }
+.wt-app .border-green\/30 { border-color: rgba(52, 211, 153, 0.3); }
+.wt-app .bg-green\/\[0\.08\] { background-color: rgba(52, 211, 153, 0.08); }
+.wt-app .border-red\/30 { border-color: rgba(248, 113, 113, 0.3); }
+.wt-app .bg-red\/\[0\.07\] { background-color: rgba(248, 113, 113, 0.07); }
+.wt-app .text-purple { color: var(--color-purple); }
+.wt-app .border-teal { border-color: var(--color-teal); }
+.wt-app .bg-teal { background-color: var(--color-teal); }
+.wt-app .border-purple { border-color: var(--color-purple); }
+.wt-app .bg-purple { background-color: var(--color-purple); }
+
+.wt-app .no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.wt-app .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.wt-app .ruler-track {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.wt-app .ruler-track::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes wt-pop-in {
+  0% { transform: scale(0.92) translateY(12px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.wt-app .animate-pop-in {
+  animation: wt-pop-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120px) rotate(360deg); opacity: 0; }
+}
+.wt-app .animate-halo {
+  animation: wt-halo-pulse 2.2s ease-in-out infinite;
+}
+@keyframes wt-halo-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.22); }
+  50% { box-shadow: 0 0 0 9px rgba(168, 85, 247, 0.05); }
+}

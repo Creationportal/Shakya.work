@@ -52,6 +52,7 @@ export interface SiteSettings {
   contact: {
     emailPrimary: string;
     emailSecondary: string;
+    emailAliases: string[]; // extra public contact emails shown on /contact
     linkedin: string; // full URL
     phone: string;
     wechat: string; // empty string = "on request"
@@ -121,6 +122,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   contact: {
     emailPrimary: "creationpanel@gmail.com",
     emailSecondary: "tangshakya@163.com",
+    emailAliases: ["shakya@dyna.ai", "shakya@agent.qq.com"],
     linkedin: "https://www.linkedin.com/in/shakya-pranamya",
     phone: "+977 9840804857",
     wechat: "",

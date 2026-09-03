@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { getLang, translate } from "@/lib/i18n/server";
+import { getLang } from "@/lib/i18n/server";
 
 export default async function NotFound() {
   const lang = await getLang();
-  const t = (k: string) => translate(k, lang);
 
   return (
     <section className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-5 py-24 text-center">

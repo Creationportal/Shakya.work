@@ -1,6 +1,7 @@
 export type LegalSection = { title: string; body: string };
 export type LegalContent = {
   metaTitle: string;
+  metaDescription: string;
   eyebrow: string;
   title: string;
   lede: string;
@@ -18,6 +19,8 @@ export const legalContent: Record<"privacy" | "terms" | "accessibility", {
   privacy: {
     en: {
       metaTitle: "Privacy Policy",
+      metaDescription:
+        "Shakya.work privacy policy — what data we collect, why, who we share it with, and your GDPR and CCPA rights.",
       eyebrow: "Legal",
       title: "Privacy Policy",
       lede: "Plain-language details on what data this site collects, why, who it is shared with, and your rights.",
@@ -54,6 +57,8 @@ export const legalContent: Record<"privacy" | "terms" | "accessibility", {
     },
     zh: {
       metaTitle: "隐私政策",
+      metaDescription:
+        "Shakya.work 隐私政策——我们收集哪些数据、为何收集、与谁共享，以及你的 GDPR 与 CCPA 权利。",
       eyebrow: "法律",
       title: "隐私政策",
       lede: "用通俗语言说明本站收集哪些数据、为什么收集、与谁共享，以及你的权利。",
@@ -92,6 +97,8 @@ export const legalContent: Record<"privacy" | "terms" | "accessibility", {
   terms: {
     en: {
       metaTitle: "Terms of Service",
+      metaDescription:
+        "Shakya.work terms of service — acceptable use, intellectual property, disclaimers and how disputes are handled.",
       eyebrow: "Legal",
       title: "Terms of Service",
       lede: "The rules for using shakya.work. By using the site you agree to these terms.",
@@ -134,6 +141,8 @@ export const legalContent: Record<"privacy" | "terms" | "accessibility", {
     },
     zh: {
       metaTitle: "使用条款",
+      metaDescription:
+        "Shakya.work 使用条款——可接受的使用、知识产权、免责声明与争议处理方式。",
       eyebrow: "法律",
       title: "使用条款",
       lede: "使用 Shakya.work 的规则。访问即表示你同意这些条款。",
@@ -178,6 +187,8 @@ export const legalContent: Record<"privacy" | "terms" | "accessibility", {
   accessibility: {
     en: {
       metaTitle: "Accessibility Statement",
+      metaDescription:
+        "Shakya.work accessibility statement — our WCAG 2.1/2.2 AA commitments, the measures we take, and known gaps.",
       eyebrow: "Legal",
       title: "Accessibility Statement",
       lede: "My commitment to making shakya.work usable by as many people as possible.",
@@ -204,6 +215,8 @@ export const legalContent: Record<"privacy" | "terms" | "accessibility", {
     },
     zh: {
       metaTitle: "无障碍声明",
+      metaDescription:
+        "Shakya.work 无障碍声明——我们的 WCAG 2.1/2.2 AA 承诺、已采取的措施与已知不足。",
       eyebrow: "法律",
       title: "无障碍声明",
       lede: "我们致力于让 Shakya.work 尽可能被更多人使用。",

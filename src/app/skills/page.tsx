@@ -1,9 +1,16 @@
 import PageIntro from "@/components/PageIntro";
 import { getLang, translate } from "@/lib/i18n/server";
+import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata() {
   const lang = await getLang();
-  return { title: lang === "zh" ? "技能" : "Skills" };
+  return pageMeta(lang, {
+    title: { en: "Skills", zh: "技能" },
+    description: {
+      en: "Shakya's skill set — AI product management, enterprise automation, voice AI, and China-market go-to-market expertise.",
+      zh: "Shakya 的技能矩阵——AI 产品管理、企业自动化、语音 AI 与中国市场拓展经验。",
+    },
+  });
 }
 
 export default async function SkillsPage() {
@@ -34,8 +41,8 @@ export default async function SkillsPage() {
                 {g.name}
               </h2>
               <ul className="mt-4 space-y-2 text-sm text-muted">
-                {g.items.map((i) => (
-                  <li key={i}>{i}</li>
+                {g.items.map((i, idx) => (
+                  <li key={`${g.name}-${idx}`}>{i}</li>
                 ))}
               </ul>
             </div>

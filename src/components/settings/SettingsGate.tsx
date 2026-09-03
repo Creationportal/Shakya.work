@@ -61,7 +61,7 @@ export default function SettingsGate({ authed }: { authed: boolean }) {
   return (
     <section className="mx-auto flex min-h-[60vh] max-w-md flex-col justify-center px-5 py-24">
       <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
-        {t("settings.loginTitle")}
+        {t("settings.eyebrow")}
       </p>
       <h1 className="mt-4 text-2xl font-semibold tracking-tight text-ink">
         {t("settings.loginTitle")}

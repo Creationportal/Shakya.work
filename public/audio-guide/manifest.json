@@ -15,10 +15,6 @@
         "es": "Inicio",
         "ne": "गृहपृष्ठ"
       },
-      "audio": {
-        "en": "/audio-guide/guide/en/home.mp3",
-        "zh": "/audio-guide/guide/zh/home.mp3"
-      },
       "text": {
         "en": "Welcome to Shakya.work — the work desk of a Fintech and AI product leader. I'm your AI guide. Use me to explore this site in your own language: who I am, the systems I've shipped, and how we might work together.",
         "zh": "欢迎来到 Shakya.work——一位金融科技与人工智能产品负责人的工作台。我是您的 AI 向导，请用您熟悉的语言探索本站：我是谁、我打造过的系统，以及我们可能的合作方式。"
@@ -26,7 +22,6 @@
     },
     "about": {
       "label": { "en": "About", "zh": "关于" },
-      "audio": { "en": "/audio-guide/guide/en/about.mp3" },
       "text": {
         "en": "The About page is who I am — a product and AI transformation leader focused on voice, search and autonomous agents. It opens with View Resume and View Projects buttons, then a categorized Skills section, followed by Achievements and Business. Achievements and Business are private and live in the Vault, reachable with the passcode. Behind it all, an animated Nepal-and-China wind background drifts as you read.",
         "zh": "关于页介绍我是谁——一位专注于语音、搜索与自主智能体的产品及 AI 转型负责人。页面以「查看简历」和「查看项目」按钮开场，接着是按类划分的技能板块，然后是成就与业务。成就与业务为私密内容，存放于保险库，凭访问码进入。背景中，尼泊尔与中国的风动动画会随着阅读缓缓流动。"
@@ -34,7 +29,6 @@
     },
     "ailab": {
       "label": { "en": "AI Lab", "zh": "AI 实验室" },
-      "audio": { "en": "/audio-guide/guide/en/ailab.mp3" },
       "text": {
         "en": "AI Lab is where you try the systems, not just read about them. It's a wall of AI ideas, projects and live demos pulled from production — each one something you can actually use. Highlights include the Agent Office Simulator at /ailab/simulation, an Agents section at /ailab/agents, and a stream of fresh Ideas to explore.",
         "zh": "AI 实验室是您亲自试用系统的地方，而不只是阅读介绍。这里有一面 AI 创意、项目与来自生产的实时演示墙——每一个都可以真正上手体验。亮点包括位于 /ailab/simulation 的「智能体办公室模拟器」、位于 /ailab/agents 的智能体板块，以及源源不断涌现的新鲜创意。"
@@ -42,7 +36,6 @@
     },
     "projects": {
       "label": { "en": "Projects", "zh": "项目" },
-      "audio": { "en": "/audio-guide/guide/en/projects.mp3" },
       "text": {
         "en": "Projects showcases the deployed work. Two are featured: Unified Trading Analysis at /trading, a full-stack system for market insight, and WT — a second project that is coming soon. Each is described with the problem it solved and the impact it delivered.",
         "zh": "项目页展示已落地的成果。当前有两个：位于 /trading 的「统一交易分析」——一套用于市场洞察的全栈系统；以及 WT——第二个项目，即将上线。每个项目都说明了其解决的问题与带来的成效。"
@@ -50,7 +43,6 @@
     },
     "skills": {
       "label": { "en": "Skills", "zh": "技能" },
-      "audio": { "en": "/audio-guide/guide/en/skills.mp3" },
       "text": {
         "en": "Skills gathers the tools I use, grouped into nine categories spanning Fintech, AI product management, engineering, design, China know-how and more — so you can find the right capability fast.",
         "zh": "技能页汇集了我所用的工具，按九大类别分组，涵盖金融科技、AI 产品管理、工程、设计、对中国的深入理解等——助您快速找到所需能力。"
@@ -58,7 +50,6 @@
     },
     "ideas": {
       "label": { "en": "Ideas", "zh": "创意" },
-      "audio": { "en": "/audio-guide/guide/en/ideas.mp3" },
       "text": {
         "en": "Ideas is the open notebook — a running collection of AI concepts, experiments and half-formed thoughts, ranging from product angles to technical spikes. It's where the next Lab demo often begins.",
         "zh": "创意页是公开的灵感笔记——持续收集的 AI 构思、实验与未成形的想法，从产品角度到技术尝试都有。实验室的下一个演示，往往就诞生于此。"
@@ -66,7 +57,6 @@
     },
     "wt": {
       "label": { "en": "WT", "zh": "WT" },
-      "audio": { "en": "/audio-guide/guide/en/wt.mp3" },
       "text": {
         "en": "WT is a new project, currently coming soon. Check back later for the full reveal, or browse Projects to see what's already live.",
         "zh": "WT 是一个新项目，目前即将上线。稍后再来查看完整发布，或前往项目页看看已经上线的内容。"
@@ -74,7 +64,6 @@
     },
     "hub": {
       "label": { "en": "Hub", "zh": "枢纽" },
-      "audio": { "en": "/audio-guide/guide/en/hub.mp3" },
       "text": {
         "en": "Hub is the central place for all my hosting and deployments — one link to reach every live project.",
         "zh": "枢纽页汇总我所有的托管与部署——通过一个入口即可访问每一个线上项目。"
@@ -82,7 +71,6 @@
     },
     "contact": {
       "label": { "en": "Contact", "zh": "联系" },
-      "audio": { "en": "/audio-guide/guide/en/contact.mp3" },
       "text": {
         "en": "Contact is where conversations start — email, LinkedIn, or a short form describing the problem you're solving.",
         "zh": "联系页是对话的起点——可通过邮件、LinkedIn，或填写简短表单说明您正在解决的问题。"
@@ -90,7 +78,6 @@
     },
     "vault": {
       "label": { "en": "Vault", "zh": "保险库" },
-      "audio": { "en": "/audio-guide/guide/en/vault.mp3" },
       "text": {
         "en": "Vault is the private area for recruiters and clients — enter the passcode 8888 (or request access) to reach the full CV at /cv and other private material.",
         "zh": "保险库是面向招聘方与客户的私密区域——输入访问码 8888（或申请权限）即可进入 /cv 查看完整简历及其他私密资料。"
@@ -105,28 +92,10 @@
       "es": "Últimas noticias de IA",
       "ne": "नवीनतम AI समाचार"
     },
-    "audio": {
-      "en": "/audio-guide/news/latest.en.mp3",
-      "zh": "/audio-guide/news/latest.zh.mp3"
-    },
     "text": {
       "en": "Welcome to Shakya AI Radio, your weekly digest of enterprise AI for the week of August 27, 2026. This week: enterprises push AI agents into production with new governance frameworks; a major cloud provider ships on-device models for privacy-first inference; regulators publish the first binding rules for high-risk AI in hiring; open-source small language models close the gap with proprietary ones; and a wave of agentic coding tools reshapes software teams. See you next time.",
       "zh": "欢迎收听 Shakya AI Radio，2026 年 8 月 27 日当周的企业级 AI 每周简报。本周要点：企业开始将 AI 智能体投入生产，并配套新的治理框架；某主流云厂商推出面向隐私优先推理的端侧模型；监管机构发布首个针对招聘高风险 AI 的约束性规则；开源小语言模型进一步缩小与闭源模型的差距；智能体式编程工具浪潮正在重塑软件团队。下期再见。"
     },
-    "updated": "2026-08-27",
-    "voiceAudio": {
-      "en": {
-        "default": "/audio-guide/news/latest.en.mp3",
-        "anchor": "/audio-guide/news/latest.en.mp3",
-        "casual": "/audio-guide/news/latest.en.mp3",
-        "calm": "/audio-guide/news/latest.en.mp3"
-      },
-      "zh": {
-        "default": "/audio-guide/news/latest.zh.mp3",
-        "anchor": "/audio-guide/news/latest.zh.mp3",
-        "casual": "/audio-guide/news/latest.zh.mp3",
-        "calm": "/audio-guide/news/latest.zh.mp3"
-      }
-    }
+    "updated": "2026-08-27"
   }
 }

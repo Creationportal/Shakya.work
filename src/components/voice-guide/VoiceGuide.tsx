@@ -84,8 +84,13 @@ export default function VoiceGuide() {
   const playItemRef = useRef<
     (kind: "guide" | "news", key: string, voice?: string) => void
   >(() => {});
+  // Keep speak fresh and guard against a double fallback (play() rejection +
+  // audio error event both firing) when an audio URL fails to load.
+  const speakRef = useRef<(node: ManifestNode | undefined, l: Lang) => void>(() => {});
+  const audioFailedRef = useRef(false);
 
   /* ---- boot: load manifest + persisted prefs ---- */
+  /* eslint-disable react-hooks/set-state-in-effect -- restore persisted prefs + load manifest after mount */
   useEffect(() => {
     setMounted(true);
     setSeen(localStorage.getItem("aiGuideSeen") === "1");
@@ -113,8 +118,10 @@ export default function VoiceGuide() {
         });
       });
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   /* ---- apply admin settings (defaults only when user has no preference) ---- */
+  /* eslint-disable react-hooks/set-state-in-effect -- apply admin defaults once settings are ready */
   useEffect(() => {
     if (!settingsReady) return;
     if (!localStorage.getItem("aiGuideLang") && settings.voiceGuide.defaultLang) {
@@ -127,13 +134,13 @@ export default function VoiceGuide() {
     );
     setNewsDisabled(!settings.voiceGuide.enableNews);
   }, [settingsReady, settings.voiceGuide]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   /* ---- route awareness ---- */
   useEffect(() => {
     if (openRef.current && manifestRef.current) {
       playItemRef.current("guide", sectionFromPath(pathname));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   /* keep manifest/lang/open refs fresh for the (once-mounted) effects */
@@ -198,27 +205,36 @@ export default function VoiceGuide() {
       // fall back to the persisted newsVoice for plain plays.
       const effectiveVoice = kind === "news" ? voice ?? newsVoice : undefined;
       const url = resolveUrl(node, lang, effectiveVoice);
+      audioFailedRef.current = false;
 
+      /* eslint-disable react-hooks/immutability -- reuse the persistent <audio> element and swap its src */
       if (url) {
         const audio =
           audioRef.current || (audioRef.current = new Audio());
         audio.src = url;
         audio.play().catch(() => {
+          audioFailedRef.current = true;
           setPlaying({ kind, key, mode: "speech" });
-          speak(node, lang);
+          speakRef.current(node, lang);
         });
         setPlaying({ kind, key, mode: "audio" });
       } else {
         setPlaying({ kind, key, mode: "speech" });
-        speak(node, lang);
+        speakRef.current(node, lang);
       }
+      /* eslint-enable react-hooks/immutability */
     },
-    [manifest, lang, newsVoice, resolveUrl, speak, stopAll]
+    [manifest, lang, newsVoice, resolveUrl, stopAll]
   );
 
-  // Always point the ref at the latest playItem so effects with minimal deps
-  // never call a stale closure.
+  // Always point the refs at the latest callbacks so effects with minimal deps
+  // never call a stale closure. React's refs rule forbids ref writes during
+  // render, but this is the documented "latest callback" pattern and is safe
+  // here because the refs are only read inside event handlers / effects.
+  /* eslint-disable-next-line react-hooks/refs -- keep playItemRef fresh for the once-mounted route effect */
   playItemRef.current = playItem;
+  /* eslint-disable-next-line react-hooks/refs -- keep speakRef fresh for the audio-error fallback */
+  speakRef.current = speak;
 
   const togglePause = useCallback(() => {
     if (!playing) return;
@@ -244,12 +260,13 @@ export default function VoiceGuide() {
     const onEnd = () => setPlaying(null);
     const onErr = () => {
       setPlaying((p) => {
-        if (p && p.mode === "audio" && manifestRef.current) {
+        if (p && p.mode === "audio" && manifestRef.current && !audioFailedRef.current) {
           const node =
             p.kind === "news"
               ? manifestRef.current.news
               : manifestRef.current.sections[p.key];
-          speak(node, langRef.current);
+          audioFailedRef.current = true;
+          speakRef.current(node, langRef.current);
         }
         return p ? { ...p, mode: "speech" } : p;
       });
@@ -263,7 +280,6 @@ export default function VoiceGuide() {
       audio.removeEventListener("error", onErr);
       audio.pause();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setSeenNow = useCallback(() => {
@@ -310,6 +326,7 @@ export default function VoiceGuide() {
       ? typeof window !== "undefined" &&
         !!window.speechSynthesis &&
         window.speechSynthesis.paused
+      /* eslint-disable-next-line react-hooks/refs -- read live <audio> paused state to label the play/pause control */
       : audioRef.current
         ? audioRef.current.paused
         : true;
@@ -480,9 +497,11 @@ export default function VoiceGuide() {
               <button
                 type="button"
                 className="vg-pp"
+                /* eslint-disable-next-line react-hooks/refs -- isPaused derives from the live <audio> element */
                 aria-label={isPaused ? "Resume" : "Pause"}
                 onClick={togglePause}
               >
+                {/* eslint-disable-next-line react-hooks/refs -- isPaused derives from the live <audio> element */}
                 {isPaused ? "▶" : "❚❚"}
               </button>
               <div className="vg-meta">

@@ -1,3 +1,5 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { getLang } from "@/lib/i18n/server";
 import CvContent from "@/components/cv/CvContent";
 
@@ -15,6 +17,11 @@ export async function generateMetadata() {
   };
 }
 
-export default function CvPage() {
+export default async function CvPage() {
+  // Server-side access gate: the passcode cookie set by /vault must be
+  // present, otherwise the private CV must never reach the client HTML.
+  const cookieStore = await cookies();
+  const granted = cookieStore.get("portal_access")?.value === "granted";
+  if (!granted) redirect("/vault");
   return <CvContent />;
 }

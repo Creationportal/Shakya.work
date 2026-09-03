@@ -1,11 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 import PageIntro from "@/components/PageIntro";
 import SimulatorPreview from "@/components/agents/simulation/SimulatorPreview";
 import { getLang, translate } from "@/lib/i18n/server";
+import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata() {
   const lang = await getLang();
-  return { title: lang === "zh" ? "创意" : "Ideas" };
+  return pageMeta(lang, {
+    title: { en: "Ideas — Product Concepts & Prototypes", zh: "创意 — 产品概念与原型" },
+    description: {
+      en: "A working notebook of product concepts and prototypes from Shakya — simulations, trading ideas and early experiments.",
+      zh: "Shakya 的产品概念与原型工作笔记——模拟、交易想法与早期实验。",
+    },
+  });
 }
 
 export default async function IdeasPage() {
@@ -27,7 +35,35 @@ export default async function IdeasPage() {
       title: t("ideas.tradingTitle"),
       body: t("ideas.tradingBody"),
       label: t("ideas.tradingLabel"),
-      preview: null,
+      preview: (
+        <div className="relative h-full w-full">
+          <Image
+            src="/projects/unified-trading-analysis.png"
+            alt={t("ideas.tradingTitle")}
+            fill
+            sizes="(min-width: 1024px) 30vw, 100vw"
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+      ),
+    },
+    {
+      key: "agentflow",
+      href: "/ideas/agent-operation-flow",
+      title: t("ideas.agentFlowTitle"),
+      body: t("ideas.agentFlowBody"),
+      label: t("ideas.agentFlowLabel"),
+      preview: (
+        <div className="relative h-full w-full">
+          <Image
+            src="/agent-operation-flow/screenshot.png"
+            alt={t("ideas.agentFlowTitle")}
+            fill
+            sizes="(min-width: 1024px) 30vw, 100vw"
+            className="object-cover object-top"
+          />
+        </div>
+      ),
     },
   ];
 
@@ -44,21 +80,21 @@ export default async function IdeasPage() {
             <Link
               key={idea.key}
               href={idea.href}
-              className="group relative overflow-hidden rounded-lg border border-line bg-surface p-0 transition-colors hover:border-accent"
+              className="group relative flex flex-col overflow-hidden rounded-lg border border-line bg-surface p-0 transition-colors hover:border-accent"
             >
               {idea.preview && (
-                <div className="aspect-[3/2] w-full border-b border-line bg-paper">
+                <div className="aspect-[3/2] w-full overflow-hidden border-b border-line bg-paper">
                   {idea.preview}
                 </div>
               )}
-              <div className="p-6">
+              <div className="flex flex-1 flex-col p-6">
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">
                   {idea.label}
                 </span>
                 <h2 className="mt-2 text-base font-semibold text-ink">
                   {idea.title}
                 </h2>
-                <p className="mt-2 text-sm text-muted">{idea.body}</p>
+                <p className="mt-2 flex-1 text-sm text-muted">{idea.body}</p>
                 <span className="mt-4 inline-block text-sm text-accent group-hover:underline">
                   {t("ailab.open")} →
                 </span>

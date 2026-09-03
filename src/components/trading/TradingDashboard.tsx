@@ -64,6 +64,10 @@ export default function TradingDashboard() {
     const seed = providerSeed(provider, symbol);
     const start = meta.basePrice * (0.9 + (seed % 200) / 1000);
     const data = generateCandles(200, start, Date.now(), 60_000, seed);
+    // (Re)generate simulated candles when the symbol/provider changes. This is
+    // derived client-side data (not fetched), so seeding state from an effect
+    // is the intended pattern here.
+    /* eslint-disable-next-line react-hooks/set-state-in-effect -- (re)seed simulated candle data on symbol/provider change */
     setCandles(data);
   }, [provider, symbol]);
 
@@ -187,8 +191,8 @@ export default function TradingDashboard() {
         </div>
         <div className="flex flex-wrap gap-2">
           <div className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-3 py-1.5 text-xs">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            {t("trading.statusLive")}
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+            {t("trading.statusSimulated")}
           </div>
         </div>
       </div>

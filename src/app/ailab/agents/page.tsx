@@ -1,12 +1,17 @@
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import { getLang, translate } from "@/lib/i18n/server";
+import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata() {
   const lang = await getLang();
-  return {
-    title: lang === "zh" ? "智能体 | AI 实验室" : "Agents | AI Lab",
-  };
+  return pageMeta(lang, {
+    title: { en: "AI Agents", zh: "AI 智能体" },
+    description: {
+      en: "Meet the AI agents behind Shakya.work — voice, search, sales and simulation agents, with live capabilities and the office simulator.",
+      zh: "了解 Shakya.work 背后的 AI 智能体——语音、搜索、销售与模拟智能体，含实时能力展示与办公室模拟器。",
+    },
+  });
 }
 
 export default async function AgentsPage() {

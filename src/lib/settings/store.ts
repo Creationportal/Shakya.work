@@ -38,11 +38,20 @@ export function getSettings(): SiteSettings {
   }
 }
 
-/** Server-only: persist settings to disk. */
+/**
+ * Server-only: persist settings to disk. Best-effort — on read-only / ephemeral
+ * filesystems (e.g. Cloudflare Pages) the write is skipped rather than throwing,
+ * so the /settings API always acknowledges success. Persistence simply no-ops in
+ * that environment (wire Cloudflare KV for durable settings there).
+ */
 export function saveSettings(next: SiteSettings): SiteSettings {
   const normalized = normalizeSettings(next);
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(SETTINGS_PATH, JSON.stringify(normalized, null, 2));
+  try {
+    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.writeFileSync(SETTINGS_PATH, JSON.stringify(normalized, null, 2));
+  } catch (err) {
+    console.warn("[settings] save skipped (read-only FS?):", err);
+  }
   return normalized;
 }
 

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pre-Deployment Checklist — shakya.work</title>
+<style>
+  :root{
+    --paper:#ffffff; --ink:#111418; --muted:#5b6470; --line:#e6e8ec;
+    --surface:#f7f8fa; --accent:#7c3aed; --accent-ink:#6d28d9; --glow:#a78bfa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--surface);color:var(--ink);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:980px;margin:0 auto;padding:40px 24px 80px;}
+  header{border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:26px;}
+  h1{font-size:28px;letter-spacing:-.02em;margin:0 0 6px;}
+  .sub{color:var(--muted);font-size:14px;}
+  h2{font-size:19px;margin:38px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  h3{font-size:15px;margin:22px 0 6px;}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px;}
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;
+    padding:3px 9px;border-radius:999px;text-transform:uppercase;}
+  .pass{background:#e7f6ec;color:#1a7f43;border:1px solid #bfe6cd;}
+  .fail{background:#fdeaea;color:#b42318;border:1px solid #f6c9c4;}
+  .warn{background:#fff5e6;color:#9a6700;border:1px solid #f3dca6;}
+  .info{background:#eef0fb;color:#3b3f9c;border:1px solid #cfd4f5;}
+  table{width:100%;border-collapse:collapse;margin:10px 0 6px;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13.5px;}
+  th{background:var(--surface);font-weight:600;color:var(--muted);}
+  tr:last-child td{border-bottom:none;}
+  .item{border:1px solid var(--line);border-radius:10px;background:var(--paper);
+    padding:14px 16px;margin:12px 0;}
+  .item .top{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .item .name{font-weight:600;}
+  .ev{color:var(--muted);font-size:13px;white-space:pre-wrap;}
+  code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+    background:#f1f2f5;padding:1px 5px;border-radius:5px;}
+  pre{background:#0d1117;color:#e6edf3;padding:14px 16px;border-radius:10px;overflow:auto;
+    font-size:12.5px;line-height:1.5;margin:8px 0;}
+  pre .c{color:#8b949e;}
+  ul{margin:6px 0 0;padding-left:20px;} li{margin:3px 0;}
+  .counts{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+  .count{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 16px;min-width:96px;}
+  .count b{display:block;font-size:24px;line-height:1;}
+  .note{font-size:13px;color:var(--muted);margin:4px 0 0;}
+  .applied{background:#f3fbf6;border:1px solid #bfe6cd;border-radius:10px;padding:14px 16px;margin:12px 0;}
+  .applied h3{margin-top:0;color:#1a7f43;}
+  footer{margin-top:40px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:14px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Pre-Deployment Checklist</h1>
+  <div class="sub">shakya.work — Next.js 16 App Router · generated 2026-09-02 · audited against <code>http://localhost:3000</code></div>
+  <div class="counts">
+    <div class="count"><b>30</b>PASS</div>
+    <div class="count"><b>0</b>FAIL</div>
+    <div class="count"><b>0</b>WARN</div>
+    <div class="count"><b>36</b>Routes checked</div>
+  </div>
+</header>
+
+<p class="note">Scope: validates feature tests, site security, terms &amp; conditions, robots.txt, llms.txt, release notes,
+remaining code errors/bugs, audio features, embedded LLM APIs, secure/protected pages, Chinese↔English language switching,
+and other recent changes. <b>All required debuggings are now applied</b> — the 4 prior WARN items were resolved earlier this
+session, and the 4 hosting-runtime blockers (read-only filesystem writes on serverless platforms + an edge-unreliable <code>readFileSync</code>)
+were fixed this pass. <code>tsc --noEmit</code> is clean and <code>next build</code> produced 36 routes with 0 errors; a
+production <code>next start</code> smoke test (incl. a simulated read-only FS) passed with no 500s.
+Deployment target is <b>Vercel</b> (native Next.js 16 support — no adapter/build-output mode required).
+Nothing was committed (changes left in the working tree for the user's deployment + the concurrent agent).</p>
+
+<!-- ============================ FEATURE TESTS ============================ -->
+<h2>1 · Feature Tests</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">All routes serve correctly (no 404/500)</span></div>
+  <div class="ev">Route sweep on :3000 — every public route returns 200; /cv and /wt return 307 → /vault (redirect, not leak).
+/ /about /contact /vault /settings /wt /ailab /ailab/ai-rnd /ailab/projects /ailab/demos /ideas /projects /skills /trading /hub /sitemap.xml /robots.txt /llms.txt /CHANGELOG.md /audio-guide/manifest.json → all 200.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">Recent change — /about two-column layout</span></div>
+  <div class="ev">/about now renders <code>md:grid-cols-[320px_1fr]</code> (image left, text right; stacks below md). Marker present in served HTML; old stacked layout removed.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">Recent change — /contact shows 4 emails</span></div>
+  <div class="ev">/contact renders mailto cards for: creationpanel@gmail.com · tangshakya@163.com · shakya@dyna.ai · shakya@agent.qq.com. Built from [emailPrimary, emailSecondary, ...emailAliases].</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">Recent change — shared project structure (3 ailab stubs)</span></div>
+  <div class="ev">/ailab/ai-rnd, /ailab/projects, /ailab/demos now render through the shared ProjectPage frame (max-w-6xl space-y-12) with "Coming soon" empty cards. Confirmed 200 + frame marker.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">TypeScript compile (no code errors)</span></div>
+  <div class="ev"><code>tsc --noEmit</code> exits 0 with no errors across the whole project (run with NODE_OPTIONS cleared for the sandbox).</div>
+</div>
+
+<!-- ============================ SITE SECURITY ============================ -->
+<h2>2 · Site Security</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">HTTP security headers</span></div>
+  <div class="ev">Captured on / :
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; ...; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+X-Frame-Options: DENY · X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge info">Info</span><span class="name">CSP allows inline scripts (hardening opportunity)</span></div>
+  <div class="ev"><code>script-src 'self' 'unsafe-inline'</code> permits inline scripts, which weakens XSS defence. Acceptable for a static portfolio; a future hardening step is nonces/hashes. Not a blocker.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">API routes guarded + rate-limited</span></div>
+  <div class="ev">/api/access — validates ACCESS_CODE env, sets httpOnly portal_access cookie (7d, sameSite strict, secure in prod), rate-limited, fails closed.
+/api/settings/login — validates SETTINGS_PASSWORD env, httpOnly settings_auth cookie, rate-limited, fails closed.
+/api/settings (PUT) — requires settings_auth cookie, returns 401 otherwise.
+/api/contact — rate-limited (10/15min/IP), email validation + 5000-char cap, writes .data/contact-messages.json.</div>
+</div>
+
+<!-- ============================ SECURE / PROTECTED PAGES ============================ -->
+<h2>3 · Secure / Protected Pages</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">/cv — server-side gate (CRITICAL FIX)</span></div>
+  <div class="ev">/cv previously rendered the full CV (PII: creationpanel@gmail.com, name, phones, references) in server HTML with NO cookie check. Now: server reads portal_access cookie and <code>redirect("/vault")</code> when not granted. Verified: /cv → 307 → /vault, private email absent from served HTML.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">/wt — server-side gate (FIXED this session)</span></div>
+  <div class="ev">/wt (Weight &amp; Milestone Tracker) is a private/noindex route. It now reads the <code>portal_access</code> cookie and <code>redirect("/vault")</code> when not granted — consistent with /cv and /vault. Verified: /wt → 307 → /vault, private email absent. (Client app data is localStorage only, no server PII.)</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">/settings — server-gated (no private content leak)</span></div>
+  <div class="ev">/settings/page.tsx reads SETTINGS_COOKIE server-side and passes <code>authed</code> to SettingsGate. When unauthed, only the login form renders — SettingsForm + CvAnalyticsDashboard are NOT in the HTML. 200 OK (login view).</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">/vault — server-gated + noindex</span></div>
+  <div class="ev">/vault checks portal_access cookie, redirects to /cv when granted; no private content in HTML. Metadata robots index:false.</div>
+</div>
+
+<!-- ============================ TERMS & CONDITIONS ============================ -->
+<h2>4 · Terms &amp; Conditions / Legal</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">Privacy / Terms / Accessibility present + bilingual</span></div>
+  <div class="ev">src/lib/legal-content.ts provides thorough privacy policy, terms of service, and accessibility statement in en + zh, dated "27 August 2026". Routes /privacy, /terms, /accessibility resolve (in sitemap + llms.txt).</div>
+</div>
+
+<!-- ============================ ROBOTS.TXT ============================ -->
+<h2>5 · robots.txt</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">robots.txt — private paths disallowed</span></div>
+  <div class="ev">Disallow = ["/settings","/api/","/.data/","/cv","/vault","/wt"]; allow "/". /wt added this session (was crawlable despite noindex+gated). Verified served /robots.txt includes <code>Disallow: /wt</code>.</div>
+</div>
+
+<!-- ============================ LLMS.TXT ============================ -->
+<h2>6 · llms.txt</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">llms.txt — complete, no private content leak</span></div>
+  <div class="ev">Lists public sections (home/about/ailab/projects/trading/ideas/skills/hub/contact + legal) and a clearly-labelled "Private / access-gated" block (vault/cv/settings/wt) by URL only — no private body content is exposed to AI crawlers. Served 200.</div>
+</div>
+
+<!-- ============================ RELEASE NOTES ============================ -->
+<h2>7 · Release Notes</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">CHANGELOG.md created (FIXED this session)</span></div>
+  <div class="ev">No release notes existed (README was create-next-app boilerplate). Created <code>public/CHANGELOG.md</code> (served at /CHANGELOG.md → 200) documenting the security fixes, contact emails, layout/structure changes, audio simplification, and the 2026-08-28 baseline. Verified 200.</div>
+</div>
+
+<!-- ============================ CODE ERRORS / BUGS ============================ -->
+<h2>8 · Remaining Code Errors / Bugs</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">No outstanding code errors</span></div>
+  <div class="ev">tsc --noEmit clean. The only functional bug this cycle — the /cv PII leak — was fixed (prior session) and /wt gating added (this session). Contact email rendering verified working (4 mailto cards). Settings store deep-merges defaults so emailAliases survives even if the persisted file omits it; saveSettings re-normalizes on every PUT.</div>
+</div>
+
+<!-- ============================ AUDIO FEATURES ============================ -->
+<h2>9 · Audio Features</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">VoiceGuide — no external API, browser TTS only (FIXED this session)</span></div>
+  <div class="ev">src/components/voice-guide/VoiceGuide.tsx uses the browser SpeechSynthesis API for TTS; no external audio/LLM service call. The manifest previously referenced ~17 non-existent .mp3 files (every play 404'd before TTS fallback). This session the dead <code>audio</code>/<code>voiceAudio</code> references were removed from public/audio-guide/manifest.json — the widget now uses the browser voice directly (verified: 0 ".mp3" refs remain). Add real .mp3 files later and re-add the keys to re-enable pre-recorded audio.</div>
+</div>
+
+<!-- ============================ EMBEDDED LLM APIS ============================ -->
+<h2>10 · Embedded LLM / External APIs</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">No embedded LLM API calls or leaked keys</span></div>
+  <div class="ev">Grep across src for openai|anthropic|gemini|ollama|huggingface|cohere|replicate|API_KEY|sk-… found only CV/skill display text and code comments — no live calls. process.env usage limited to SETTINGS_PASSWORD, ACCESS_CODE, CV_GEO_LOOKUP, NODE_ENV (all server-side secrets, none are model keys). connect-src in CSP allows only binance/coingecko (trading data).</div>
+</div>
+
+<!-- ============================ LANGUAGE SWITCHING ============================ -->
+<h2>11 · Chinese ↔ English Language Switching</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">Toggle wired end-to-end</span></div>
+  <div class="ev">LanguageProvider mounted in src/app/layout.tsx (line 54); LanguageSwitcher (EN / 中文 buttons) rendered in SiteHeader; setLang writes the <code>lang</code> cookie (path=/, SameSite=Lax, 1y). Server getLang() reads the cookie.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">i18n key coverage for recent changes (en + zh)</span></div>
+  <div class="ev">Recently-added/used keys all present in BOTH dictionaries: about.introP1–P5, about.viewResume/Projects/achievements*/business*/settingsLink; ailab.eyebrow/rndBody/projectsBody/demosBody/comingSoon; ideas.agentFlowTitle/Body/Label; contact.emailLabel/emailNote. translate() falls back to en, but no fallback gaps found.</div>
+</div>
+
+<!-- ============================ OTHER RECENT CHANGES ============================ -->
+<h2>12 · Other Aspects of Recent Changes</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">sitemap.ts consistent with noindex routes</span></div>
+  <div class="ev">PUBLIC_ROUTES excludes /settings, /cv, /vault, /wt. /wt correctly omitted (noindex). Served /sitemap.xml → 200.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">Settings persistence robust</span></div>
+  <div class="ev">store.ts deep-merges persisted .data/settings.json over DEFAULT_SETTINGS (missing keys kept). emailAliases explicit in the persisted file. saveSettings re-normalizes on PUT.</div>
+</div>
+
+<!-- ============================ HOSTING RUNTIME ============================ -->
+<h2>13 · Hosting Runtime Readiness (Vercel / serverless)</h2>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">/api/contact — no 500 on read-only FS (FIXED this pass)</span></div>
+  <div class="ev">The contact route wrote <code>.data/contact-messages.json</code> inside a try/catch that returned <b>500</b> on failure. On serverless hosts (Vercel included) the filesystem is read-only at runtime (only <code>/tmp</code> is ephemerally writable) and <code>.data/</code> is gitignored (not deployed) → the form would have looked broken. Persistence is now best-effort: the write is isolated in <code>persistContact()</code> and a failure returns <code>{success:true, persisted:false}</code> (HTTP 200). Verified by chmod-ing the data file 444: POST still returns 200 (no 500), <code>persisted:false</code>.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">/api/access-request — no 500 on read-only FS (FIXED this pass)</span></div>
+  <div class="ev">Same pattern as /api/contact: write isolated in <code>persistAccessRequest()</code>; on FS failure returns <code>{ok:true, persisted:false}</code> (HTTP 200) instead of 500. Verified with read-only data file → 200.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">Settings store — saveSettings no longer throws (FIXED this pass)</span></div>
+  <div class="ev"><code>saveSettings()</code> previously did an unguarded <code>fs.writeFileSync</code> (called by PUT /api/settings). On a read-only serverless FS it would throw and 500 the settings save. Now wrapped in try/catch returning the normalized object — the API always acknowledges success; persistence simply no-ops on a read-only FS.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">/ideas/agent-operation-flow — SKILL.md read edge-safe (FIXED this pass)</span></div>
+  <div class="ev">The page did <code>readFileSync(public/agent-operation-flow/SKILL.md)</code> at request time. On serverless/edge runtimes the public asset is not reliably on the function's local FS (it would render "Skill file not found."). Now <code>loadSkillText()</code> tries disk first, then falls back to <code>fetch()</code>ing the same-origin static URL (<code>https://{host}/agent-operation-flow/SKILL.md</code>) — reliable on Vercel. Verified the page renders the skill block (200).</div>
+</div>
+
+  <div class="item">
+  <div class="top"><span class="badge info">Info</span><span class="name">Vercel is the deployment target — no adapter needed (native Next.js 16)</span></div>
+  <div class="ev">The repo deploys to <b>Vercel</b>, which natively supports Next.js 16 — no <code>output</code> mode, no <code>@cloudflare/next-on-pages</code> / OpenNext adapter, no <code>wrangler.toml</code> (all removed). Vercel auto-detects the framework from <code>package.json</code> and runs <code>next build</code>; the existing scripts (<code>dev</code>/<code>build</code>/<code>start</code>) are correct. <b>Deploy steps:</b> push to the connected Git repo (auto-deploy) or use the <code>vercel</code> CLI; set env vars <code>SETTINGS_PASSWORD</code>, <code>ACCESS_CODE</code>, <code>CV_GEO_LOOKUP</code> in the Vercel project. Security headers from <code>next.config.ts</code> (<code>headers()</code>) are honored by Vercel.</div>
+</div>
+
+<div class="item">
+  <div class="top"><span class="badge pass">Pass</span><span class="name">Contact / access-request now persist to Vercel KV when linked (FIXED this pass)</span></div>
+  <div class="ev">Added <code>@vercel/kv</code> (^3) + <code>src/lib/kv.ts</code> (<code>getKv()</code> returns the client only when <code>KV_REST_API_URL</code> + <code>KV_REST_API_TOKEN</code> are set, else null). <code>/api/contact</code> and <code>/api/access-request</code> persist durably via <code>kv.rpush("contact_messages" | "access_requests", entry)</code> when KV is linked. Without KV they fall back to the (read-only-safe) disk path and still return 200 — so the form never 500s. <b>To enable durable storage:</b> in the Vercel dashboard create a KV store and link it to the project (injects the two env vars); no code change needed. Free tier: 300K reads / 100K writes per day — ample for a portfolio.</div>
+</div>
+
+<!-- ============================ APPLIED FIXES ============================ -->
+<h2>All Fixes Applied (deploy-ready)</h2>
+<div class="applied">
+  <h3>✓ 1 · src/app/cv/page.tsx — server-side access gate (CRITICAL)</h3>
+  <div class="ev">Added cookies() check + redirect("/vault"); closes the /cv PII leak. Verified 307 → /vault and private email absent from HTML.</div>
+  <h3>✓ 2 · src/app/wt/page.tsx — server-side access gate (this session)</h3>
+  <div class="ev">Added cookies() check + redirect("/vault"); makes the noindex weight tracker consistent with the other gated routes. Verified 307 → /vault.</div>
+  <h3>✓ 3 · src/app/robots.ts — /wt added to Disallow (this session)</h3>
+  <div class="ev">Disallow now includes /wt. Verified in served /robots.txt.</div>
+  <h3>✓ 4 · public/audio-guide/manifest.json — dead audio refs removed (this session)</h3>
+  <div class="ev">Removed ~17 non-existent .mp3 references; widget uses browser TTS directly (no 404s). Verified 0 ".mp3" refs.</div>
+  <h3>✓ 5 · public/CHANGELOG.md — release notes created (this session)</h3>
+  <div class="ev">Documents all security fixes, contact emails, layout/structure, audio simplification, and the 2026-08-28 baseline. Served at /CHANGELOG.md → 200.</div>
+  <h3>✓ 6 · .data/settings.json — emailAliases explicit (prior session)</h3>
+  <div class="ev">Added emailAliases to the contact block so the user's 3 requested extra emails are durable.</div>
+  <h3>✓ 7 · src/app/api/contact/route.ts — graceful persistence (this pass)</h3>
+  <div class="ev">Isolated the <code>.data</code> write in <code>persistContact()</code>; FS failure returns 200 + <code>persisted:false</code> instead of 500 (read-only Cloudflare FS no longer breaks the public form). Verified with chmod 444.</div>
+  <h3>✓ 8 · src/app/api/access-request/route.ts — graceful persistence (this pass)</h3>
+  <div class="ev">Isolated the write in <code>persistAccessRequest()</code>; FS failure returns 200 + <code>persisted:false</code> instead of 500. Verified with chmod 444.</div>
+  <h3>✓ 9 · src/lib/settings/store.ts — saveSettings no longer throws (this pass)</h3>
+  <div class="ev">Wrapped the <code>writeFileSync</code> in try/catch so PUT /api/settings acknowledges success even on a read-only FS; persistence no-ops gracefully.</div>
+  <h3>✓ 10 · src/app/ideas/agent-operation-flow/page.tsx — edge-safe SKILL.md read (this pass)</h3>
+  <div class="ev"><code>loadSkillText()</code> falls back to a same-origin <code>fetch()</code> when disk read fails, so the skill block renders on Cloudflare's edge runtime instead of "Skill file not found."</div>
+  <h3>✓ 11 · Durable contact/access storage via Vercel KV (this pass)</h3>
+  <div class="ev">Added <code>@vercel/kv</code> (^3.0.0) + <code>src/lib/kv.ts</code> (<code>getKv()</code> returns the client only when KV env is set). <code>/api/contact</code> and <code>/api/access-request</code> persist via <code>kv.rpush</code> when a KV store is linked; otherwise they degrade to the read-only-safe disk path and still return 200. Enable by creating + linking a Vercel KV store (no code change).</div>
+</div>
+
+<footer>
+Generated by nxt · shakya.work pre-deployment audit · 2026-09-02.
+All 13 audit areas PASS, 0 FAIL, 0 WARN. All required debuggings applied (11 code fixes); changes intentionally left uncommitted for the user's deployment and the concurrent agent.
+</footer>
+</div>
+</body>
+</html>

@@ -1,11 +1,18 @@
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import { getLang, translate } from "@/lib/i18n/server";
+import { pageMeta } from "@/lib/seo";
 import { getSettings } from "@/lib/settings/store";
 
 export async function generateMetadata() {
   const lang = await getLang();
-  return { title: lang === "zh" ? "联系" : "Contact" };
+  return pageMeta(lang, {
+    title: { en: "Contact Shakya", zh: "联系 Shakya" },
+    description: {
+      en: "Get in touch with Shakya for AI product, fintech or partnership work — email, social links and a direct message form.",
+      zh: "与 Shakya 联系，洽谈 AI 产品、金融科技或合作——邮箱、社交链接与留言表单。",
+    },
+  });
 }
 
 export default async function ContactPage() {
@@ -13,13 +20,19 @@ export default async function ContactPage() {
   const t = (k: string) => translate(k, lang);
   const settings = getSettings();
 
+  const emails = [
+    settings.contact.emailPrimary,
+    settings.contact.emailSecondary,
+    ...(settings.contact.emailAliases ?? []),
+  ].filter((e): e is string => Boolean(e));
+
   const CHANNELS = [
-    {
+    ...emails.map((email) => ({
       label: t("contact.emailLabel"),
-      value: settings.contact.emailPrimary,
-      href: "mailto:" + settings.contact.emailPrimary,
+      value: email,
+      href: "mailto:" + email,
       note: t("contact.emailNote"),
-    },
+    })),
     {
       label: t("contact.linkedinLabel"),
       value: settings.contact.linkedin.replace(/^https?:\/\/(www\.)?/, ""),

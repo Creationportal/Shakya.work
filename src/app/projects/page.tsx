@@ -2,12 +2,17 @@ import PageIntro from "@/components/PageIntro";
 import Link from "next/link";
 import ProjectScreenshot from "@/components/projects/ProjectScreenshot";
 import { getLang, translate } from "@/lib/i18n/server";
+import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata() {
   const lang = await getLang();
-  return {
-    title: lang === "zh" ? "shakya.项目" : "shakya.projects",
-  };
+  return pageMeta(lang, {
+    title: { en: "Projects", zh: "项目" },
+    description: {
+      en: "Shakya's product portfolio — AI trading analysis, the weight and milestone tracker, enterprise AI and interactive demos.",
+      zh: "Shakya 的产品组合——AI 交易分析、体重与里程碑追踪器、企业级 AI 与交互式演示。",
+    },
+  });
 }
 
 export default async function ProjectsPage() {
@@ -83,7 +88,7 @@ export default async function ProjectsPage() {
                 ) : (
                   <div className="flex aspect-[16/9] w-full items-center justify-center rounded-md border border-dashed border-line bg-paper text-center">
                     <span className="text-xs font-medium uppercase tracking-wider text-muted">
-                      {p.badge ?? t("projects.wtStatus")}
+                      {p.badge ? t("projects.wtPlaceholder") : t("projects.wtStatus")}
                     </span>
                   </div>
                 )}

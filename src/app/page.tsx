@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Orb from "@/components/Orb";
 import TiltCard from "@/components/TiltCard";
 import orbConfig from "@/lib/orb-config.json";
@@ -8,7 +9,10 @@ import { getSettings } from "@/lib/settings/store";
 export async function generateMetadata() {
   const lang = await getLang();
   return {
-    title: lang === "zh" ? "Shakya.work" : "Shakya.work",
+    description:
+      lang === "zh"
+        ? "Shakya —— 兼具中国经验的金融科技与 AI 产品管理。交互式 AI 演示、智能体办公室模拟、交易实验室，以及面向招聘方与客户的私有入口。"
+        : "Shakya — Fintech and AI product management with China know-how. Interactive AI demos, an agent office simulator, a trading lab, and a private portal for recruiters and clients.",
   };
 }
 
@@ -154,13 +158,15 @@ export default async function HomePage() {
                     </div>
                   </div>
                   <div className="sm:w-1/2 lg:w-5/12">
-                    <div className="overflow-hidden rounded-lg border border-line">
-                      <img
-                        src="/projects/unified-trading-analysis.png"
-                        alt={PROJECT.title}
-                        className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
+                  <div className="relative overflow-hidden rounded-lg border border-line">
+                    <Image
+                      src="/projects/unified-trading-analysis.png"
+                      alt={PROJECT.title}
+                      fill
+                      sizes="(min-width: 1024px) 40vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
                   </div>
                 </div>
               </article>

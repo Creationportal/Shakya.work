@@ -8,6 +8,9 @@ export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
+    // Sync theme state from the DOM after mount — avoids a flash/hydration
+    // mismatch on first paint since the `dark` class is set by an inline script.
+    /* eslint-disable-next-line react-hooks/set-state-in-effect -- read applied theme from <html> after mount */
     setIsDark(document.documentElement.classList.contains("dark"));
   }, []);
 

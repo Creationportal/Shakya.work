@@ -1,10 +1,15 @@
 import Link from "next/link";
 import { getLang } from "@/lib/i18n/server";
+import { pageMeta } from "@/lib/seo";
 import { legalContent } from "@/lib/legal-content";
 
 export async function generateMetadata() {
   const lang = await getLang();
-  return { title: legalContent.privacy[lang].metaTitle };
+  const c = legalContent.privacy;
+  return pageMeta(lang, {
+    title: { en: c.en.metaTitle, zh: c.zh.metaTitle },
+    description: { en: c.en.metaDescription, zh: c.zh.metaDescription },
+  });
 }
 
 export default async function PrivacyPage() {

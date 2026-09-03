@@ -53,7 +53,8 @@ or permanently:
 ```
 
 ### B. Site owner (no code)
-Open `/settings`, enter password `8888`, adjust **Design** section and **Save**.
+Open `/settings`, enter the `SETTINGS_PASSWORD` value (configured in your host
+environment or `.env.local`), adjust **Design** section and **Save**.
 This writes `.data/settings.json`; every visitor's page picks it up.
 
 ### C. Fonts
@@ -83,4 +84,4 @@ This writes `.data/settings.json`; every visitor's page picks it up.
 - `src/lib/settings/schema.ts` — settings schema & defaults
 - `src/lib/settings/store.ts` — server settings read/write
 - `src/app/api/settings/route.ts` — GET (public) / PUT (gated) API
-- `src/app/settings/page.tsx` — backend UI (password 8888)
+- `src/app/settings/page.tsx` — backend UI (gated by the `SETTINGS_PASSWORD` env var)

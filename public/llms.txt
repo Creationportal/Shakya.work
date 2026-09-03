@@ -1,0 +1,32 @@
+# Shakya.work
+
+> Shakya — Fintech and AI product management with China know-how. Interactive AI projects, an agent office simulator, a trading lab, and a private portal for recruiters and clients.
+
+Shakya.work is the personal site of Pranamyya Shakya (唐仲禹), an AI product manager and fintech builder based in China. The site showcases enterprise AI products, interactive demos, and a private portal for recruiters and clients.
+
+## Public sections
+
+- Home: https://shakya.work/
+- About Shakya: https://shakya.work/about
+- AI Lab: https://shakya.work/ailab
+  - AI Agents: https://shakya.work/ailab/agents
+  - AI R&D: https://shakya.work/ailab/ai-rnd
+  - AI Projects: https://shakya.work/ailab/projects
+  - Demos: https://shakya.work/ailab/demos
+  - Office Live Twin simulator: https://shakya.work/ailab/simulation
+- Projects: https://shakya.work/projects
+- Unified Trading Analysis: https://shakya.work/trading
+- Ideas — Product Concepts & Prototypes: https://shakya.work/ideas
+- Skills: https://shakya.work/skills
+- Hub: https://shakya.work/hub
+- Contact: https://shakya.work/contact
+- Privacy Policy: https://shakya.work/privacy
+- Terms of Service: https://shakya.work/terms
+- Accessibility Statement: https://shakya.work/accessibility
+
+## Private / access-gated (not for indexing)
+
+- Vault (access code required): https://shakya.work/vault
+- CV (access code required): https://shakya.work/cv
+- Settings (admin): https://shakya.work/settings
+- WT — Weight & Milestone Tracker (private): https://shakya.work/wt

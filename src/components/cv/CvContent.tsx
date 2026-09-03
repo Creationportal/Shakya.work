@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { CV_DATA } from "@/lib/cv-data";
 import Icon from "@/components/Icon";
 import CvDownloadButton from "@/components/CvDownloadButton";
@@ -65,6 +66,9 @@ export default function CvContent() {
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY) as CvLang | null;
+    // Restore the visitor's last language choice after mount — reading
+    // localStorage during render would cause a hydration mismatch.
+    /* eslint-disable-next-line react-hooks/set-state-in-effect -- restore persisted language after mount */
     if (saved === "zh" || saved === "en") setCvLang(saved);
   }, []);
 
@@ -242,11 +246,12 @@ export default function CvContent() {
               <article key={`${e.company}-${e.period}-${e.role.en}`}>
                 <div className="flex items-start gap-4">
                   {e.logo && (
-                    <div className="flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-md border border-line bg-paper p-1">
-                      <img
+                    <div className="relative flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-md border border-line bg-paper p-1">
+                      <Image
                         src={e.logo}
                         alt={e.company}
-                        className="h-full w-full object-contain"
+                        fill
+                        className="object-contain"
                       />
                     </div>
                   )}
@@ -322,11 +327,12 @@ export default function CvContent() {
                 className="flex items-start gap-3 rounded-md border border-line bg-surface p-3 text-sm"
               >
                 {c.logo ? (
-                  <span className="mt-0.5 flex h-8 w-8 flex-none items-center justify-center overflow-hidden rounded-md border border-line bg-paper p-0.5">
-                    <img
+                  <span className="relative mt-0.5 flex h-8 w-8 flex-none items-center justify-center overflow-hidden rounded-md border border-line bg-paper p-0.5">
+                    <Image
                       src={c.logo}
                       alt={c.issuer}
-                      className="h-full w-full object-contain"
+                      fill
+                      className="object-contain"
                     />
                   </span>
                 ) : (
@@ -353,11 +359,12 @@ export default function CvContent() {
               >
                 <div className="flex items-start gap-4">
                   {e.logo && (
-                    <div className="flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-md border border-line bg-paper p-1">
-                      <img
+                    <div className="relative flex h-12 w-12 flex-none items-center justify-center overflow-hidden rounded-md border border-line bg-paper p-1">
+                      <Image
                         src={e.logo}
                         alt={e.school}
-                        className="h-full w-full object-contain"
+                        fill
+                        className="object-contain"
                       />
                     </div>
                   )}
@@ -437,11 +444,12 @@ export default function CvContent() {
                   key={a.name}
                   className="flex items-center gap-2 rounded-md border border-line bg-surface px-3 py-2"
                 >
-                  <span className="flex h-6 w-6 flex-none items-center justify-center overflow-hidden rounded-sm border border-line bg-paper p-0.5">
-                    <img
+                  <span className="relative flex h-6 w-6 flex-none items-center justify-center overflow-hidden rounded-sm border border-line bg-paper p-0.5">
+                    <Image
                       src={a.logo}
                       alt={a.name}
-                      className="h-full w-full object-contain"
+                      fill
+                      className="object-contain"
                     />
                   </span>
                   <span className="text-sm text-ink">{a.name}</span>

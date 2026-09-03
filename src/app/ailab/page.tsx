@@ -1,10 +1,17 @@
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
 import { getLang, translate } from "@/lib/i18n/server";
+import { pageMeta } from "@/lib/seo";
 
 export async function generateMetadata() {
   const lang = await getLang();
-  return { title: lang === "zh" ? "AI 实验室" : "AI Lab" };
+  return pageMeta(lang, {
+    title: { en: "AI Lab", zh: "AI 实验室" },
+    description: {
+      en: "Shakya's AI Lab — live demos of AI agents, R&D experiments, projects, and the Office Live Twin simulator.",
+      zh: "Shakya 的 AI 实验室——AI 智能体、研发实验、项目，以及 Office Live Twin 模拟器的实时演示。",
+    },
+  });
 }
 
 export default async function AilabPage() {

@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Shakya.work",
   description:
-    "Shakya — Fintech & AI product management, technical and ecosystem expertise with China know-how. AI projects you can use, an interactive CV, and a private portal for recruiters and clients (v2.0).",
+    "Shakya — Fintech & AI product management, technical and ecosystem expertise with China know-how. AI projects you can use, an interactive CV, and a private portal for recruiters and clients.",
   metadataBase: new URL("https://shakya.work"),
 };
 
