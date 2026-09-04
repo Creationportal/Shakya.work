@@ -203,12 +203,14 @@ export default function CvContent() {
               value={data.contacts.phoneAlt}
               href={`tel:${data.contacts.phoneAlt.replace(/\s/g, "")}`}
             />
-            <ContactRow
-              icon="linkedin"
-              label="LinkedIn"
-              value={data.contacts.linkedin}
-              href={`https://${data.contacts.linkedin}`}
-            />
+            {data.contacts.linkedin ? (
+              <ContactRow
+                icon="linkedin"
+                label="LinkedIn"
+                value={data.contacts.linkedin}
+                href={`https://${data.contacts.linkedin}`}
+              />
+            ) : null}
             <ContactRow
               icon="languages"
               label="WeChat"

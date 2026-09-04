@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/lib/i18n";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import VoiceGuide from "@/components/voice-guide/VoiceGuide";
+import VoiceAgent from "@/components/voice-agent/VoiceAgent";
 import DesignSystemProvider from "@/components/DesignSystemProvider";
 
 const geistSans = Geist({
@@ -59,6 +60,7 @@ export default async function RootLayout({
               <SiteFooter />
             </div>
             <VoiceGuide />
+            <VoiceAgent />
           </DesignSystemProvider>
         </LanguageProvider>
       </body>

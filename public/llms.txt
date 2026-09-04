@@ -12,7 +12,6 @@ Shakya.work is the personal site of Pranamyya Shakya (唐仲禹), an AI product 
   - AI Agents: https://shakya.work/ailab/agents
   - AI R&D: https://shakya.work/ailab/ai-rnd
   - AI Projects: https://shakya.work/ailab/projects
-  - Demos: https://shakya.work/ailab/demos
   - Office Live Twin simulator: https://shakya.work/ailab/simulation
 - Projects: https://shakya.work/projects
 - Unified Trading Analysis: https://shakya.work/trading

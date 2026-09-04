@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-page-node-id="gj0Z5G5aZCfICYjNmOh86S">
+<head data-page-node-id="gNdNFzKct2rpJSvN8NxL5W">
+<meta charset="UTF-8" data-page-node-id="1gFHii5VClT7NdDUTsSGjZ" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="M42eFJgi90Y46KPGyhLfCw" />
+<title>Pre-Deployment Checklist — shakya.work</title>
+<style>
+  :root{
+    --paper:#ffffff; --ink:#111418; --muted:#5b6470; --line:#e6e8ec;
+    --surface:#f7f8fa; --accent:#7c3aed; --accent-ink:#6d28d9; --glow:#a78bfa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--surface);color:var(--ink);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:980px;margin:0 auto;padding:40px 24px 80px;}
+  header{border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:26px;}
+  h1{font-size:28px;letter-spacing:-.02em;margin:0 0 6px;}
+  .sub{color:var(--muted);font-size:14px;}
+  h2{font-size:19px;margin:38px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  h3{font-size:15px;margin:22px 0 6px;}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px;}
+  .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;
+    padding:3px 9px;border-radius:999px;text-transform:uppercase;}
+  .pass{background:#e7f6ec;color:#1a7f43;border:1px solid #bfe6cd;}
+  .fail{background:#fdeaea;color:#b42318;border:1px solid #f6c9c4;}
+  .warn{background:#fff5e6;color:#9a6700;border:1px solid #f3dca6;}
+  .info{background:#eef0fb;color:#3b3f9c;border:1px solid #cfd4f5;}
+  table{width:100%;border-collapse:collapse;margin:10px 0 6px;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:13.5px;}
+  th{background:var(--surface);font-weight:600;color:var(--muted);}
+  tr:last-child td{border-bottom:none;}
+  .item{border:1px solid var(--line);border-radius:10px;background:var(--paper);
+    padding:14px 16px;margin:12px 0;}
+  .item .top{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .item .name{font-weight:600;}
+  .ev{color:var(--muted);font-size:13px;white-space:pre-wrap;}
+  code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+    background:#f1f2f5;padding:1px 5px;border-radius:5px;}
+  pre{background:#0d1117;color:#e6edf3;padding:14px 16px;border-radius:10px;overflow:auto;
+    font-size:12.5px;line-height:1.5;margin:8px 0;}
+  ul{margin:6px 0 0;padding-left:20px;} li{margin:3px 0;}
+  .counts{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+  .count{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 16px;min-width:96px;}
+  .count b{display:block;font-size:24px;line-height:1;}
+  .note{font-size:13px;color:var(--muted);margin:4px 0 0;}
+  .applied{background:#f3fbf6;border:1px solid #bfe6cd;border-radius:10px;padding:14px 16px;margin:12px 0;}
+  .applied h3{margin-top:0;color:#1a7f43;}
+  .open{background:#fff5e6;border:1px solid #f3dca6;border-radius:10px;padding:14px 16px;margin:12px 0;}
+  .open h3{margin-top:0;color:#9a6700;}
+  footer{margin-top:40px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:14px;}
+</style>
+</head>
+<body data-page-node-id="eZXjbCDCC9PVmFm7qGccCb">
+<div class="wrap" data-page-node-id="LC6r3Catb9PJMoCjIPdwLP">
+<header data-page-node-id="7wXZuFzuBHOfXPTcVOJedi">
+  <h1 data-page-node-id="jL01O8VOL0trKKzlK90prr">Pre-Deployment Checklist</h1>
+  <div class="sub" data-page-node-id="fKH6IWFcVri7YaUxjzY59L">shakya.work — Next.js 16.3.2 App Router · regenerated 2026-09-04 · audited against a clean <code data-page-node-id="n30MknHiuvHORaWDFPFd4C">next build</code> (42 routes) + a <code data-page-node-id="54PJSss491lEIQ550DglVb">next start</code> production smoke test on <code data-page-node-id="C1GH3TmkZYVXtuy50a1jGs">http://localhost:3000</code></div>
+  <div class="counts" data-page-node-id="BdFSAu3dge0FDUQG6RPO0f">
+    <div class="count" data-page-node-id="ioFAjx9DUnGLKKqLnm1bLc"><b data-page-node-id="wJoUZI00uMiRyj9gH68uKb">21</b>PASS</div>
+    <div class="count" data-page-node-id="lwHKDisHjkjPlKXm35sfAr"><b data-page-node-id="hm89SAFIh8aq2GReGvQxre">0</b>FAIL</div>
+    <div class="count" data-page-node-id="YF6GeMk8NLTEusLEEdRrhd"><b data-page-node-id="KDlg7oMatQeti2c3QGf5XE">0</b>WARN</div>
+    <div class="count" data-page-node-id="byy6hRYBJWwANbDXV86mF6"><b data-page-node-id="bRLlkPqfBLqsqLyfCdvphc">42</b>Routes built</div>
+  </div>
+</header>
+
+<p class="note" data-page-node-id="IZkpTpm1uvlzsK5nedHIBN">Scope: re-validates the site after the latest round of changes — the AI Lab reorg (TTS / ASR / RAG / Voice Ops embedded on <code data-page-node-id="j95URl9BsLAkyguLuGtODp">/ailab</code>), the removal of <code data-page-node-id="KJlAuIFR5A3hxy0lC9VgrD">/underwrite</code>, <code data-page-node-id="5ls0B87xr7W5HNyku0EdMS">/compliance</code> and <code data-page-node-id="kWjPCxr7rmsZikRW0zPDdo">/ask-cv</code>, the <code data-page-node-id="ASJruQtW7rsAcEavZAiIby">/contact</code> cleanup (no <code data-page-node-id="SS0evNY7zOeOXy3pkcMMOp">shakya@dyna.ai</code>, no LinkedIn), the new <code data-page-node-id="MOnNv6NB6DENk0tBgaVrnF">/ideas</code> Blog, and the <code data-page-node-id="fQkkN5b6DmGIYEcwidkVLp">/ailab</code> Demos removal + 2 coming-soon cards — plus the standing security, SEO and hosting-runtime items. This replaces the 2026-09-02/03 checklist, which predated all of the above and wrongly still "passed" the since-deleted routes. <b data-page-node-id="Akw9eWGLrE7M4tvBkcBt21">All required debuggings are applied; the production build is green.</b> Deployment target is <b data-page-node-id="AVKeHFYev6HSGMqgpc8A2r">Vercel</b> (native Next.js 16 — no adapter / output mode required). Nothing was committed (changes left in the working tree for the user's deployment + the concurrent agent).</p>
+
+<!-- ============================ BUILD ============================ -->
+<h2 data-page-node-id="dbxHAHojjTcksQIGgrBegp">1 · Production Build</h2>
+<div class="item" data-page-node-id="H9VDmOQcXLVO4U1hm9lyi2">
+  <div class="top" data-page-node-id="ksb8MFgzqAis4ph4XI9ji5"><span class="badge pass" data-page-node-id="evBKeTv3eCqfUW3xDPo8JL">Pass</span><span class="name" data-page-node-id="u6vSUDgYNGb7suAGIrzcRX">next build — 42 routes, 0 errors</span></div>
+  <div class="ev" data-page-node-id="e5GJYUZ2dZkPSIUrwjO1D1"><code data-page-node-id="Ntpqt50ZE1Bvfon1D34pWQ">env -u NODE_OPTIONS npx next build</code> → <code data-page-node-id="uT0G3hDNL0iUkWJ9YGA71I">✓ Compiled successfully in 1204ms</code>, <code data-page-node-id="gCVLoJ5cwldhd2S3rxxPwn">✓ Generating static pages (42/42)</code>, exit 0. Turbopack (Next 16 default) used; the sandbox-injected <code data-page-node-id="hLt4ouqQAjKQLRUCcHyYDU">NODE_OPTIONS=--use-system-ca</code> is cleared for the build so TLS is not broken. Route table shows the four studio routes <code data-page-node-id="aSb8K1BTrSErzRU2gSfLnn">/tts /asr /rag /voiceops</code> as redirect stubs and <b data-page-node-id="gSEUblCbDU5MSIDlOEhFMj">no</b> <code data-page-node-id="pbHDTJx9Cy1SrIV1bhsbsx">/underwrite /compliance /ask-cv /ailab/demos</code>. <code data-page-node-id="GQgYG1DnE851NbIIHUKAwH">/robots.txt</code>, <code data-page-node-id="O2ExxWffNBhGd1sYmqBbjV">/sitemap.xml</code>, <code data-page-node-id="XUA8S9GUruASj4lmOaG5hq">/icon.svg</code> are prerendered static; everything else is dynamic (server-rendered).</div>
+</div>
+
+<!-- ============================ TYPESCRIPT ============================ -->
+<h2 data-page-node-id="U2ctEaoIF0fCs0C447zaRF">2 · TypeScript Compile</h2>
+<div class="item" data-page-node-id="44ygVaDzBOiW7auRVkt2Gj">
+  <div class="top" data-page-node-id="Oa4qp5DxhrnDGwC2zEfYQi"><span class="badge pass" data-page-node-id="OpCxJgGVCCKGCOpNXHegVQ">Pass</span><span class="name" data-page-node-id="5jBZSYosAfXuTGxCbqsqvZ">tsc --noEmit clean (and build-time TS pass)</span></div>
+  <div class="ev" data-page-node-id="SQVFsPhqD1ixZIg9dIxzQ4"><code data-page-node-id="hzxMagwg9aNOno5wXrPrGy">env -u NODE_OPTIONS npx tsc --noEmit</code> exits 0 with no errors across the whole project, and the build's own TypeScript pass finished in 3.4s. Removing 12 module files and the route folders left no dangling type references; the previously-seen stale <code data-page-node-id="DtOiOwaYcXT1Ss4pm6eeS4">.next/types/validator.ts</code> phantom errors were cleared by deleting the generated file and letting the dev/build server regenerate it.</div>
+</div>
+
+<!-- ============================ ROUTE INVENTORY ============================ -->
+<h2 data-page-node-id="FlwuHZfXjG2EOnCHUrlP8F">3 · Route Inventory &amp; Redirects</h2>
+<div class="item" data-page-node-id="6YIfAXVXFDIQLPAqtlX3mB">
+  <div class="top" data-page-node-id="28o7Pc9gZjlJm4SHvnyttd"><span class="badge pass" data-page-node-id="C5zP4SWfWlxFUQga4Qv8yJ">Pass</span><span class="name" data-page-node-id="DVdJQoquB2kj01vuT4I5GR">Studio routes 307 → /ailab; deleted routes 404</span></div>
+  <div class="ev" data-page-node-id="0flOygJUkDOqtKcPEkiyaG">Verified on the production server: <code data-page-node-id="AK77RQc7xVRJTMDGYNAhET">/tts</code>, <code data-page-node-id="1bkTsGUoBOdPEdwSXQ7P0r">/asr</code>, <code data-page-node-id="eE2cg8vBL8uOplStfAhcop">/rag</code>, <code data-page-node-id="uIbwX27LIbiX32LrqvLf8i">/voiceops</code> each return <b data-page-node-id="cfwWbntarRyaRWBlAFmFwE">307 → /ailab</b> (server-component <code data-page-node-id="6F1Df6FEk84mCqWYiIKiIF">redirect()</code> stubs). The deleted routes <code data-page-node-id="yWcAwdjd8V8uvq0nyQ0E8j">/underwrite</code>, <code data-page-node-id="U9is0vXSn9f1pOjtR7MtxQ">/compliance</code>, <code data-page-node-id="oCDKavmuefdaffXt6JtCHF">/ask-cv</code>, <code data-page-node-id="bHiSFHM6RVykgVM7fXFEO7">/ailab/demos</code> return <b data-page-node-id="bs2mJwXI4p6Dp83CWjHWlj">404</b> and are absent from the build manifest. Full public sweep: <code data-page-node-id="vpvHIfxbbbwVmriZeCvaPq">/</code>, <code data-page-node-id="oq1ynrbkqTBncoc08UAU27">/about</code>, <code data-page-node-id="uCHgqmtk31yje0HKjgHoo0">/ailab</code> (+ <code data-page-node-id="18YvfNBfP2F6t6hvCUrPHQ">/ailab/agents</code>, <code data-page-node-id="wwF3AqUpWwOUxPjGpvnz5h">/ai-rnd</code>, <code data-page-node-id="97g8SGDIdVVNmEd3VY90l6">/projects</code>, <code data-page-node-id="O7fSK2eypmY9JKkOpzR648">/simulation</code>), <code data-page-node-id="PkDKnkRJ47W8jQuPUHoEqJ">/ideas</code> (+ <code data-page-node-id="ZIRlnzlhMINuBgdItQ1vy2">/agent-operation-flow</code>), <code data-page-node-id="sq9lqqEnSOEqDv8QgziFt7">/projects</code>, <code data-page-node-id="Wz4tSLsJsu9SPpZBaH45t9">/trading</code>, <code data-page-node-id="n5c8jI7P33IloZeHlWuEPA">/skills</code>, <code data-page-node-id="HnRcoMZ1UnGEZGy33zSULd">/hub</code>, <code data-page-node-id="3KLUAln8PelYuopC3AiaXm">/contact</code> (+ <code data-page-node-id="1CydUwJYDjIgMAIFoB18JU">/vip</code>), <code data-page-node-id="ToSQjdaaB8Chy4pGSxDs8x">/privacy</code>, <code data-page-node-id="6rIr0e0X43BqCvVF74CkiJ">/terms</code>, <code data-page-node-id="A27z72euQyqEnseOadA0H7">/accessibility</code>, <code data-page-node-id="IR53waeUaTTmFj7YRWmnFJ">/sitemap.xml</code>, <code data-page-node-id="M5zLa9VXOouMhk7uHN4OAw">/robots.txt</code>, <code data-page-node-id="kcT34FowDATxh9IVYVS9w3">/llms.txt</code>, <code data-page-node-id="aCoE3cxMRRQZ7H6pre8QxY">/CHANGELOG.md</code> → all 200.</div>
+</div>
+
+<!-- ============================ AI LAB REORG ============================ -->
+<h2 data-page-node-id="44kFtosWBbucpLdM0l8LBN">4 · AI Lab Reorg (Live modules)</h2>
+<div class="item" data-page-node-id="Q7555JNu8vv5tTMEIvlkUI">
+  <div class="top" data-page-node-id="1KQB4tWX8qivw43RmOaQy0"><span class="badge pass" data-page-node-id="mZceGy5kkMn3O4cni8ejOv">Pass</span><span class="name" data-page-node-id="xjErjqzOIisl9B2EG41sN6">TTS / ASR / RAG / Voice Ops embedded on /ailab</span></div>
+  <div class="ev" data-page-node-id="m426PtnvlJ94GcYBL2ht6k"><code data-page-node-id="Rg1gmlCBZzXF4G6QZBADeC">src/components/ailab/LiveModules.tsx</code> mounts all four studios in one tabbed section (<code data-page-node-id="DAAUFCGH9AgJ4yIut1lo0F">#live-modules</code>) directly on <code data-page-node-id="04M1TMWMA12tdB9lrX6bxA">/ailab</code>. All panels stay mounted; inactive ones are hidden via the <code data-page-node-id="m2BZXlM86qT0IQwujJVdKM">hidden</code> attribute so studio state survives tab switches. Deep links work through <code data-page-node-id="yD3E7ljgT2t0V9DULW4BXp">window.location.hash</code> parsed in <code data-page-node-id="jT3QBD2TAhj7wI5IqSbj0W">useEffect</code> (<code data-page-node-id="KbrqMIAnnhgFLt4tXqolcd">#live-tts</code> / <code data-page-node-id="z6dE6619TkpqWF6Rpt54cm">#live-asr</code> / <code data-page-node-id="NMIHxotTxlohFnG4BVCB7D">#live-rag</code> / <code data-page-node-id="41j5CjAULdB3ArhgBXLRpc">#live-voiceops</code>) — no <code data-page-node-id="7Jy6t2KArSS5Sqa43OJx6p">useSearchParams</code>/Suspense needed. Proper <code data-page-node-id="pdwfEqeZ8NLpUQxoH1XTE8">role="tablist"/tab/tabpanel</code> semantics; section heading + body come from <code data-page-node-id="Gq3CyV5qEAc4KUGi5Lqck2">ailab.liveTitle</code> / <code data-page-node-id="VrRT6ZIvTYY2haLYgOsk3i">ailab.liveBody</code> (present in en + zh). Verified: <code data-page-node-id="dP4SlGHXRmXHzIMGmZS2U6">/ailab</code> serves the "AI R&D · Live modules" heading and all four studio panels.</div>
+</div>
+
+<!-- ============================ PROJECTS CLEANUP ============================ -->
+<h2 data-page-node-id="kMVMvOMLRQn6SFIloLNuTZ">5 · /projects Cleanup</h2>
+<div class="item" data-page-node-id="nHiQ9eM2Pw2BcARDTzT7ZW">
+  <div class="top" data-page-node-id="r5V568WVy7SVK3H9aHhSTj"><span class="badge pass" data-page-node-id="gYzsSxbYjrHEJYQRDjKkiw">Pass</span><span class="name" data-page-node-id="bDJRXq8AZso47h5ewmp0jy">Only trading + wt cards remain</span></div>
+  <div class="ev" data-page-node-id="lvC8TrrGEvPGA0qRz7ClZG"><code data-page-node-id="sTNfnmiSFrQmhEABuWTFgo">src/app/projects/page.tsx</code> <code data-page-node-id="CK9n39kCZOITRd3crKp8UT">PROJECTS</code> array now holds just <code data-page-node-id="mWJRpoy98QTQ63JXgptP9S">trading</code> (→ <code data-page-node-id="yFmqZEQpWy28jFZ8tVgAZg">/trading</code>) and <code data-page-node-id="5G8MJKvWJkWDxBFqpbGKJC">wt</code> (→ <code data-page-node-id="yHDVfgO52zFYTJZXEkVMn9">/wt</code>). The TTS / ASR / RAG / Voice Ops cards were removed; those studios are now reached from <code data-page-node-id="RitPe0NsR5Emx0LJdHtpqr">/ailab</code>. Verified: served <code data-page-node-id="xIcSAkxogX1gmkcAS1osYr">/projects</code> contains 0 occurrences of "TTS+ / ASR+ / RAG+ / Voice Ops".</div>
+</div>
+
+<!-- ============================ CONTACT CLEANUP ============================ -->
+<h2 data-page-node-id="K48gEMP1Lov3vd06NED7Ul">6 · /contact Cleanup</h2>
+<div class="item" data-page-node-id="Iw5BLYWAI1aE2NRjbcRFfK">
+  <div class="top" data-page-node-id="CoI2vngrTxaPKaomBniznZ"><span class="badge pass" data-page-node-id="qZe0jKcqHNa3KtCgTkaDTk">Pass</span><span class="name" data-page-node-id="8zWVyTYs3xiezLhBxT969L">shakya@dyna.ai email + all LinkedIn links removed</span></div>
+  <div class="ev" data-page-node-id="hVTtKIFFaNA5bX9bzJhduu"><code data-page-node-id="RLWmRSoHcBRfBXF7L2hgye">src/lib/settings/schema.ts</code> <code data-page-node-id="xO7siWH8JbuXSedrAMHLsa">emailAliases</code> = <code data-page-node-id="WKO27EINCwZT8fP7ISBDLJ">["shakya@agent.qq.com"]</code> (was <code data-page-node-id="fYZqXYcA67uva6N729KJLN">["shakya@dyna.ai","shakya@agent.qq.com"]</code>); <code data-page-node-id="ELpGLv1nkRI25Jd0qBTGek">linkedin: ""</code>. <code data-page-node-id="RPSv9VtH9vJrCYj02Vz8BW">.data/settings.json</code> no longer carries <code data-page-node-id="2hiSdHnUKP3KhoJF5En4AT">shakya@dyna.ai</code>, and <code data-page-node-id="7VESdmFfGxvXEdwDxTSzeD">contact.linkedin</code> is <code data-page-node-id="uwucXVM3SJfGqgg4I0F6x2">""</code>. <code data-page-node-id="VGCqR3IGJeP4tUpcBLoeh6">src/app/contact/page.tsx</code> and <code data-page-node-id="P91OaC3qp0rxDsORDvMkkH">src/app/contact/vip/page.tsx</code> no longer render any LinkedIn channel. Verified on the production server: <code data-page-node-id="OAvIm6HFlYXBSXcgdaoVPJ">/contact</code> and <code data-page-node-id="u0Ffx8R9VYNQmqvvMAEbbr">/contact/vip</code> return <b data-page-node-id="Klzy1FZZauFtF0ElDkYXLT">0</b> matches for <code data-page-node-id="GPDmt6gRproXc0AMtZ7RuL">dyna.ai</code> and <b data-page-node-id="s1PoLjsV6hLChoOWQPNXu8">0</b> for <code data-page-node-id="JDuecvecdHIu4hiOybJ5jC">linkedin</code>; the three remaining channels are <code data-page-node-id="VpjNHUwjGpEwOQ7KvdZf1V">creationpanel@gmail.com</code>, <code data-page-node-id="smGnMx7E8JyYgDqo8qRHGa">tangshakya@163.com</code>, <code data-page-node-id="SiA1N8YctXVPwEUsRiFpFp">shakya@agent.qq.com</code>.</div>
+</div>
+
+<!-- ============================ IDEAS BLOG ============================ -->
+<h2 data-page-node-id="WJK13SCidwzLmaAxB9AsWR">7 · /ideas Blog</h2>
+<div class="item" data-page-node-id="s0d0ow72txFqVJfb3YVCNc">
+  <div class="top" data-page-node-id="dg69tVTHa77QzRPx4EPWFD"><span class="badge pass" data-page-node-id="y7lap4VAEgyKrdGctzK2tz">Pass</span><span class="name" data-page-node-id="HTjUQt553Ht6rTtii0gS83">New Blog section — 6 bilingual entries</span></div>
+  <div class="ev" data-page-node-id="9dMwcGu6xOwcQB1B4m2qWE"><code data-page-node-id="RKUyodoesFuKLvBQzs0Hke">src/app/ideas/page.tsx</code> renders a Blog <code data-page-node-id="aFEp9cY7GhdEUv6PlBgXCL">&lt;section&gt;</code> after the ideas grid: <code data-page-node-id="yqRfFMNdWUOvjEBBDRqCq0">ideas.blogTitle</code> ("Blog" / "博客"), <code data-page-node-id="0986dLEfTKSj4Fbp8UHgrz">ideas.blogBody</code>, and six inline-bilingual cards (<code data-page-node-id="npl0Rf5MyBp8asXeaN031G">kind: "article" | "news"</code>, dated, linked to <code data-page-node-id="XrxxBHEm05OZbQONEdXPuN">/ailab</code>, <code data-page-node-id="BYWcZAmCn6D15Kw2Cv6DMo">/ailab/ai-rnd</code>, <code data-page-node-id="8KNcXnMOSXwwCrswrLJkx7">/ailab/simulation</code>, <code data-page-node-id="UoeRybV7sfMyAIuAYrdyUE">/contact</code>). Badge text from <code data-page-node-id="mRvZOHIHn3nObOOLcztczU">ideas.blogArticle</code> / <code data-page-node-id="0LHxjRciW99aqdiLHLGOW7">ideas.blogNews</code>. Verified: served <code data-page-node-id="hsIp2jmA6qReFxFnpYng3t">/ideas</code> contains "Articles and news highlights" and the lead post "AI Lab refresh — TTS, ASR, RAG and Voice Ops live in one place" in both en and zh.</div>
+</div>
+
+<!-- ============================ AILAB DEMOS ============================ -->
+<h2 data-page-node-id="RFfLYjA4zBMUOxmeM6tnpt">8 · /ailab Demos Removed + Coming-Soon</h2>
+<div class="item" data-page-node-id="FDW4qBL2v1T7O7mATm9thz">
+  <div class="top" data-page-node-id="y1hApQG1y8azF2YYBEpilf"><span class="badge pass" data-page-node-id="3oGDf75UnNHRQxNex48fHF">Pass</span><span class="name" data-page-node-id="fP3iQLOwsF2ycL6aPuk7rJ">Demos section gone; exactly 2 coming-soon cards</span></div>
+  <div class="ev" data-page-node-id="aWuroCIfRAT0ubxEXL8k3N">The <code data-page-node-id="V4sRrfs1mvxJLfjLugsuUQ">/ailab/demos</code> route folder was deleted (backed up to <code data-page-node-id="G5edHInp9VPbiO8JlJ1Qhw">.workbuddy/backup/removed-modules-2026-09-04-demos/</code>) and its card was removed from the <code data-page-node-id="DU571RsoJwLOe47sps0MxY">/ailab</code> wall. The <code data-page-node-id="vVxZNK9euKll8XD6KxDpem">WALL</code> now has 3 items (AI R&D, AI Projects, Agents). The ideas wall renders exactly <code data-page-node-id="5UuwGY4r2CwBWQx1YqIyZc">Array.from({ length: 2 })</code> "coming soon" cards. Verified: <code data-page-node-id="FW5o4CG4AmJjh0cfI6l8qO">/ailab</code> 404s on <code data-page-node-id="yOxXr61rHFLuv52sxhvGif">/ailab/demos</code> and shows the two "— coming soon" placeholders.</div>
+</div>
+
+<!-- ============================ SITE SECURITY ============================ -->
+<h2 data-page-node-id="AC9mvWxMGNUQEocwkVLyPC">9 · Site Security (HTTP headers)</h2>
+<div class="item" data-page-node-id="jDB0k8vFDHdpZnhlALZBIH">
+  <div class="top" data-page-node-id="cRAxsSFzlHcOBDYehKGjWn"><span class="badge pass" data-page-node-id="QvEOXX6hGUbttwWjTPfkMU">Pass</span><span class="name" data-page-node-id="GtAamHOwH29oOfZV5RTKZs">Security headers intact</span></div>
+  <div class="ev" data-page-node-id="OsD6VSEQLfto05eNLpoavt">Unchanged from prior audit, still emitted by <code data-page-node-id="PXAlxMv9UNm9ZZtnp97Cxc">next.config.ts</code> <code data-page-node-id="7O5HoHMcvwn5STjtVV8Iji">headers()</code> and honored by Vercel: CSP (<code data-page-node-id="eU6K0j8VMw04LmU5kTwksO">default-src 'self'</code>, inline scripts/styles allowed for hydration, <code data-page-node-id="RllGX3f8Z72X3mmkwfHjGl">connect-src</code> limited to same-origin + Binance/CoinGecko for <code data-page-node-id="TyEx7jmlcbuL2ZBczTdoXP">/trading</code>), HSTS (63072000, preload), <code data-page-node-id="tngwaQzNk09GR7ZQ6TX5ZB">X-Frame-Options: DENY</code>, <code data-page-node-id="jGPrJeOxeKY7memdeXOkZU">X-Content-Type-Options: nosniff</code>, <code data-page-node-id="5KyIqv7V13K9kAK7EwBpyH">Referrer-Policy: strict-origin-when-cross-origin</code>, <code data-page-node-id="R5Mzy1BBclAsxHawIArYnJ">Permissions-Policy</code> disabling camera/mic/geolocation.</div>
+</div>
+
+<!-- ============================ PROTECTED PAGES ============================ -->
+<h2 data-page-node-id="MMynWOgfRsU7ChnBIs6fie">10 · Secure / Protected Pages</h2>
+<div class="item" data-page-node-id="7zC8r31E6EfOX10RQ8XNL7">
+  <div class="top" data-page-node-id="0hdRpuccTIBSh9wep6SbCl"><span class="badge pass" data-page-node-id="jkz4TmYhthgTH3FE4vxyYZ">Pass</span><span class="name" data-page-node-id="1vhhzB8BReeNAxrAucmWu5">/cv &amp; /wt gated; /vault &amp; /settings no PII (re-verified on prod)</span></div>
+  <div class="ev" data-page-node-id="ZoFhZwBuwHKiEWbd8oAMPe">On the production server: <code data-page-node-id="pIoxVb04DBfQofCPFQkVi7">/cv</code> → <b data-page-node-id="DQTiNvieiDGO4D0TyjHbB6">307 → /vault</b>, <code data-page-node-id="REJTBakcEXBzH9IcQmdXbH">/wt</code> → <b data-page-node-id="NMF2rMFUL4jPazFdV0X7L6">307 → /vault</b>, <code data-page-node-id="DnhfFI0cDh9CgM6VBl8vkj">/vault</code> → 200 (access form only), <code data-page-node-id="1UTDXGUdC8Ra7IbEPINpHY">/settings</code> → 200 (login form only). The private email <code data-page-node-id="892EgfuhXVFXwnFkL2TrpV">creationpanel@gmail.com</code> is <b data-page-node-id="9U8FY4J4BSaCSx865gHP2e">absent</b> from the unauthenticated <code data-page-node-id="jt9tlDRDfr6zB6CG7LGDns">/cv</code> HTML (PII leak closed). Metadata for <code data-page-node-id="vt2XfCtG1WWmVGNVNDdZIn">/cv</code>, <code data-page-node-id="HRBlzleFMri1HpydKnzuv4">/wt</code>, <code data-page-node-id="K9ALb4u2luOmQC1UaFe6Bb">/vault</code>, <code data-page-node-id="z7zdLKuyd4jRfPHMowYEk4">/settings</code> is <code data-page-node-id="drF4UTa28J2QDkPvYvXJWd">robots: index:false</code>.</div>
+</div>
+
+<!-- ============================ ROBOTS ============================ -->
+<h2 data-page-node-id="8amE97HQuzGAyQFQETEwmS">11 · robots.txt</h2>
+<div class="item" data-page-node-id="9zGO83giYZBpreHKAs2eNv">
+  <div class="top" data-page-node-id="KABGuepu9YCoDEl6C54FXO"><span class="badge pass" data-page-node-id="mvrXomHhzAzzE9FsoarR5X">Pass</span><span class="name" data-page-node-id="DAxNlfBHggPuiHZS80G6CH">Private paths disallowed</span></div>
+  <div class="ev" data-page-node-id="PCL4opCFAwhAoGbPvYAjDP"><code data-page-node-id="vgcndMikVcLda7r98YmQPB">src/app/robots.ts</code> disallows <code data-page-node-id="A3ZtwlklJuHmftDAQhGH2d">/settings</code>, <code data-page-node-id="vx6z3fK3J2MHFnWlSTmBQT">/api/</code>, <code data-page-node-id="e1ourAcrUZd7fbRfG9grP8">/.data/</code>, <code data-page-node-id="too5XJDiDlhjFU91PpvvEb">/cv</code>, <code data-page-node-id="XNyBVEkWWx1qkrEqtpvabF">/vault</code>, <code data-page-node-id="BtzzELkJx07APfYztTj0R3">/wt</code>. Verified in the served <code data-page-node-id="0DQBFgCupRpMVrGIbGHjTn">/robots.txt</code> (includes <code data-page-node-id="B8EtcE0xymkE0aGHcVcysY">Disallow: /wt</code>).</div>
+</div>
+
+<!-- ============================ LLMS.TXT ============================ -->
+<h2 data-page-node-id="JfA7DXUsLqJ1ranxVowGXF">12 · llms.txt</h2>
+<div class="item" data-page-node-id="iGrsznlKZajfRdTHfECcbw">
+  <div class="top" data-page-node-id="EQ2bfB8xybwcOwZ0qniIUw"><span class="badge pass" data-page-node-id="FLRKb3BAZXH1EIucb64uc3">Pass</span><span class="name" data-page-node-id="E7cnXAYcfsS58XgoPdvvY0">Public sections only; no private body; no removed routes</span></div>
+  <div class="ev" data-page-node-id="Ny64bP88kLpFhGDJDw9wXK"><code data-page-node-id="Qek9L9QcToV1IHPZSMFP4u">public/llms.txt</code> lists the public sections (home/about/ailab + sub-pages/projects/trading/ideas/skills/hub/contact + legal) and a clearly-labelled "Private / access-gated" block (vault/cv/settings/wt) by URL only — no private body content. No removed routes referenced. Served 200.</div>
+</div>
+
+<!-- ============================ SITEMAP ============================ -->
+<h2 data-page-node-id="zUADxNG1q8tMt94ZeZJFjM">13 · sitemap.xml</h2>
+<div class="item" data-page-node-id="zn6HpFRoCPM6UmX9txnbT7">
+  <div class="top" data-page-node-id="LBHkGArmD8TEL9zLQcaepj"><span class="badge pass" data-page-node-id="MvAVOZdiFriQbKz2qfi5jf">Pass</span><span class="name" data-page-node-id="qSJlxn5h8qLO0SU2GMft6c">18 public URLs; consistent with noindex</span></div>
+  <div class="ev" data-page-node-id="Xu4HvU6hwcvY6KO1ZukQcF"><code data-page-node-id="VxROBKHnijgjLYfnR4IHu6">src/app/sitemap.ts</code> <code data-page-node-id="TkgmMXlgV3N86rxBIYXl57">PUBLIC_ROUTES</code> (18 entries) excludes <code data-page-node-id="zBmwHyWbLaOpkUliJdbrOV">/settings</code>, <code data-page-node-id="ktEfqTydsCVEfbm4lGBcPR">/cv</code>, <code data-page-node-id="1A4KgC8DgG4pDblsfl3TJr">/vault</code>, <code data-page-node-id="vQOLZdSkmHa32EVM0rBiwq">/wt</code> and contains none of the removed routes. Verified: served <code data-page-node-id="rHd8tyH39L4zVsiNWczdla">/sitemap.xml</code> has 0 occurrences of <code data-page-node-id="ocbAnffHrGaLcdWipNKGqW">underwrite|compliance|ask-cv|/tts|/asr|/rag|/voiceops|ailab/demos</code>.</div>
+</div>
+
+<!-- ============================ LEGAL ============================ -->
+<h2 data-page-node-id="lwHmfMmdxje5chFiJrQKJg">14 · Terms &amp; Legal</h2>
+<div class="item" data-page-node-id="ORjs3Bqv9sLmPYoUEzwz4h">
+  <div class="top" data-page-node-id="dX6rBrQAUOKTBGuoMdHkDw"><span class="badge pass" data-page-node-id="Ab8p9kkgViSYBrDYUW19oM">Pass</span><span class="name" data-page-node-id="RWWq22DEdS7ZZqCNdRfMpM">Privacy / Terms / Accessibility present + bilingual</span></div>
+  <div class="ev" data-page-node-id="Pp429MLWYD7fe75Jb5WJFl"><code data-page-node-id="vR0HXgHxBHAR9EAobPkKCK">src/lib/legal-content.ts</code> provides privacy policy, terms of service and accessibility statement in en + zh; <code data-page-node-id="Cb5AEwhziKxdG3j4IjZNlN">/privacy</code>, <code data-page-node-id="Xf67uB2GgqDkHy1WUV4AEk">/terms</code>, <code data-page-node-id="TWX9lwyNdbhvZpHOwtJC4f">/accessibility</code> resolve and are in the sitemap + llms.txt.</div>
+</div>
+
+<!-- ============================ HOSTING RUNTIME ============================ -->
+<h2 data-page-node-id="PsAZEguUoimJIFHyCYx41B">15 · Hosting Runtime Readiness (Vercel)</h2>
+<div class="item" data-page-node-id="ZbkPv25szByhCtgBFfqZB0">
+  <div class="top" data-page-node-id="RUVrs35cxkJgjbCPQ5qVAT"><span class="badge pass" data-page-node-id="SZgG6K7eKoONU5tisEMIZ0">Pass</span><span class="name" data-page-node-id="jhnjw92qHA8dxPBTGA69GC">Read-only FS handled; KV optional; no adapter</span></div>
+  <div class="ev" data-page-node-id="t4BkXZz5MXa1aTpCT7t3hA">Vercel is the target — native Next.js 16, no <code data-page-node-id="YaNrE6WEBHBleJl6EqwGvO">output</code> mode / Cloudflare adapter / <code data-page-node-id="xMT2hUA0OiKNuM4kV64Ejc">wrangler.toml</code>. <code data-page-node-id="TibJPuJKBGPLh95uZ0cFC8">/api/contact</code> and <code data-page-node-id="D2efE8meJTayEivRSeUoNz">/api/access-request</code> isolate their <code data-page-node-id="HWHn3tkesNiwB4lh4EcDcI">.data</code> writes in <code data-page-node-id="YnyQEFeu8SwJ1GDjnejTkZ">persistContact()</code> / <code data-page-node-id="cmRFeBTOOWbBtvJUNVclEx">persistAccessRequest()</code> that return <code data-page-node-id="R7ghNArYkFjQSiAxmMhktN">{success:true, persisted:false}</code> (HTTP 200) on a read-only FS instead of 500ing. <code data-page-node-id="IE7MmAzRmfsGQhE9XCkCp8">saveSettings()</code> is wrapped in try/catch. Optional durable storage via <code data-page-node-id="k4dyn3QvObIZFxCu3m4mdK">@vercel/kv</code> (<code data-page-node-id="RX2wFkx4UVgeePyEQnICTd">src/lib/kv.ts</code> → <code data-page-node-id="DyOj8v5Y760ZikKcjh4FYG">getKv()</code>) activates automatically when a KV store is linked (no code change). Env vars to set in Vercel: <code data-page-node-id="Mo1Gb4BovXUrAMQCHduP3A">SETTINGS_PASSWORD</code>, <code data-page-node-id="l19L38oCnMCaz96G2ylWIw">ACCESS_CODE</code>, <code data-page-node-id="MjwNCCZKR5Ev0Gj0JxlH2O">CV_GEO_LOOKUP</code> (and optionally the LLM / Fish Audio / embedding keys for the live voice + RAG features).</div>
+</div>
+
+<!-- ============================ AUDIO ============================ -->
+<h2 data-page-node-id="eu5BwPrryfdWgvcYbSuia9">16 · Audio Features</h2>
+<div class="item" data-page-node-id="egKsx56u3iQuU4kaAPGE8c">
+  <div class="top" data-page-node-id="ck8FCzxfnyXDhCSBOfWCFW"><span class="badge pass" data-page-node-id="ZVD4GMgnnulW3bWH6qOX6P">Pass</span><span class="name" data-page-node-id="4PW5VD9RGhJrNCY9GPTdJO">VoiceGuide — browser TTS only, no dead audio</span></div>
+  <div class="ev" data-page-node-id="WFvJ6yw4NdyyNA4sBiZzsi"><code data-page-node-id="MLocnHicdFPtjGM4S3qkTy">src/components/voice-guide/VoiceGuide.tsx</code> uses the browser SpeechSynthesis API; no external audio service. <code data-page-node-id="stxeKHxY7GoLALlPwC0Hph">public/audio-guide/manifest.json</code> has 0 <code data-page-node-id="OqRnUNa3UXvrcgT11xht92">.mp3</code> references (the ~17 non-existent files were removed earlier). <code data-page-node-id="ZofF3x1qjvuTekHfpDvGCf">/api/tts</code> and <code data-page-node-id="W5JYd1ehGjejpZA9EqZmIw">/api/voice-agent</code> call Fish Audio server-side only when <code data-page-node-id="Uiq2JRjxhR2Rz08HZrkJWD">FISH_AUDIO_API_KEY</code> is set, degrading to browser TTS otherwise.</div>
+</div>
+
+<!-- ============================ EMBEDDED APIS ============================ -->
+<h2 data-page-node-id="9yAjkhQXUy77duoQr00eQ1">17 · Embedded LLM / External APIs</h2>
+<div class="item" data-page-node-id="YnrHTInLyEjDlz5SVjibaX">
+  <div class="top" data-page-node-id="nEXOZnW7j60HinvFyj7h2C"><span class="badge pass" data-page-node-id="3LEURANQv3CQ1C0gyETmGI">Pass</span><span class="name" data-page-node-id="t3pCBt0WpVC3lXAe0NklrI">No key leaks; server-only secrets</span></div>
+  <div class="ev" data-page-node-id="f7NT7xpMk4sP1uzw9tZ77b">Grep across <code data-page-node-id="FBpj80bMZQoWYdj7UtBxH3">src</code> for <code data-page-node-id="ZQBD8avw69HLwLTDEvf1Ae">openai|anthropic|gemini|ollama|huggingface|cohere|replicate</code> finds only CV/skill display text + comments — no live client calls. <code data-page-node-id="kSewMJk9F8yl91927ACtQi">process.env</code> usage is limited to server-side secrets (<code data-page-node-id="taPt1YHYkllTY0MTPvcblI">SETTINGS_PASSWORD</code>, <code data-page-node-id="2BSR8XoB475KG4B7gRXk9K">ACCESS_CODE</code>, <code data-page-node-id="A2dd0q0bHFnYAmLS37c8EG">CV_GEO_LOOKUP</code>, <code data-page-node-id="gcApS3Jhof53lxUP9y4TKh">LLM_API_KEY</code>, <code data-page-node-id="bp002fWXRpfZP5E3wBsWe1">FISH_AUDIO_API_KEY</code>, <code data-page-node-id="YFMjlLL0QTtNbRdPRvAfRE">EMBEDDING_API_KEY</code>, <code data-page-node-id="CDh1XNATaMOs6raHDIyB26">NODE_ENV</code>) — never shipped to the browser. The client receives an audio data-URL + reply text (voice-agent) or ranked passages (rag), never a key. CSP <code data-page-node-id="vfDCSECVuhyFHUxGzFyn6V">connect-src</code> permits only same-origin + Binance/CoinGecko.</div>
+</div>
+
+<!-- ============================ LANGUAGE SWITCHING ============================ -->
+<h2 data-page-node-id="WAlkQnj30T6V9X6lTaLuyv">18 · Chinese ↔ English Switching</h2>
+<div class="item" data-page-node-id="b1ix7sJNN3KJItK6pGo1Wy">
+  <div class="top" data-page-node-id="kQq12lp5RbVCdm6j9lnbMb"><span class="badge pass" data-page-node-id="E4udB5jauKATDdWyYAvvU1">Pass</span><span class="name" data-page-node-id="vHLLOyI6cdBQML2DSbFo7V">Toggle wired; new keys covered in both locales</span></div>
+  <div class="ev" data-page-node-id="RXMaRCpwReBv6iFTphRHPD"><code data-page-node-id="EWiQaGe2DNQAl4LgNaxCmj">LanguageProvider</code> mounted in <code data-page-node-id="QVHSjNe3AwdoV7B00ghTzr">src/app/layout.tsx</code>; <code data-page-node-id="4ON8NDnoX8gL0J9olQ4OWI">LanguageSwitcher</code> (EN / 中文) in <code data-page-node-id="gSBBgY1h1mhB0EsIQOh684">SiteHeader</code>; <code data-page-node-id="onRbBiNAOhfcM3bPOcQQkj">setLang</code> writes the <code data-page-node-id="jp5jnTgTudP36sMvksu5fp">lang</code> cookie (1y, SameSite=Lax); server <code data-page-node-id="MqhJVioaPIXidf6AXGnEbA">getLang()</code> reads it. All keys added this round — <code data-page-node-id="TkDnhEP0Zn73bE73TYXdhv">ailab.liveTitle</code>, <code data-page-node-id="gJ9iP8HgU0tiRfkqpS1jop">ailab.liveBody</code>, <code data-page-node-id="Ig9kRIbTgVCGQyTZIq5BOW">ideas.blogTitle/blogBody/blogArticle/blogNews</code>, <code data-page-node-id="xABIsOBO1uz662BVfHcl4F">ailab.open</code>, and the <code data-page-node-id="B2xzSIuAWFvdHL5zbSNOqN">tts/asr/rag/voiceops</code> studio sections — exist in <b data-page-node-id="VXU67jCcwBghP21gY4U6nU">both</b> en and zh. <code data-page-node-id="rATW7JUU97zeO4lGYwaCHY">translate()</code> falls back to en; no unresolved-key gaps found.</div>
+</div>
+
+<!-- ============================ REMOVED MODULES ============================ -->
+<h2 data-page-node-id="Upar0cBGvnOkq97OFbx0hp">19 · Removed Modules (clean deletion)</h2>
+<div class="item" data-page-node-id="W5elfc0TMBbfDslx4pkv3i">
+  <div class="top" data-page-node-id="YPInxYpgy109LuaTOKNuEC"><span class="badge pass" data-page-node-id="VbgjBS2dkNBHdoCChtbZlF">Pass</span><span class="name" data-page-node-id="NNBghYJrv2FEhxVbP3gA3P">/underwrite, /compliance, /ask-cv fully removed</span></div>
+  <div class="ev" data-page-node-id="vH9TsTQIfCSH5omgR8J1Vl">12 files deleted (route folders <code data-page-node-id="FEgGUELPNxsL3iZpljjhCA">src/app/{underwrite,compliance,ask-cv}/</code>, components <code data-page-node-id="eUPpZkhwrjjgGWtFMS0vUr">src/components/{underwrite,compliance,ask-cv}/</code>, libs <code data-page-node-id="aUHIYyux2DCHIqX1YgG7gx">src/lib/{underwrite,compliance,cv}.ts</code>, images <code data-page-node-id="L8EVpw9xWp7xCUhlSSjUrW">public/projects/{underwrite,compliance,ask-cv}.png</code>) and backed up to <code data-page-node-id="tZHSKzLSI3BfEKovdoVSdv">.workbuddy/backup/removed-modules-2026-09-04/</code>. No import or link to them remains anywhere in <code data-page-node-id="LlCnyorFVi44ZhCKFUQ93I">src</code> (grep clean). Their i18n keys were removed from both dictionaries; not in the build, sitemap, or llms.txt.</div>
+</div>
+
+<!-- ============================ CODE ERRORS ============================ -->
+<h2 data-page-node-id="S22mb5Kg8VBWcLYn3ZpIeH">20 · Outstanding Code Errors / Bugs</h2>
+<div class="item" data-page-node-id="TlK27LFCQp0kFQfiH3tHEF">
+  <div class="top" data-page-node-id="5ShmevbASt32IbEZrKDU53"><span class="badge pass" data-page-node-id="onNLKFnfTFqHl0OUmMIOJC">Pass</span><span class="name" data-page-node-id="kgbKx5HZA1gF03j8angkJM">None</span></div>
+  <div class="ev" data-page-node-id="tQEwfVTOdAfs9QfpWea3Ld"><code data-page-node-id="vAt0WT2GCwAvTcKTgIgd3K">tsc --noEmit</code> clean; production build clean; a project-wide grep for the removed module/route names returns only legitimate prose ("compliance-heavy fintech", "demos" inside <code data-page-node-id="LGBMgLlHrtjtblS5AtoKr1">ideasWallBody</code>). The stale generated-types issue from earlier deletions is resolved. The only functional risks this cycle (orphaned studio routes, dead links, PII exposure on /contact) were all addressed.</div>
+</div>
+
+<!-- ============================ HOUSEKEEPING ============================ -->
+<h2 data-page-node-id="ePafEodJfDJzW9dj0Y09lx">21 · Housekeeping (non-blocking)</h2>
+<div class="item" data-page-node-id="yv13TCj2EOtArnHYeQTvQL">
+  <div class="top" data-page-node-id="2p2JBEYLAfRehpFYjHDi4Z"><span class="badge info" data-page-node-id="Pvi0EstYDlc812yFUkMqZ0">Info</span><span class="name" data-page-node-id="gMsq8Aw7cbf3YfWh5weayL">Minor clutter — safe to leave, tidy before deploy if desired</span></div>
+  <div class="ev" data-page-node-id="pX03PymwXHbirNW4voT0zD">• Unreferenced static assets remain in <code data-page-node-id="Wz0weNwzNMQB2PTpB7Rp0H">public/projects/</code>: <code data-page-node-id="KUqqLvjr9BA1lABew7PhyQ">asr-studio.png</code>, <code data-page-node-id="c6A1rJpvBHQOEhgQ3L0FLb">rag-search.png</code>, <code data-page-node-id="TZVNuu3O0hCco23Nd2V8EU">tts-studio.png</code>, <code data-page-node-id="ZJ7ZT8XHzSA0mLDF7EWRpI">voice-ops.png</code> (the /projects cards for those were removed; studios are now embedded in /ailab). Harmless but add deploy weight.
+• <code data-page-node-id="ejZcE0OddNkJ2OEXqH4sYg">src/lib/cv-data.old.ts.bak</code> is a backup file left in <code data-page-node-id="gdOpeZ7nBFVOutpsEX9Bb5">src/lib</code> (not imported, ignored by tsc, but it does carry a <code data-page-node-id="LA8ooLmmaFXyY7N7eTej1K">linkedin</code> value — delete it to avoid confusion).
+• Two root <code data-page-node-id="ECLcK0zkJ7kCZ9BhjsqeM2">.zip</code> files (<code data-page-node-id="vb3suacnZ6nmMRZBNV74gp">shakya-work-08-28-reverted.zip</code>, <code data-page-node-id="0764V8NbziZNyD8lJbTjs7">shakya-work-seo-fixed.zip</code>) sit in the deploy root; they upload to Vercel but are never served. Consider <code data-page-node-id="O0ja0z5L6VveFYU2xZd3CU">.gitignore</code>-ing or removing them.
+• <code data-page-node-id="0BoNrUAwsQEgPsyJTH6Dzu">/cv</code> still renders a LinkedIn link via <code data-page-node-id="zPde4eA8LJwaZBVSyKraFe">src/lib/cv-data.ts</code> + <code data-page-node-id="MQl1JZ7mU0DOhs7ImieUfK">CvContent.tsx</code>. This is <b data-page-node-id="27GMyPVNo1sNe0assLIuuw">behind the access gate</b> (not publicly crawlable/leaked), but it is inconsistent with the /contact cleanup. Optional: blank out <code data-page-node-id="qfR1ADU4WOGSzTazhXVCmz">cv-data.ts</code> <code data-page-node-id="rWqycGGJSUY8IZ4q5S9Sjk">contacts.linkedin</code> if you want LinkedIn gone site-wide.</div>
+</div>
+
+<!-- ============================ APPLIED CHANGES ============================ -->
+<h2 data-page-node-id="UbLVTqAahm7R3sS0zAsAu5">All Changes Applied This Round (deploy-ready)</h2>
+<div class="applied" data-page-node-id="revTMaXwpGgq2DtdzKENhN">
+  <h3 data-page-node-id="5Ey8yT7PTkaGVk11DzUoY4">✓ AI Lab reorg — TTS/ASR/RAG/Voice Ops on /ailab</h3>
+  <div class="ev" data-page-node-id="vXp9oZDspmeOVhLOXm531X">Created <code data-page-node-id="uPjsyw4PIZyfM3NFc1svyp">src/components/ailab/LiveModules.tsx</code> (tabbed, hash-deep-linkable, state-preserving). Added the <code data-page-node-id="AKHigNUemEMP7kOfs6Ub1w">#live-modules</code> section to <code data-page-node-id="7x1DuPLZsyrU6MZl1IClDg">src/app/ailab/page.tsx</code>. Converted <code data-page-node-id="Ejf7UPcVfmLe80qmMhfhHT">/tts</code>, <code data-page-node-id="QSQ6qolbDWve8WRCRuA6eA">/asr</code>, <code data-page-node-id="SQxBOuYlCPw3Y4EPB8HQh5">/rag</code>, <code data-page-node-id="6UKSsvIcF3q1fa909e3oGg">/voiceops</code> into <code data-page-node-id="RX51gVnwX6RAE2myHYIRzQ">redirect("/ailab")</code> stubs. Added <code data-page-node-id="63wV2X1EVBu6BYCp1hAJuH">ailab.liveTitle</code> / <code data-page-node-id="5QVEcZhkacNeV7RUUVmrEZ">ailab.liveBody</code> (en+zh).</div>
+  <h3 data-page-node-id="9ZfPwadCG95jd46GeEpcHY">✓ Removed /underwrite, /compliance, /ask-cv</h3>
+  <div class="ev" data-page-node-id="QljZ0qbgaGqL4FBF1gQ1Oj">Deleted 12 files (backed up to <code data-page-node-id="iVe6R860SHJBPMPGCzfBaZ">.workbuddy/backup/removed-modules-2026-09-04/</code>). Removed all i18n keys, links, sitemap entries and images. Stale generated types cleared.</div>
+  <h3 data-page-node-id="nvCy7Eb7vETa0TpcgHaMxc">✓ /projects — dropped TTS/ASR/RAG/VoiceOps cards</h3>
+  <div class="ev" data-page-node-id="T65d3v8WtVCB1eFxh5vd0w"><code data-page-node-id="9hH7ik1sllcaToqomTjRAO">src/app/projects/page.tsx</code> now lists only <code data-page-node-id="MY8N2CnoEiQPrQAZfG847w">trading</code> and <code data-page-node-id="in7CbyAureQLPZF6o0I1uV">wt</code>.</div>
+  <h3 data-page-node-id="PIyJhSZrPojG2jcvxETxQH">✓ /contact — removed shakya@dyna.ai + LinkedIn</h3>
+  <div class="ev" data-page-node-id="bBzgWvRvgXISGtZ07AYrNu"><code data-page-node-id="2SftZXHBZwOlY9xrecv9Pq">schema.ts</code> <code data-page-node-id="5ZbcRAetZtZ0HdxkdEnxwq">emailAliases</code> → <code data-page-node-id="qglISvRF13QFLNOmrvgiHQ">["shakya@agent.qq.com"]</code>, <code data-page-node-id="RJO05jH43itDnBXEttzmaS">linkedin: ""</code>; <code data-page-node-id="i4Da02ZUct3tnr1rXT9sor">.data/settings.json</code> updated; LinkedIn channel removed from <code data-page-node-id="46yC9jQMtL35xb15ed9l2x">/contact</code> and <code data-page-node-id="9YBhLu7AqDLOdOG7xY7deF">/contact/vip</code>; LinkedIn label removed from both dictionaries.</div>
+  <h3 data-page-node-id="lIaKwHbbnPtMtXXRS1zivh">✓ /ideas — new Blog section</h3>
+  <div class="ev" data-page-node-id="FccVkNd9zSEA4FL5YuJcl9">Six bilingual article/news cards added after the ideas grid; keys <code data-page-node-id="557FtQsWmMdit6fe0HHjIW">ideas.blogTitle/blogBody/blogArticle/blogNews</code> (en+zh).</div>
+  <h3 data-page-node-id="bbFzvFsn8zcmV2F7aFqAqs">✓ /ailab — Demos removed, 2 coming-soon</h3>
+  <div class="ev" data-page-node-id="keb5uWunUHNXNFygr3Ebjt">Deleted <code data-page-node-id="WmsYGX3IJ3KYzqzrGFy4Id">/ailab/demos</code> route (backed up); removed its card from the wall; set coming-soon count to exactly 2; removed <code data-page-node-id="VU2wvowI6E2xApDASR3dIP">demos*</code> i18n keys.</div>
+</div>
+
+<!-- ============================ OPEN DECISIONS ============================ -->
+<h2 data-page-node-id="BjDd2rukACSRFSQ4nX3C7B">Open Decisions (need your call)</h2>
+<div class="open" data-page-node-id="aDHymOnK761CTdRSr2SEgi">
+  <h3 data-page-node-id="pdi0e3vxE6tKIuBFsNusC4">① LinkedIn on /cv — RESOLVED</h3>
+  <div class="ev" data-page-node-id="rxJoAhIG3AetCGFwhQChsa"><span class="badge pass" data-page-node-id="Xlvq7sgEHMhGDBMUDHxfvN">Done</span> Removed this pass using the same pattern as /contact: <code data-page-node-id="j1jd53aVA3kgOj0BtR8IaO">cv-data.ts</code> <code data-page-node-id="BKTnIim6MsW2j4Bl3fWRZj">contacts.linkedin</code> set to <code data-page-node-id="DcUuwTFJpBAoukm1WWNyHd">""</code> and <code data-page-node-id="tbowWYCVHhIMFLsvdWzm1S">CvContent.tsx</code> now skips the row when the value is empty (no broken <code data-page-node-id="ZQYdSipOhTNuIuuX5jwgmW">https://</code> link). Behind the vault gate the CV now shows no LinkedIn. Site-wide LinkedIn removal is complete.</div>
+  <h3 data-page-node-id="7k0Z4t9ctCtadJZdN3ixgp">② Pre-deploy housekeeping — partially done</h3>
+  <div class="ev" data-page-node-id="HAEPq6xzO2Zft7VF1yiW0q">Removed (and backed up to <code data-page-node-id="pSM5e6HR1iQI5FBH4ARCWA">.workbuddy/backup/removed-housekeeping-2026-09-04/</code>): the four orphaned <code data-page-node-id="dRigbQV7mX3xnUHkT3Xs9w">public/projects/*.png</code> screenshots and <code data-page-node-id="eYU6wKHkGA2xXGU1wTiiQJ">src/lib/cv-data.old.ts.bak</code>. <b data-page-node-id="1JFNQbMJGlUrPQbHvDOVvj">Left in place:</b> the two root <code data-page-node-id="7AE3ReqGSPL2djGV8EPsax">.zip</code> files (<code data-page-node-id="gDJLtLLYNpHAx6CFCV8Eda">shakya-work-08-28-reverted.zip</code>, <code data-page-node-id="emunqmu1dkWF0OCYseoZ8Q">shakya-work-seo-fixed.zip</code>) per the standing convention — recommend adding them to <code data-page-node-id="KT9Hqa2rJq5ECpSaGpXYHV">.gitignore</code> so they don't upload to Vercel. Only <code data-page-node-id="MsmQ6hIObWVTn2wIycKdvE">public/projects/unified-trading-analysis.png</code> (used by /projects) remains.</div>
+</div>
+
+<footer data-page-node-id="nyeySuYMa6p41hJ7Xht70p">
+Generated by nxt · shakya.work pre-deployment audit · regenerated 2026-09-04 (replaces the 2026-09-02/03 version, which predated the AI Lab reorg, module removals, /contact cleanup, /ideas Blog and /ailab Demos changes).
+All 21 audit areas PASS, 0 FAIL, 0 WARN. Production build green (42 routes). Changes intentionally left uncommitted for the user's deployment and the concurrent agent.
+</footer>
+</div>
+</body>
+</html>

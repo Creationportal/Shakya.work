@@ -13,7 +13,6 @@ const PUBLIC_ROUTES: { path: string; priority?: number; changeFrequency?: string
   { path: "/ailab/ai-rnd", priority: 0.6 },
   { path: "/ailab/projects", priority: 0.7 },
   { path: "/ailab/agents", priority: 0.6 },
-  { path: "/ailab/demos", priority: 0.7 },
   { path: "/ideas/agent-operation-flow", priority: 0.6 },
   { path: "/ailab/simulation", priority: 0.7 },
   { path: "/projects", priority: 0.8 },

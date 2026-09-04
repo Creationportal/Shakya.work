@@ -21,7 +21,7 @@ export default async function VipContactPage() {
   const t = (k: string) => translate(k, lang);
   const settings = getSettings();
 
-  const { emailPrimary, emailSecondary, linkedin, phone, wechat, github } =
+  const { emailPrimary, emailSecondary, phone, wechat, github } =
     settings.contact;
 
   const channels = [
@@ -31,13 +31,6 @@ export default async function VipContactPage() {
       lines: [emailPrimary, emailSecondary],
       notes: [t("vip.emailPrimaryNote"), t("vip.emailSecondaryNote")],
       href: `mailto:${emailPrimary}`,
-    },
-    {
-      icon: "linkedin" as const,
-      label: t("vip.linkedinLabel"),
-      lines: [linkedin.replace(/^https?:\/\/(www\.)?/, "")],
-      notes: [t("vip.linkedinNote")],
-      href: linkedin,
     },
     {
       icon: "phone" as const,

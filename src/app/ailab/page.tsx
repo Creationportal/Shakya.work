@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PageIntro from "@/components/PageIntro";
+import LiveModules from "@/components/ailab/LiveModules";
 import { getLang, translate } from "@/lib/i18n/server";
 import { pageMeta } from "@/lib/seo";
 
@@ -34,11 +35,6 @@ export default async function AilabPage() {
       href: "/ailab/agents",
       desc: t("agents.description"),
     },
-    {
-      title: t("ailab.demosTitle"),
-      href: "/ailab/demos",
-      desc: t("ailab.demosBody"),
-    },
   ];
 
   return (
@@ -48,6 +44,17 @@ export default async function AilabPage() {
         title={t("ailab.title")}
         description={t("ailab.description")}
       />
+
+      {/* AI R&D live modules — TTS, ASR, RAG and Voice Ops, all on this page */}
+      <section id="live-modules" className="mx-auto max-w-4xl px-5 pb-16">
+        <h2 className="text-lg font-semibold tracking-tight text-ink">
+          {t("ailab.liveTitle")}
+        </h2>
+        <p className="mt-2 text-sm text-muted">{t("ailab.liveBody")}</p>
+        <div className="mt-6">
+          <LiveModules />
+        </div>
+      </section>
 
       <section className="mx-auto max-w-6xl px-5 pb-12">
         <div className="grid gap-6 sm:grid-cols-3">
@@ -96,7 +103,7 @@ export default async function AilabPage() {
               </p>
             </div>
           </Link>
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: 2 }).map((_, i) => (
             <div
               key={i}
               className="rounded-md border border-line bg-paper p-4 text-sm text-muted"

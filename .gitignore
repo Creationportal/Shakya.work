@@ -39,6 +39,16 @@ yarn-error.log*
 # local request data (access requests)
 /.data
 
+# local snapshots / backups (not for deploy)
+/shakya-work-08-28-reverted.zip
+/shakya-work-seo-fixed.zip
+
+# agent working backups (contain deleted-source snapshots)
+/.workbuddy/backup/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# deploy prompt embeds live credentials — keep out of the repo
+/HERMES-DEPLOY-PROMPT.md

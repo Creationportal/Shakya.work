@@ -113,7 +113,7 @@ export const CV_DATA: CvData = {
     emailSecondary: "tangshakya@163.com",
     phone: "+86 16600045527",
     phoneAlt: "+977 9840804857",
-    linkedin: "linkedin.com/in/shakya-pranamya",
+    linkedin: "", // empty string = do not show (consistent with /contact)
     wechat: "Shakyain",
     bossZhipin: "Shakya唐仲禹",
     github: "github.com/Creationportal",

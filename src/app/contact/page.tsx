@@ -33,12 +33,6 @@ export default async function ContactPage() {
       href: "mailto:" + email,
       note: t("contact.emailNote"),
     })),
-    {
-      label: t("contact.linkedinLabel"),
-      value: settings.contact.linkedin.replace(/^https?:\/\/(www\.)?/, ""),
-      href: settings.contact.linkedin,
-      note: t("contact.linkedinNote"),
-    },
   ];
 
   return (
