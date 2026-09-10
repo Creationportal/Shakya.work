@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
+import { parseByotInput } from "@/lib/byot";
 
 /**
  * TTS engine — Fish.audio integration.
@@ -25,15 +26,24 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let body: { text?: string; voiceId?: string };
+  let body: { text?: string; voiceId?: string; byot?: unknown };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
+  // Visitor-supplied key (BYOT) — sanitized, used transiently, never stored.
+  const byot = parseByotInput(body.byot);
+  // Key precedence: per-request voiceId > saved BYOT voice > site env var.
+  const fishKey = byot.fish?.key || process.env.FISH_AUDIO_API_KEY;
+  const fishSource: "your-key" | "server" | "fallback" = byot.fish?.key
+    ? "your-key"
+    : process.env.FISH_AUDIO_API_KEY
+      ? "server"
+      : "fallback";
+
   const text = (body.text ?? "").toString();
-  const voiceId = (body.voiceId ?? "").toString().trim();
 
   if (!text.trim()) {
     return NextResponse.json({ error: "Please enter some text." }, { status: 400 });
@@ -51,18 +61,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Message too long." }, { status: 413 });
   }
 
-  const apiKey = process.env.FISH_AUDIO_API_KEY;
+  const apiKey = fishKey;
 
-  // Configurable token not supplied yet → caller uses browser TTS fallback.
+  // No key at all → caller uses browser TTS fallback.
   if (!apiKey) {
     return NextResponse.json({
       ok: true,
       configured: false,
       audio: null,
       engine: "browser-tts",
+      source: fishSource,
       chars: text.length,
       message:
-        "Fish.audio API key not configured — using browser TTS fallback. Set FISH_AUDIO_API_KEY to enable studio-quality voice.",
+        "No Fish.audio API key — using browser TTS fallback. Add your own key under “Bring your own token” on the AI Lab page, or set FISH_AUDIO_API_KEY.",
     });
   }
 
@@ -72,6 +83,7 @@ export async function POST(req: NextRequest) {
       format: "mp3",
       mp3_bitrate: 128,
     };
+    const voiceId = (body.voiceId ?? "").toString().trim() || byot.fish?.voiceId || process.env.FISH_AUDIO_VOICE_ID;
     if (voiceId) ttsBody.reference_id = voiceId;
 
     const res = await fetch("https://api.fish.audio/v1/tts", {
@@ -91,6 +103,7 @@ export async function POST(req: NextRequest) {
         configured: true,
         audio: null,
         engine: "browser-tts",
+        source: fishSource,
         chars: text.length,
         message: `Fish.audio request failed (${res.status}). Falling back to browser TTS.`,
       });
@@ -102,6 +115,7 @@ export async function POST(req: NextRequest) {
       configured: true,
       audio: `data:audio/mp3;base64,${buf.toString("base64")}`,
       engine: "fish-audio",
+      source: fishSource,
       chars: text.length,
     });
   } catch (err) {
@@ -111,6 +125,7 @@ export async function POST(req: NextRequest) {
       configured: true,
       audio: null,
       engine: "browser-tts",
+      source: fishSource,
       chars: text.length,
       message: "Fish.audio request error. Falling back to browser TTS.",
     });

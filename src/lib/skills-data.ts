@@ -73,6 +73,7 @@ export const SKILLS: SkillCategory[] = [
       { name: "Diandian Data", icon: "diandian.ico" },
       { name: "ThinkingData", icon: "thinkingdata.ico" },
       { name: "Tableau", icon: "tableau.ico" },
+      { name: "SellerSprite", icon: "sellersprite.svg" },
       { name: "Power BI" },
     ],
   },

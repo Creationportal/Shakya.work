@@ -123,12 +123,12 @@ export default async function IdeasPage() {
             date: "2026-09-04",
             href: "/ailab",
             title: {
-              en: "AI Lab refresh — TTS, ASR, RAG and Voice Ops live in one place",
-              zh: "AI 实验室改版——TTS、ASR、检索与语音运营汇聚一处",
+              en: "AI Lab refresh — TTS, ASR and RAG live in one place",
+              zh: "AI 实验室改版——TTS、ASR 与检索汇聚一处",
             },
             body: {
-              en: "The four R&D studios are now embedded directly on the AI Lab page — try them without leaving it.",
-              zh: "四个研发工作室已直接嵌入 AI 实验室页面——无需跳转即可体验。",
+              en: "The three R&D studios are now embedded directly on the AI Lab page — try them without leaving it.",
+              zh: "三个研发工作室已直接嵌入 AI 实验室页面——无需跳转即可体验。",
             },
           },
           {

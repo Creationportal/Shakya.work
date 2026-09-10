@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
+import { parseByotInput, type ByotChat, type ByotFish } from "@/lib/byot";
 
 const MAX_LEN = 2000;
 
@@ -19,14 +20,22 @@ Keep answers under 60 words. Never invent prices, timelines or credentials.`;
 interface LlmResult {
   reply: string;
   used: boolean;
+  source: "your-key" | "server" | "fallback";
 }
 
 /**
- * Calls an OpenAI-compatible chat endpoint when LLM_API_KEY is configured.
- * Falls back to a short persona blurb so the demo still "speaks" without a key.
+ * Calls an OpenAI-compatible chat endpoint. Key precedence: the visitor's own
+ * key (BYOT, passed transiently in the request body) → the site's
+ * LLM_API_KEY env var. Falls back to a short persona blurb so the demo still
+ * "speaks" without any key. BYOT keys are used in-memory only — never
+ * persisted, logged, or echoed back.
  */
-async function generateReply(userText: string, lang: string): Promise<LlmResult> {
-  const apiKey = process.env.LLM_API_KEY;
+async function generateReply(
+  userText: string,
+  lang: string,
+  byotChat?: ByotChat
+): Promise<LlmResult> {
+  const apiKey = byotChat?.key || process.env.LLM_API_KEY;
   if (!apiKey) {
     return {
       reply:
@@ -34,12 +43,16 @@ async function generateReply(userText: string, lang: string): Promise<LlmResult>
           ? "你好，我是 nxt，Shakya.work 的 AI 助手。我可以介绍我们的 AI 语音代理、企业搜索、销售 AI 与债务催收 AI 等产品。请配置 LLM 密钥以启用实时对话。"
           : "Hi, I'm nxt, the AI assistant for Shakya.work. I can talk about our AI Voice Agent, Enterprise Search, Sales AI and Debt Collection AI. Configure an LLM key to enable live chat.",
       used: false,
+      source: "fallback",
     };
   }
+  const source: LlmResult["source"] = byotChat?.key ? "your-key" : "server";
   try {
     const url =
-      process.env.LLM_API_URL || "https://api.openai.com/v1/chat/completions";
-    const model = process.env.LLM_MODEL || "gpt-4o-mini";
+      byotChat?.url ||
+      process.env.LLM_API_URL ||
+      "https://api.openai.com/v1/chat/completions";
+    const model = byotChat?.model || process.env.LLM_MODEL || "gpt-4o-mini";
     const messages: ChatMessage[] = [
       { role: "system", content: SYSTEM_PROMPT },
       { role: "user", content: userText },
@@ -56,12 +69,13 @@ async function generateReply(userText: string, lang: string): Promise<LlmResult>
     const data = await res.json();
     const text: string = data?.choices?.[0]?.message?.content?.trim() ?? "";
     if (!text) throw new Error("empty LLM response");
-    return { reply: text, used: true };
+    return { reply: text, used: true, source };
   } catch (err) {
     console.warn("[voice-agent] LLM failed:", err);
     return {
       reply: "Sorry — the language model is temporarily unavailable. Please try again shortly.",
       used: false,
+      source,
     };
   }
 }
@@ -72,20 +86,24 @@ interface TtsResult {
 }
 
 /**
- * Synthesizes speech via Fish Audio when FISH_AUDIO_API_KEY is set; the returned
- * audio is a base64 data URL the client can play directly. On any failure we
- * return null so the client falls back to the browser SpeechSynthesis API.
+ * Synthesizes speech via Fish Audio. Key precedence: the visitor's own BYOT
+ * key (transient, in-memory) → the site's FISH_AUDIO_API_KEY env var. On any
+ * failure we return null so the client falls back to browser SpeechSynthesis.
  */
-async function synthesize(text: string): Promise<TtsResult> {
-  const apiKey = process.env.FISH_AUDIO_API_KEY;
-  if (!apiKey) return { audio: null, engine: "browser-tts" };
+async function synthesize(
+  text: string,
+  byotFish?: ByotFish
+): Promise<TtsResult & { source: "your-key" | "server" | "browser" }> {
+  const apiKey = byotFish?.key || process.env.FISH_AUDIO_API_KEY;
+  if (!apiKey) return { audio: null, engine: "browser-tts", source: "browser" };
+  const source: "your-key" | "server" = byotFish?.key ? "your-key" : "server";
   try {
     const body: Record<string, unknown> = {
       text,
       format: "mp3",
       mp3_bitrate: 128,
     };
-    const voiceId = process.env.FISH_AUDIO_VOICE_ID;
+    const voiceId = byotFish?.voiceId || process.env.FISH_AUDIO_VOICE_ID;
     if (voiceId) body.reference_id = voiceId;
 
     const res = await fetch("https://api.fish.audio/v1/tts", {
@@ -101,10 +119,11 @@ async function synthesize(text: string): Promise<TtsResult> {
     return {
       audio: `data:audio/mp3;base64,${buf.toString("base64")}`,
       engine: "fish-audio",
+      source,
     };
   } catch (err) {
     console.warn("[voice-agent] Fish Audio failed:", err);
-    return { audio: null, engine: "browser-tts" };
+    return { audio: null, engine: "browser-tts", source: "browser" };
   }
 }
 
@@ -117,12 +136,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let body: { text?: string; lang?: string };
+  let body: { text?: string; lang?: string; byot?: unknown };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
+
+  // Visitor-supplied keys (BYOT) — sanitized, used transiently, never stored.
+  const byot = parseByotInput(body.byot);
 
   const text = (body.text ?? "").toString().trim();
   const lang = (body.lang ?? "en").toString().trim();
@@ -133,8 +155,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Message too long." }, { status: 413 });
   }
 
-  const { reply, used: llmUsed } = await generateReply(text, lang);
-  const { audio, engine } = await synthesize(reply);
+  const { reply, used: llmUsed, source: llmSource } = await generateReply(text, lang, byot.chat);
+  const { audio, engine, source: ttsSource } = await synthesize(reply, byot.fish);
 
   return NextResponse.json({
     reply,
@@ -142,5 +164,7 @@ export async function POST(req: NextRequest) {
     lang,
     engine, // "fish-audio" | "browser-tts"
     llmUsed,
+    llmSource, // "your-key" | "server" | "fallback"
+    ttsSource, // "your-key" | "server" | "browser"
   });
 }

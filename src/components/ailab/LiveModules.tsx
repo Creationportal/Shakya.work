@@ -4,16 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import TtsStudio from "@/components/tts/TtsStudio";
 import AsrStudio from "@/components/asr/AsrStudio";
 import RagStudio from "@/components/rag/RagStudio";
-import VoiceOpsStudio from "@/components/voice-ops/VoiceOpsStudio";
+import ByotPanel from "@/components/ailab/ByotPanel";
 import { useTranslation } from "@/lib/i18n";
 
 /**
- * LiveModules — the four AI R&D studios (TTS+, ASR+, RAG+, Voice Ops)
+ * LiveModules — the three AI R&D studios (TTS+, ASR+, RAG+)
  * embedded directly on the AI Lab page as one tabbed section. All studios
  * stay mounted so in-progress state (typed text, transcript, inputs)
  * survives tab switches; the inactive ones are hidden via CSS.
  *
- * Deep links: /ailab#live-tts | #live-asr | #live-rag | #live-voiceops
+ * Deep links: /ailab#live-tts | #live-asr | #live-rag
  * preselect the matching tab and scroll the section into view.
  */
 
@@ -21,12 +21,6 @@ const MODULES = [
   { id: "tts", titleKey: "tts.title", descKey: "tts.description", hash: "live-tts" },
   { id: "asr", titleKey: "asr.title", descKey: "asr.description", hash: "live-asr" },
   { id: "rag", titleKey: "rag.title", descKey: "rag.description", hash: "live-rag" },
-  {
-    id: "voiceops",
-    titleKey: "voiceops.title",
-    descKey: "voiceops.description",
-    hash: "live-voiceops",
-  },
 ] as const;
 
 type ModuleId = (typeof MODULES)[number]["id"];
@@ -50,6 +44,11 @@ export default function LiveModules() {
 
   return (
     <div ref={sectionRef} className="scroll-mt-24 rounded-xl border border-line bg-surface">
+      {/* BYOT — visitors can bring their own provider keys to unlock live AI */}
+      <div className="border-b border-line px-2 pt-2 sm:px-3">
+        <ByotPanel />
+      </div>
+
       {/* Tab bar */}
       <div
         className="flex flex-wrap gap-1 border-b border-line p-2"
@@ -94,7 +93,6 @@ export default function LiveModules() {
             {m.id === "tts" && <TtsStudio />}
             {m.id === "asr" && <AsrStudio />}
             {m.id === "rag" && <RagStudio />}
-            {m.id === "voiceops" && <VoiceOpsStudio />}
           </div>
         ))}
       </div>

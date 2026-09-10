@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { withByot } from "@/lib/byot";
 
 /**
  * TtsStudio — the client UI for the Fish.audio text-to-speech engine.
@@ -46,7 +47,7 @@ export default function TtsStudio() {
       const res = await fetch("/api/tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: t, voiceId: voiceId.trim() }),
+        body: JSON.stringify(withByot({ text: t, voiceId: voiceId.trim() })),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -54,6 +55,7 @@ export default function TtsStudio() {
         return;
       }
       setEngine(data.engine ?? "");
+      if (data.source === "your-key") setInfo("✓ Using your own key");
       if (data.audio) {
         setAudioUrl(data.audio as string);
         if (audioRef.current) {

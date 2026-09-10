@@ -39,12 +39,6 @@ export default async function AiProjectsPage() {
       body: t("projects.ttsBody"),
     },
     {
-      href: "/ailab#live-voiceops",
-      label: t("ailab.labelOps"),
-      title: t("projects.voiceopsTitle"),
-      body: t("projects.voiceopsBody"),
-    },
-    {
       href: "/ailab/simulation",
       label: t("ailab.simulationLabel"),
       title: t("ailab.simulationTitle"),

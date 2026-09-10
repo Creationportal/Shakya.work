@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { withByot } from "@/lib/byot";
 
 type Lang = "en" | "zh" | "yue" | "es" | "ne";
 
@@ -60,7 +61,7 @@ export default function VoiceAgent() {
       const res = await fetch("/api/voice-agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, lang }),
+        body: JSON.stringify(withByot({ text, lang })),
       });
       const data = await res.json();
       if (!res.ok) {

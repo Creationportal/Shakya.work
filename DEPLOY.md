@@ -61,6 +61,10 @@ These are **server-only** — never shipped to the browser. The site degrades gr
 | `FISH_AUDIO_API_KEY` (+ `FISH_AUDIO_VOICE_ID`) | Real Fish Audio voice synthesis (`/api/tts`, `/api/voice-agent`) | Free browser SpeechSynthesis |
 | `EMBEDDING_API_KEY` (+ `EMBEDDING_API_URL`, `EMBEDDING_MODEL`) | Vector retrieval in the RAG demo (`/api/rag`) | BM25 keyword retrieval |
 
+## BYOT — visitors bring their own tokens (no env needed)
+
+The AI Lab's "Bring your own token (BYOT)" panel (`src/components/ailab/ByotPanel.tsx`) lets visitors paste **their own** OpenAI-compatible chat key and/or Fish Audio key to unlock the live demos at zero cost to the site. Keys are stored only in the visitor's localStorage, sent with their own demo requests (`byot` field in the JSON body), sanitized + used transiently in-memory by `/api/tts` and `/api/voice-agent`, and never persisted, logged, or echoed back. Key precedence everywhere: visitor key → site env var → browser/demo fallback. Requires no env vars and no configuration — it ships enabled.
+
 ## Durable contact / access-request storage (optional)
 
 `/api/contact` and `/api/access-request` persist best-effort to disk and **never 500** on a read-only filesystem. For durable storage, link a **Vercel KV** store to the project (Dashboard → Storage → Create / Link). This injects `KV_REST_API_URL` + `KV_REST_API_TOKEN`; `src/lib/kv.ts` picks it up automatically and `rpush`s messages/requests. No code change needed. Free tier (300K reads / 100K writes per day) is ample for a portfolio.

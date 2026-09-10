@@ -45,7 +45,7 @@ export default async function AilabPage() {
         description={t("ailab.description")}
       />
 
-      {/* AI R&D live modules — TTS, ASR, RAG and Voice Ops, all on this page */}
+      {/* AI R&D live modules — TTS, ASR and RAG, all on this page */}
       <section id="live-modules" className="mx-auto max-w-4xl px-5 pb-16">
         <h2 className="text-lg font-semibold tracking-tight text-ink">
           {t("ailab.liveTitle")}

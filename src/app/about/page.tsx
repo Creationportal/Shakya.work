@@ -51,10 +51,6 @@ export default async function AboutPage() {
               <p className="text-base leading-relaxed sm:text-lg">
                 {t("about.introP1")}
               </p>
-              <p className="text-base leading-relaxed">{t("about.introP2")}</p>
-              <p className="text-base leading-relaxed">{t("about.introP3")}</p>
-              <p className="text-base leading-relaxed">{t("about.introP4")}</p>
-              <p className="text-base leading-relaxed">{t("about.introP5")}</p>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-4">
