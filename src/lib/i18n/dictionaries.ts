@@ -73,6 +73,12 @@ export const en: I18nDictionary = {
     achievementsTitle: "Credentials & distinctions",
     achievementsBody:
       "A few signals of the standards I hold myself to — from professional certifications to academic honors and language fluency.",
+    achievementItem1: "PMP-certified project manager (PMI).",
+    achievementItem2:
+      "MSc in Computer Science, Beihang University; BSc in Software Engineering.",
+    achievementItem3: "Fluent in English, Chinese and Nepali.",
+    achievementItem4:
+      "0-to-1 product launches across fintech and enterprise AI.",
     businessEyebrow: "Business",
     businessTitle: "Business involvement",
     businessBody:
@@ -153,9 +159,9 @@ export const en: I18nDictionary = {
     wtTitle: "WT",
     wtBody:
       "Weight milestone tracker. Set a start and goal, plan your weekly burn, and watch the whole journey break into milestones — with body-fat, BMI and waist estimated from gender, height and weight.",
-    wtStatus: "Live",
-    openWt: "Open WT",
-    wtPlaceholder: "Live demo — open to explore",
+    wtStatus: "Gated",
+    openWt: "Request access",
+    wtPlaceholder: "Demo available on request",
     ttsTitle: "TTS+",
     ttsBody:
       "A Fish.audio-powered text-to-speech studio — type text and hear natural voice on the free tier.",
@@ -295,6 +301,8 @@ export const en: I18nDictionary = {
     emailLabel: "Email",
     emailValue: "creationpanel@gmail.com",
     emailNote: "For project inquiries and opportunities.",
+    emailSecondaryLabel: "Email — secondary",
+    emailAliasLabel: "Email — alias",
     formTitle: "Or send a note",
     namePlaceholder: "Your name",
     emailPlaceholder: "Your email",
@@ -513,6 +521,7 @@ export const en: I18nDictionary = {
   voiceGuide: {
     pillLabel: "AI Guide",
     title: "AI Guide",
+    openAria: "Open AI guide",
     guideTab: "Guide",
     newsTab: "News",
     notGenerated: "Not generated yet",
@@ -523,6 +532,14 @@ export const en: I18nDictionary = {
     pause: "Pause",
     minimize: "Minimize",
     selectLanguage: "Language",
+  },
+  voiceAgent: {
+    openAria: "Open voice agent",
+    closeAria: "Close",
+    title: "nxt · Voice Agent",
+    hint: "Ask about our AI Voice Agent, Enterprise Search, Sales AI, Debt Collection AI, or the Office Live Twin.",
+    inputPlaceholder: "Type a message…",
+    send: "Send",
   },
   trading: {
     eyebrow: "Trading",
@@ -662,6 +679,10 @@ export const zh: I18nDictionary = {
     achievementsTitle: "资质与荣誉",
     achievementsBody:
       "我为自己设定的高标准的一些证明——从职业认证、学术荣誉到语言能力。",
+    achievementItem1: "PMP 认证项目管理专业人士（PMI）。",
+    achievementItem2: "北京航空航天大学计算机科学硕士，软件工程学士。",
+    achievementItem3: "熟练使用英语、中文和尼泊尔语。",
+    achievementItem4: "多个金融科技与企业级 AI 产品完成从 0 到 1 落地。",
     businessEyebrow: "商业",
     businessTitle: "商业参与",
     businessBody: "我如何参与产品、合作以及塑造它们的社群。",
@@ -736,9 +757,9 @@ export const zh: I18nDictionary = {
     wtTitle: "WT",
     wtBody:
       "体重里程碑追踪器：设定起点与目标、规划每周减重，整个旅程会自动拆解为里程碑——并根据性别、身高与体重估算体脂率、BMI 和腰围。",
-    wtStatus: "已上线",
-    openWt: "打开 WT",
-    wtPlaceholder: "在线演示 — 点击进入体验",
+    wtStatus: "需访问码",
+    openWt: "申请权限",
+    wtPlaceholder: "演示可按需申请",
     ttsTitle: "TTS+",
     ttsBody:
       "由 Fish.audio 驱动的文字转语音工作室——输入即生成自然语音，免费额度。",
@@ -876,6 +897,8 @@ export const zh: I18nDictionary = {
     emailLabel: "电子邮箱",
     emailValue: "creationpanel@gmail.com",
     emailNote: "适合项目咨询与合作机会。",
+    emailSecondaryLabel: "电子邮箱 — 备用",
+    emailAliasLabel: "电子邮箱 — 别名",
     formTitle: "或直接留言",
     namePlaceholder: "你的名字",
     emailPlaceholder: "你的邮箱",
@@ -1084,6 +1107,7 @@ export const zh: I18nDictionary = {
   voiceGuide: {
     pillLabel: "AI 导览",
     title: "AI 导览",
+    openAria: "打开 AI 导览",
     guideTab: "导览",
     newsTab: "资讯",
     notGenerated: "尚未生成",
@@ -1094,6 +1118,14 @@ export const zh: I18nDictionary = {
     pause: "暂停",
     minimize: "收起",
     selectLanguage: "语言",
+  },
+  voiceAgent: {
+    openAria: "打开语音助手",
+    closeAria: "关闭",
+    title: "nxt · 语音助手",
+    hint: "询问我们的 AI 语音助手、企业搜索、销售 AI、债务催收 AI 或 Office Live Twin。",
+    inputPlaceholder: "输入消息…",
+    send: "发送",
   },
   trading: {
     eyebrow: "交易",

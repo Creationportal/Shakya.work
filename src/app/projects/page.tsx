@@ -32,7 +32,7 @@ export default async function ProjectsPage() {
       key: "wt",
       title: t("projects.wtTitle"),
       body: t("projects.wtBody"),
-      href: "/wt",
+      href: "/vault",
       cta: t("projects.openWt"),
       badge: t("projects.wtStatus"),
     },

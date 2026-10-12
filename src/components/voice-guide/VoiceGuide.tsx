@@ -336,7 +336,7 @@ export default function VoiceGuide() {
       {/* Collapsed pill */}
       <button
         type="button"
-        aria-label="Open AI Guide"
+        aria-label={t("voiceGuide.openAria")}
         onClick={() => toggleOpen(true)}
         className="vg-pill"
       >
@@ -352,7 +352,7 @@ export default function VoiceGuide() {
 
       {/* Expanded card */}
       {open && (
-        <div className="vg-card" role="dialog" aria-label="AI Guide">
+        <div className="vg-card" role="dialog" aria-label={t("voiceGuide.title")}>
           <div className="vg-head">
             <div className="vg-title">
               {t("voiceGuide.title")}

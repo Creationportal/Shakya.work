@@ -26,14 +26,19 @@ export default async function ContactPage() {
     ...(settings.contact.emailAliases ?? []),
   ].filter((e): e is string => Boolean(e));
 
-  const CHANNELS = [
-    ...emails.map((email) => ({
-      label: t("contact.emailLabel"),
-      value: email,
-      href: "mailto:" + email,
-      note: t("contact.emailNote"),
-    })),
-  ];
+  // Each email gets a distinct label and a unique key — three cards all
+  // labelled "Email" read as a rendering duplication.
+  const CHANNELS = emails.map((email, i) => ({
+    label:
+      i === 0
+        ? t("contact.emailLabel")
+        : i === 1
+          ? t("contact.emailSecondaryLabel")
+          : t("contact.emailAliasLabel"),
+    value: email,
+    href: "mailto:" + email,
+    note: t("contact.emailNote"),
+  }));
 
   return (
     <div className="flex-1">
@@ -53,7 +58,7 @@ export default async function ContactPage() {
         <div className="grid gap-4 md:grid-cols-2">
           {CHANNELS.map((c) => (
             <Link
-              key={c.label}
+              key={c.value}
               href={c.href}
               target={c.href.startsWith("http") ? "_blank" : undefined}
               rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}

@@ -103,14 +103,6 @@ export default async function AilabPage() {
               </p>
             </div>
           </Link>
-          {Array.from({ length: 2 }).map((_, i) => (
-            <div
-              key={i}
-              className="rounded-md border border-line bg-paper p-4 text-sm text-muted"
-            >
-              {t("ailab.idea")} #{i + 2} — coming soon
-            </div>
-          ))}
         </div>
       </section>
     </div>

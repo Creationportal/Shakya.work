@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { withByot } from "@/lib/byot";
+import { useTranslation } from "@/lib/i18n";
 
 type Lang = "en" | "zh" | "yue" | "es" | "ne";
 
@@ -23,6 +24,7 @@ const SPEECH_CODE: Record<Lang, string> = {
 };
 
 export default function VoiceAgent() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [lang, setLang] = useState<Lang>("en");
   const [input, setInput] = useState("");
@@ -88,7 +90,7 @@ export default function VoiceAgent() {
     return (
       <button
         onClick={() => setOpen(true)}
-        aria-label="Open voice agent"
+        aria-label={t("voiceAgent.openAria")}
         className="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#7c3aed] text-white shadow-lg shadow-violet-900/30 transition hover:bg-[#6d28d9]"
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -105,11 +107,13 @@ export default function VoiceAgent() {
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-[#7c3aed]" />
-          <span className="text-sm font-semibold text-ink">nxt · Voice Agent</span>
+          <span className="text-sm font-semibold text-ink">
+            {t("voiceAgent.title")}
+          </span>
         </div>
         <button
           onClick={() => setOpen(false)}
-          aria-label="Close"
+          aria-label={t("voiceAgent.closeAria")}
           className="text-muted transition hover:text-ink"
         >
           ✕
@@ -132,10 +136,7 @@ export default function VoiceAgent() {
         {reply ? (
           <p>{reply}</p>
         ) : (
-          <p className="text-muted">
-            Ask about our AI Voice Agent, Enterprise Search, Sales AI, Debt
-            Collection AI, or the Office Live Twin.
-          </p>
+          <p className="text-muted">{t("voiceAgent.hint")}</p>
         )}
       </div>
 
@@ -149,7 +150,7 @@ export default function VoiceAgent() {
           }
         }}
         rows={2}
-        placeholder="Type a message…"
+        placeholder={t("voiceAgent.inputPlaceholder")}
         className="mt-2 w-full resize-none rounded-lg border border-line bg-paper p-2 text-sm text-ink outline-none focus:border-[#7c3aed]"
       />
 
@@ -166,7 +167,7 @@ export default function VoiceAgent() {
           disabled={busy || !input.trim()}
           className="rounded-lg bg-[#7c3aed] px-4 py-1.5 text-sm font-medium text-white transition hover:bg-[#6d28d9] disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {busy ? "…" : "Send"}
+          {busy ? "…" : t("voiceAgent.send")}
         </button>
       </div>
 

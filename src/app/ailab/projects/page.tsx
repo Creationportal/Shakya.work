@@ -19,7 +19,15 @@ export default async function AiProjectsPage() {
   const lang = await getLang();
   const t = (k: string) => translate(k, lang);
 
-  const CARDS = [
+  type Card = {
+    href: string;
+    label: string;
+    title: string;
+    body: string;
+    cta?: string;
+  };
+
+  const CARDS: Card[] = [
     {
       href: "/ailab#live-rag",
       label: t("ailab.labelRag"),
@@ -51,10 +59,13 @@ export default async function AiProjectsPage() {
       body: t("projects.tradingBody"),
     },
     {
-      href: "/wt",
+      href: "/vault",
       label: t("ailab.labelTracker"),
       title: t("projects.wtTitle"),
       body: t("projects.wtBody"),
+      // /wt is gated behind the vault access code — the CTA must not promise
+      // a live demo that ends at a login wall.
+      cta: t("vault.requestButton"),
     },
   ];
 
@@ -72,7 +83,7 @@ export default async function AiProjectsPage() {
             label={card.label}
             title={card.title}
             body={card.body}
-            cta={t("ailab.open")}
+            cta={card.cta ?? t("ailab.open")}
           />
         ))}
       </ProjectGrid>

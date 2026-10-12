@@ -17,10 +17,23 @@ export default async function SkillsPage() {
   const lang = await getLang();
   const t = (k: string) => translate(k, lang);
 
+  // The Technical card is intentionally hidden until it has real content —
+  // never ship empty "—" placeholder bullets.
   const GROUPS = [
-    { name: t("skills.technical"), items: ["—", "—", "—"] },
-    { name: t("skills.management"), items: ["Fintech PM", "AI PM", "—"] },
-    { name: t("skills.ecosystem"), items: ["Fintech", "AI", "China know-how"] },
+    {
+      name: t("skills.management"),
+      items: [
+        "Fintech PM",
+        "AI PM",
+        "Agile delivery & PRDs",
+        "ROI modeling",
+        "Stakeholder management",
+      ],
+    },
+    {
+      name: t("skills.ecosystem"),
+      items: ["Fintech", "AI", "China know-how"],
+    },
   ];
 
   return (
@@ -31,7 +44,7 @@ export default async function SkillsPage() {
         description={t("skills.description")}
       />
       <section className="mx-auto max-w-6xl px-5 pb-20">
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2">
           {GROUPS.map((g) => (
             <div
               key={g.name}

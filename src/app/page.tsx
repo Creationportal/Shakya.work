@@ -158,7 +158,7 @@ export default async function HomePage() {
                     </div>
                   </div>
                   <div className="sm:w-1/2 lg:w-5/12">
-                  <div className="relative overflow-hidden rounded-lg border border-line">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-line">
                     <Image
                       src="/projects/unified-trading-analysis.png"
                       alt={PROJECT.title}

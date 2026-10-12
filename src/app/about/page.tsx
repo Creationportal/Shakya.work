@@ -21,7 +21,22 @@ export default async function AboutPage() {
   const lang = await getLang();
   const t = (k: string) => translate(k, lang);
 
-  // Achievements and Business details are intentionally kept private and linked to /vault.
+  // Achievements and Business show real summaries here; /vault holds the
+  // fuller, vetted detail behind the access code.
+  const ACHIEVEMENTS = [
+    t("about.achievementItem1"),
+    t("about.achievementItem2"),
+    t("about.achievementItem3"),
+    t("about.achievementItem4"),
+  ];
+
+  const BUSINESS = [
+    t("about.businessItem1"),
+    t("about.businessItem2"),
+    t("about.businessItem3"),
+    t("about.businessItem4"),
+    t("about.businessItem5"),
+  ];
 
   return (
     <div className="relative">
@@ -88,6 +103,14 @@ export default async function AboutPage() {
             <p className="mt-3 text-sm text-muted">
               {t("about.achievementsBody")}
             </p>
+            <ul className="mt-5 space-y-2 text-sm text-muted">
+              {ACHIEVEMENTS.map((item) => (
+                <li key={item} className="flex gap-2.5">
+                  <span className="mt-[7px] h-1 w-1 flex-none rounded-full bg-accent" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
             <div className="mt-6">
               <Link
                 href="/vault"
@@ -107,6 +130,14 @@ export default async function AboutPage() {
               {t("about.businessTitle")}
             </h2>
             <p className="mt-3 text-sm text-muted">{t("about.businessBody")}</p>
+            <ul className="mt-5 space-y-2 text-sm text-muted">
+              {BUSINESS.map((item) => (
+                <li key={item} className="flex gap-2.5">
+                  <span className="mt-[7px] h-1 w-1 flex-none rounded-full bg-accent" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
             <div className="mt-6">
               <Link
                 href="/vault"
@@ -116,18 +147,6 @@ export default async function AboutPage() {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Footer utilities */}
-      <section className="mx-auto max-w-6xl px-5 pb-20">
-        <div className="flex justify-end">
-          <Link
-            href="/settings"
-            className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-sm font-medium text-muted transition-colors hover:border-accent hover:text-ink"
-          >
-            {t("about.settingsLink")}
-          </Link>
         </div>
       </section>
     </div>
